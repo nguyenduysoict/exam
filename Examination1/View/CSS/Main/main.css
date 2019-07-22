@@ -141,6 +141,7 @@ span.text-pagination.result-pagination{
     display: flex;
     background-color: white;
     border-left: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .filter-input-master-tbl{

@@ -4,6 +4,8 @@
     <meta charset="utf-8"  name="viewport" content="width=device-width, initial-scale=1" />
     <title>Examination 1</title>
     <link rel="stylesheet" href="../CSS/Library/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/Library/jquery-ui.css">
+    <link rel="stylesheet" href="../CSS/Library/jquery.timepicker.css">
     <link rel="stylesheet" href="../CSS/Library/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
     <link rel="stylesheet" href="../CSS/Main/main.css">
@@ -11,6 +13,11 @@
     <link rel="stylesheet" href="../CSS/Custom/custom.css">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="../JS/Library/jquery-3.3.1.min.js"></script>
+    <script src="../JS/Library/jquery-ui.min.js"></script>
+    <script src="../JS/Library/popper.min.js"></script>
+    <script src="../JS/Library/bootstrap.min.js"></script>
+
 </head>
 <body>
     <div class="wrapper">
@@ -189,9 +196,9 @@
                                                     <th class=" width-230">Số phiếu xuất</th>
                                                     <th class=" width-250">Đối tượng</th>
                                                     <th class=" width-170">Tổng tiền</th>
-                                                    <th class=" width-544">Diễn giải</th>
+                                                    <th class=" ">Diễn giải</th>
                                                     <th class=" width-368">Loại chứng từ</th>
-                                                    <th class=" width-1"></th>
+                                                    <th class=" width-18"></th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -222,7 +229,7 @@
                                         <div class="filter-input-master-tbl width-170">
 
                                         </div>
-                                        <div class="filter-input-master-tbl width-544">
+                                        <div class="filter-input-master-tbl" style="min-width: 221px">
                                             <div class="filter-table-input">
                                                 <div>
                                                     <img src="../../Contents/Images/Quick-search.png" alt="">
@@ -231,10 +238,21 @@
                                             </div>
                                         </div>
                                         <div class="filter-input-master-tbl" style="flex-grow:1">
-                                            <div class="filter-table-input">
-                                                <input type="text" class="" />
+                                            <!-- <div class="filter-table-input">
+                                                <input type="text" class="" value="Tất cả"/>
                                                 <div style="margin-top: 5px;" class="arrow-down-icon"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
-                                            </div>
+                                            </div> -->
+                                            <div class="dropdown filter-table-input">
+                                                    <input type="text" class="" value="Tất cả" data-toggle="dropdown"/>
+
+                                                    <div style="margin-top: 5px;" class="arrow-down-icon dropdown-toggle" data-toggle="dropdown"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
+
+                                                    <ul class="dropdown-menu" >
+                                                        <li> 1 </li>
+                                                        <li> 1 </li>
+                                                        
+                                                    </ul> 
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,41 +262,8 @@
                             </div>
                                 <div class="div-wrap-master-table">
                                     <table class="table table-striped"> 
-                                        <tbody class="tbody-table">
-                                            <tr>
-                                                <td class=" width-170">Ngày</td>
-                                                <td class=" width-230">Số phiếu xuất</td>
-                                                <td class=" width-250">Đối tượng</td>
-                                                <td class=" width-170">Tổng tiền</td>
-                                                <td class=" width-544">Diễn giải</td>
-                                                <td class=" width-368">Loại chứng từ</td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" width-170">Ngày</td>
-                                                <td class=" width-230">Số phiếu xuất</td>
-                                                <td class=" width-250">Đối tượng</td>
-                                                <td class=" width-170">Tổng tiền</td>
-                                                <td class=" width-544">Diễn giải</td>
-                                                <td class=" width-368">Loại chứng từ</td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" width-170">Ngày</td>
-                                                <td class=" width-230">Số phiếu xuất</td>
-                                                <td class=" width-250">Đối tượng</td>
-                                                <td class=" width-170">Tổng tiền</td>
-                                                <td class=" width-544">Diễn giải</td>
-                                                <td class=" width-368">Loại chứng từ</td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" width-170">Ngày</td>
-                                                <td class=" width-230">Số phiếu xuất</td>
-                                                <td class=" width-250">Đối tượng</td>
-                                                <td class=" width-170">Tổng tiền</td>
-                                                <td class=" width-544">Diễn giải</td>
-                                                <td class=" width-368">Loại chứng từ</td>
-                                            </tr>
-                                            
-                                            
+                                        <tbody class="tbody-table export-master-table">
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -305,25 +290,16 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Mã hàng hóa</th>
-                                        <th>Tên hàng hóa</th>
-                                        <th>Kho</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Đơn giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Thành tiền</th>
+                                        <th class="width-170">Mã hàng hóa</th>
+                                        <th class="width-230">Tên hàng hóa</th>
+                                        <th class="width-250">Kho</th>
+                                        <th class="width-170">Đơn vị tính</th>
+                                        <th class="width-170">Đơn giá</th>
+                                        <th class="width-170">Số lượng</th>
+                                        <th class="width-170">Thành tiền</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>AKK0123123</td>
-                                        <td>Áo khoác</td>
-                                        <td>Chi nhánh cầu giấy</td>
-                                        <td>Chiếc</td>
-                                        <td class="text-align-right">368.000</td>
-                                        <td class="text-align-right">2</td>
-                                        <td class="text-align-right">700.000</td>
-                                    </tr>
+                                <tbody class="export-detail-table">
                                 </tbody>
                             </table>
                         </div>
@@ -333,8 +309,13 @@
 
         </div>
     </div>
-    <script src="../JS/Library/jquery-3.3.1.min.js"></script>
-    <script src="../JS/Library/popper.min.js"></script>
-    <script src="../JS/Library/bootstrap.min.js"></script>
+   
+    <script src="../JS/Common/ajax.js"></script>
+    <script src="../JS/Common/databinding.js"></script>
+    <script src="../JS/Common/dataformater.js"></script>
+    <script src="../JS/Common/dialog.js"></script>
+    <script src="../JS/Main/main.js"></script>
+    <script src="../JS/Common/calendardisplay.js"></script>
+
 </body>
 </html>

@@ -8,7 +8,7 @@ body{
 
 .container{
     height: calc(100% - 52px);
-    padding: 15px;
+    padding: 8px;
     width: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -17,7 +17,6 @@ body{
 
 .main-left-sidebar{
     width: 140px;
-    height: 100vh;
     background-color: #026b97;
 }
 
