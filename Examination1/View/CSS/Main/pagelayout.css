@@ -1,0 +1,197 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.container{
+    height: calc(100% - 52px);
+    padding: 15px;
+    width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+
+.main-left-sidebar{
+    width: 140px;
+    height: 100vh;
+    background-color: #026b97;
+}
+
+.content{
+    width: calc(100% - 140px);
+    background-color: #e5e6eb;
+
+}
+
+
+.page-logo{
+    background-color: #006189;
+    height: 52px;
+    padding: 12px 8px;
+}
+
+.menu-icon{
+    margin: auto;
+    height: 26px;
+    width: 26px;
+    background: url('../../../Contents/Images/slibarmenu.png')  no-repeat;
+}
+
+.item-menu{
+    display: block;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 14px 0;
+}
+
+.item-menu:hover{
+    cursor: pointer;
+    background-color: #004765;
+    color: white;
+}
+
+a.item-menu{
+    text-decoration: none;
+}
+
+.icon-dropdown {
+    background-position: -29px 0px;
+}
+.icon-overview {
+    background-position: -29px 0px;
+}
+
+.icon-buy {
+    background-position: -29px -41px;
+}
+
+.icon-treasury {
+    background-position: -29px -79px;
+}
+
+.icon-money {
+    background-position: -29px -120px;
+}
+
+.icon-cost {
+    background-position: -29px -162px;
+}
+
+.icon-promotional {
+    background-position: -29px -200px;
+}
+
+.icon-catalog {
+    background-position: -29px -239px;
+}
+
+.icon-report {
+    background-position: -29px -279px;
+}
+
+.icon-set {
+    background-position: -29px -320px;
+}
+
+.icon-goods {
+    background-position: -29px -355px;
+}
+
+.info-header{
+    display: flex;
+    height: 52px;
+    background-color: white;
+}
+
+.name-title-header{
+    margin-left: 8px;
+    padding: 18px 8px;
+}
+
+.name-title-header span{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user-header{
+    display: flex;
+    height: 100%;
+    margin: 6px 12px;
+}
+
+.username-header{
+    margin: 7px 20px;
+}
+
+.help-header{
+    padding-top: 15px;
+    margin-left: 15px;
+}
+
+.text-help-header{
+    color: #027488;
+}
+
+.user-name-header{
+    margin: 6px 20px;
+}
+
+.user-name-header span{
+    margin-right: 5px;
+}
+
+.user-login-header{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.name-login-header{
+    display: flex;
+    width: 191px;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#img-login-header{
+    width: 28px;
+    height: 28px;
+}
+
+#one-user-header{
+    padding: 8px 11px 0 5px;
+}
+
+.menu-login-header{
+    margin: 0;
+    padding: 0px;
+    position: absolute;
+    right: 0px;
+    top: 32px;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 191px;
+    display: none;
+}
+
+.menu-login-header li{
+    list-style: none;
+    line-height: 32px;
+    padding-left: 35px;
+}
+
+.menu-login-header li a{
+    color: black;
+    text-decoration: none;
+}

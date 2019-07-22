@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"  name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Examination 1</title>
+    <link rel="stylesheet" href="../CSS/Library/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/Library/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
+    <link rel="stylesheet" href="../CSS/Main/main.css">
+    <link rel="stylesheet" href="../CSS/Common/common.css">
+    <link rel="stylesheet" href="../CSS/Custom/custom.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main-left-sidebar">
+            <div class="page-logo">
+                <img src="../../Contents/Images/logo-mshopkeeper.png" alt="">
+            </div>
+                
+            <div class="menu">
+                <div class="center-content-menu">
+                    <a class="item-menu">
+                        <div class="menu-icon icon-overview"></div>
+                        <div>Tổng quan</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-buy"></div>
+                        <div>Mua hàng</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-treasury"></div>
+                        <div>Kho</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-money"></div>
+                        <div>Quỹ tiền</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-cost"></div>
+                        <div>Chi phí</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-promotional"></div>
+                        <div>Khuyến mãi</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-catalog"></div>
+                        <div>Danh mục</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-report"></div>
+                        <div>Báo cáo</div>
+                    </a>
+                    <a class="item-menu">
+                        <div class="menu-icon icon-set"></div>
+                        <div>Thiết lập</div>
+                    </a>
+                </div>
+                <div class="bottom-content-menu">
+                    <a class="item-menu">
+                        <div class="menu-icon icon-goods"></div>
+                        <div>Hàng hóa</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="info-header">
+                <div class="name-title-header">
+                    <span>Xuất kho</span>
+                </div>
+                <div class="user-header">
+                    <div class="help-header">
+    
+                        <img src="../../Contents/Images/icon_help_18.png" class="img-help-header" />
+                        <span class="text-help-header">Trợ giúp</span>
+                    </div>
+                    <div class="user-login-header">
+                        <div class="username-header">
+                            <span>Tất cả các chi nhánh</span>
+                            <img src="../../Contents/Icons/arrow-down-line.png" alt="">
+                        </div>
+                        <div class="name-login-header">
+                            <img src="../../Contents/Images/Image.jpg" id="img-login-header" />
+                            <span id="one-user-header">Nguyễn Mạnh Duy</span>
+                            <img src="../../Contents/Icons/arrow-down-line.png" style="height: 4px; margin-top: 14px;" alt="">
+                            <ul class="menu-login-header">
+                                <li> <a href="#">Thông tin tài khoản</a></li>
+                                <li> <a href="#">Đổi mật khẩu</a></li>
+                                <li> <a href="#">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="main-toolbar">
+                        <button id="btnAdd" class="toolbar-btn-item" title="Ctrl+Alt+N">
+                            <div class="btn-icon btn-icon-add"></div>
+                            <span class="btn-text">Thêm mới</span>
+                            
+                        </button>
+
+                        <button id="btnDuplicate" class="toolbar-btn-item" title="Ctrl + C">
+                            <div class="btn-icon btn-icon-duplicate"> </div>
+                            <span class="btn-text">Nhân bản</span>
+                        </button>
+                        
+                        <button id="btnRefesh" class="toolbar-btn-item">
+                            <div class="btn-icon btn-icon-view">
+                            </div>
+                            <span class="btn-text">Xem</span>
+                        </button>        
+        
+                        <button id="btnEdit" class="toolbar-btn-item" title="Ctrl  + E">
+                            <div class="btn-icon btn-icon-edit"></div>
+                            <span class="btn-text">Sửa</span>
+                        </button>     
+        
+                        <button id="btnDelete" class="toolbar-btn-item" title="Ctrl  + D">
+                            <div class="btn-icon btn-icon-delete"></div>
+                            <span class="btn-text">Xóa</span>
+                        </button>
+
+                        <button id="btnPrint" class="toolbar-btn-item" title="Ctrl  + P">
+                            <div class="btn-icon btn-icon-print"></div>
+                            <span class="btn-text">In</span>
+                            <div class="add-arrow-down-icon">
+                                    <i class="fa fa-caret-down icon-dropdown"></i>
+                            </div>
+                        </button>
+                </div>    
+                <div class="filter-date">
+                        <div class="dropdown">
+                            <div class="cb-date dropdown-toggle" data-toggle="dropdown">
+                                    Hôm nay
+                                    <div class="add-arrow-down-icon date-filter-dropdown-icon">
+                                            <i class="fa fa-caret-down icon-dropdown"></i>
+                                    </div>
+                            </div>
+                            <ul class="dropdown-menu time-filter-selection" role="menu" aria-labelledby="menu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm nay</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm qua</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần này</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần trước</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng này</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng trước</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý này</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý trước</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">6 tháng trước</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm nay</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm trước</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Khác</a></li>
+                            </ul> 
+                        </div>
+                            
+
+                        <div class="lbl-filter">Từ</div>
+        
+                        <div class="input-form-dialog">
+                            <input type="text" class="input-day-from" id="get-data-from-day-input" />
+                            <div class="calendar-icon-picker icon-input get-data-from-day-icon"></div>
+                        </div>
+                        <div class="lbl-filter">đến</div>
+        
+                        <div class="input-form-dialog">
+                            <input type="text" class="input-day-to" id="get-data-to-day-input" />
+                            <div class="calendar-icon-picker icon-input get-data-to-day-icon"></div>
+                        </div>
+        
+                        <div class="blue-border-btn get-store-data">
+                            <div class="btn-icon btn-icon-filter"></div>
+                            <div>Lấy dữ liệu</div>
+                        </div>
+                </div>
+                <div class="main-content">
+                    <div class="master-store-table">
+                        <div>
+                            <div>
+                                <div>
+                                    <div class="thead-table">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class=" width-170">Ngày</th>
+                                                    <th class=" width-230">Số phiếu xuất</th>
+                                                    <th class=" width-250">Đối tượng</th>
+                                                    <th class=" width-170">Tổng tiền</th>
+                                                    <th class=" width-544">Diễn giải</th>
+                                                    <th class=" width-368">Loại chứng từ</th>
+                                                    <th class=" width-1"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="thead-filter-row">
+                                        <div class="filter-input-master-tbl width-170">
+                                            <div class="filter-table-input">
+                                                <input type="text" class="input-day-from" />
+                                                <div class="calendar-icon-picker icon-input filter-table-icon"></div>
+                                            </div>
+                                        </div>
+                                        <div class="filter-input-master-tbl width-230">
+                                            <div class="filter-table-input">
+                                                <div>
+                                                    <img src="../../Contents/Images/Quick-search.png" alt="">
+                                                </div>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                        <div class="filter-input-master-tbl width-250">
+                                                <div class="filter-table-input">
+                                                    <div>
+                                                        <img src="../../Contents/Images/Quick-search.png" alt="">
+                                                    </div>
+                                                    <input type="text">
+                                                </div>
+                                        </div>
+                                        <div class="filter-input-master-tbl width-170">
+
+                                        </div>
+                                        <div class="filter-input-master-tbl width-544">
+                                            <div class="filter-table-input">
+                                                <div>
+                                                    <img src="../../Contents/Images/Quick-search.png" alt="">
+                                                </div>
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                        <div class="filter-input-master-tbl" style="flex-grow:1">
+                                            <div class="filter-table-input">
+                                                <input type="text" class="" />
+                                                <div style="margin-top: 5px;" class="arrow-down-icon"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="thead-space-scroll">
+
+                                </div>
+                            </div>
+                                <div class="div-wrap-master-table">
+                                    <table class="table table-striped"> 
+                                        <tbody class="tbody-table">
+                                            <tr>
+                                                <td class=" width-170">Ngày</td>
+                                                <td class=" width-230">Số phiếu xuất</td>
+                                                <td class=" width-250">Đối tượng</td>
+                                                <td class=" width-170">Tổng tiền</td>
+                                                <td class=" width-544">Diễn giải</td>
+                                                <td class=" width-368">Loại chứng từ</td>
+                                            </tr>
+                                            <tr>
+                                                <td class=" width-170">Ngày</td>
+                                                <td class=" width-230">Số phiếu xuất</td>
+                                                <td class=" width-250">Đối tượng</td>
+                                                <td class=" width-170">Tổng tiền</td>
+                                                <td class=" width-544">Diễn giải</td>
+                                                <td class=" width-368">Loại chứng từ</td>
+                                            </tr>
+                                            <tr>
+                                                <td class=" width-170">Ngày</td>
+                                                <td class=" width-230">Số phiếu xuất</td>
+                                                <td class=" width-250">Đối tượng</td>
+                                                <td class=" width-170">Tổng tiền</td>
+                                                <td class=" width-544">Diễn giải</td>
+                                                <td class=" width-368">Loại chứng từ</td>
+                                            </tr>
+                                            <tr>
+                                                <td class=" width-170">Ngày</td>
+                                                <td class=" width-230">Số phiếu xuất</td>
+                                                <td class=" width-250">Đối tượng</td>
+                                                <td class=" width-170">Tổng tiền</td>
+                                                <td class=" width-544">Diễn giải</td>
+                                                <td class=" width-368">Loại chứng từ</td>
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                        </div>
+                        
+
+                        <div class="pagination-table">
+                            <div class="icon-pagination icon-double-arrow-left"></div>
+                            <div class="icon-pagination icon-arrow-left"></div>
+                            <span class="text-pagination">Trang</span>
+                            <input type="number" min="1" class="input-pagination" />
+                            <span class="text-pagination">trên 1</span>
+                            <div class="icon-pagination icon-arrow-right"></div>
+                            <div class="icon-pagination icon-double-arrow-right"></div>
+                            <div class="icon-pagination icon-refresh-pagination"></div>
+                            <span class="text-pagination">Số bản ghi</span>
+                            <span class="text-pagination result-pagination">1-15 trong 30 kết quả</span>
+                        </div>
+
+                    </div>
+                    <div class="detail-store-table">
+                        <div>Chi tiết</div>
+                        <div class="div-wrap-detail-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã hàng hóa</th>
+                                        <th>Tên hàng hóa</th>
+                                        <th>Kho</th>
+                                        <th>Đơn vị tính</th>
+                                        <th>Đơn giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AKK0123123</td>
+                                        <td>Áo khoác</td>
+                                        <td>Chi nhánh cầu giấy</td>
+                                        <td>Chiếc</td>
+                                        <td class="text-align-right">368.000</td>
+                                        <td class="text-align-right">2</td>
+                                        <td class="text-align-right">700.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../JS/Library/jquery-3.3.1.min.js"></script>
+    <script src="../JS/Library/popper.min.js"></script>
+    <script src="../JS/Library/bootstrap.min.js"></script>
+</body>
+</html>

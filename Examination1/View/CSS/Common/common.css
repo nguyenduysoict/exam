@@ -1,0 +1,128 @@
+.btn-icon{
+    width: 16px;
+    height: 20px;
+    margin: 1px 4px;
+    background-image: url('../../../Contents/Icons/common-icon.png');
+}
+
+.common-icon{
+    background-image: url('../../../Contents/Icons/common-icon.png')
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.text-align-right{
+    text-align: right;
+}
+
+.btn-icon-add{
+    background-position: -1px -127px;
+}
+
+.btn-icon-view{
+    background-position: 318px -126px;
+}
+
+.btn-icon-edit{
+    background-position: -77px -203px;
+}
+
+.btn-icon-duplicate{
+    background-position: -976px -127px;
+}
+
+.btn-icon-delete{
+    background-position: -1076px -127px;
+}
+
+.btn-icon-print{
+    background-position: -228px -129px;
+    margin-top: 3px
+}
+
+.btn-icon-filter{
+    background-position:  -605px -131px;
+    margin: 5px 0;
+}
+
+.btn-text{
+    padding: 0 5px;
+}
+
+.calendar-icon-picker{
+    background: url('../../../Contents/Icons/common-icon.png') no-repeat -4px -178px;
+}
+
+.blue-border-btn{
+    height: 35px;
+    padding: 7px 15px;
+    margin: 14px 0 15px 15px;
+    border: 1px solid #026b97;
+    border-radius: 3px;
+    display: flex;
+    color: #026b97;
+}
+
+.blue-border-btn:hover{
+    cursor: pointer;
+}
+
+
+thead{
+    background-color: #f0f0f0;
+}
+
+thead th{
+    text-align: center;
+}
+
+tbody{
+    background-color: white;
+}
+
+tbody td{
+    padding-left: 15px;
+}
+
+.div-wrap-master-table{
+    height: 410px;
+    background-color: white;
+    overflow-y: scroll;
+}
+
+.div-wrap-detail-table{
+    height: 215px;
+    background-color: white;
+}
+
+.width-18{
+    width: 18px;
+}
+
+.width-170{
+    width: 170px;
+}
+
+.width-180{
+    width: 180px;
+}
+
+.width-230{
+    width:230px;
+}
+
+.width-250{
+    width:250px;
+}
+
+.width-368{
+    width: 368px;
+}
+
+.width-544{
+    width: 544px;
+}
+
+

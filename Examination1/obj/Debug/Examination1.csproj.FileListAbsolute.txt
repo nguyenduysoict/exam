@@ -1,0 +1,17 @@
+D:\examination1\Examination1\Examination1\bin\Examination1.dll.config
+D:\examination1\Examination1\Examination1\bin\Examination1.dll
+D:\examination1\Examination1\Examination1\bin\Examination1.pdb
+D:\examination1\Examination1\Examination1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\examination1\Examination1\Examination1\bin\Newtonsoft.Json.dll
+D:\examination1\Examination1\Examination1\bin\System.Net.Http.Formatting.dll
+D:\examination1\Examination1\Examination1\bin\System.Web.Http.dll
+D:\examination1\Examination1\Examination1\bin\System.Web.Http.WebHost.dll
+D:\examination1\Examination1\Examination1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\examination1\Examination1\Examination1\bin\Newtonsoft.Json.xml
+D:\examination1\Examination1\Examination1\bin\System.Net.Http.Formatting.xml
+D:\examination1\Examination1\Examination1\bin\System.Web.Http.xml
+D:\examination1\Examination1\Examination1\bin\System.Web.Http.WebHost.xml
+D:\examination1\Examination1\Examination1\obj\Debug\Examination1.csprojResolveAssemblyReference.cache
+D:\examination1\Examination1\Examination1\obj\Debug\Examination1.csproj.CoreCompileInputs.cache
+D:\examination1\Examination1\Examination1\obj\Debug\Examination1.dll
+D:\examination1\Examination1\Examination1\obj\Debug\Examination1.pdb
