@@ -1,5 +1,6 @@
 ﻿class AjaxJS {
     constructor() {
+        this.receiptNumber = "XK0000012";
     }
 
     getExportMasterTableData(){
@@ -24,75 +25,44 @@
         switch (receiptCode) {
             case "1":
                 var item = {
-                    itemCode: 'AKK0231001',
+                    itemCode: this.randomGoodCode(),
                     itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Cầu Giấy',
-                    countUnit: 'Chiếc',
+                    storePlace: this.randomPlace(),
+                    countUnit: this.randomUnit(),
                     unitPrice: this.randomMoney(),
-                    amount: '2',
-                    sumMoney: '700.000'
+                    amount: this.randomAmount(),
+                    sumMoney: this.randomMoney()
                 }
                 data.push(item);
                 break;
             case "2":
-                var item1 = {
-                    itemCode: 'QAK00030234',
-                    itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Đống Đa',
-                    countUnit: 'Chiếc',
-                    unitPrice: this.randomMoney(),
-                    amount: '1',
-                    sumMoney: '300.000'
+                for(let i=0;i<2;i++){
+                    var item = {
+                        itemCode: this.randomGoodCode(),
+                        itemName: this.randomGoods(),
+                        storePlace: this.randomPlace(),
+                        countUnit: this.randomUnit(),
+                        unitPrice: this.randomMoney(),
+                        amount: this.randomAmount(),
+                        sumMoney: this.randomMoney()
+                    }
+                    data.push(item);
                 }
-                data.push(item1);
-
-                var item2 = {
-                    itemCode: 'KAA023494',
-                    itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Thanh Xuân',
-                    countUnit: 'Cái',
-                    unitPrice: this.randomMoney(),
-                    amount: '2',
-                    sumMoney: '400.000'
-                }
-                data.push(item2);
-
                 break;
             case "3":
-                var item1 = {
-                    itemCode: 'PAA032944',
-                    itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Bưởi',
-                    countUnit: 'Chiếc',
-                    unitPrice: this.randomMoney(),
-                    amount: '1',
-                    sumMoney: '600.000'
+                for(let i=0;i<3;i++){
+                    var item = {
+                        itemCode: this.randomGoodCode(),
+                        itemName: this.randomGoods(),
+                        storePlace: this.randomPlace(),
+                        countUnit: this.randomUnit(),
+                        unitPrice: this.randomMoney(),
+                        amount: this.randomAmount(),
+                        sumMoney: this.randomMoney()
+                    }
+                    data.push(item);
                 }
-                data.push(item1);
-
-                var item2 = {
-                    itemCode: 'OPA0434102',
-                    itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Đào Tấn',
-                    countUnit: 'Cái',
-                    unitPrice: this.randomMoney(),
-                    amount: '2',
-                    sumMoney: '500.000'
-                }
-                data.push(item2);
-
-                var item3 = {
-                    itemCode: 'THY092344',
-                    itemName: this.randomGoods(),
-                    storePlace: 'Chi nhánh Phạm Hùng',
-                    countUnit: 'Cái',
-                    unitPrice: this.randomMoney(),
-                    amount: '3',
-                    sumMoney: '800.000'
-                }
-                data.push(item3);
                 break;
-        
             default:
                 break;
         }
@@ -100,85 +70,56 @@
     }
 
     getComboboxData(comboboxName) {
+        var object = [];
         switch (comboboxName) {
-            case "customer-repayment":
-                var customerComboboxDataOnRepaymentDialog = [];
+            case "object":
                 var comboboxData1 = {
                     id: 'nmd2310',
-                    code: 'KH0001',
-                    name: 'Nguyễn Văn A',
+                    code: 'KH0000'+this.randomTwoDigitNumber(),
+                    name: this.randomName(),
                     type: 'Khách hàng',
                     address: 'Duy Tân'
                 }
 
                 var comboboxData2 = {
                     id: '0213nmd',
-                    code: 'KH0002',
-                    name: 'Đỗ Mạnh B',
-                    type: 'Khách hàng',
+                    code: 'NV0000'+this.randomTwoDigitNumber(),
+                    name: this.randomName(),
+                    type: 'Nhân viên',
                     address: 'Lò Đúc'
                 }
 
                 var comboboxData3 = {
                     id: 'nm0230d',
-                    code: 'KH0003',
-                    name: 'Hoàng Văn C',
-                    type: 'Khách hàng',
-                    address: 'NoWhere'
-                }
-
-                for (let i = 1; i <= 2; i++) {
-                    customerComboboxDataOnRepaymentDialog.push(comboboxData1);
-                    customerComboboxDataOnRepaymentDialog.push(comboboxData2);
-                    customerComboboxDataOnRepaymentDialog.push(comboboxData3);
-                }
-                return customerComboboxDataOnRepaymentDialog;
-                break;
-
-            case "customer-receipt":
-                var customerComboboxDataOnReceiptDialog = [];
-                var comboboxData1 = {
-                    id: 'nmd2310',
-                    code: 'KH0001',
-                    name: 'Đặng Trần Tùng',
-                    type: 'Khách hàng'
-                }
-
-                var comboboxData2 = {
-                    id: 'lmr0231',
-                    code: 'KH0002',
-                    name: 'Lê Hoàng Hải',
-                    type: 'Nhà cung cấp'
+                    code: 'NCC0000'+this.randomTwoDigitNumber(),
+                    name: this.randomName(),
+                    type: 'Nhà cung cấp',
+                    address: 'Bưởi'
                 }
 
                 for (let i = 1; i <= 5; i++) {
-                    customerComboboxDataOnReceiptDialog.push(comboboxData1);
-                    customerComboboxDataOnReceiptDialog.push(comboboxData2);
+                    object.push(comboboxData1);
+                    object.push(comboboxData2);
+                    object.push(comboboxData3);
                 }
-                return customerComboboxDataOnReceiptDialog;
-                break;
+                return object;
 
-            case "staff":
-                var staffComboboxData = [];
-                var comboboxData1 = {
-                    id: 'staff0608',
-                    code: 'MV0456',
-                    name: 'Hoàng Đạo Thúy',
+            case "goods":
+                var goods = [];
+                for (let i = 1; i <= 20; i++) {
+                    var item = {
+                        itemCode: this.randomGoodCode(),
+                        itemName: this.randomGoods(),
+                        storePlace: this.randomPlace(),
+                        countUnit: this.randomUnit(),
+                        unitPrice: this.randomMoney(),
+                        amount: this.randomAmount(),
+                        sumMoney: this.randomMoney()
+                    }
+    
+                    goods.push(item);
                 }
-
-                var comboboxData2 = {
-                    id: 'staff0608',
-                    code: 'NV02323',
-                    name: 'Nguyễn Mạnh Duy',
-                }
-
-                for (let i = 1; i <= 1; i++) {
-                    staffComboboxData.push(comboboxData1);
-                    staffComboboxData.push(comboboxData2);
-                }
-
-                return staffComboboxData;
-                break;
+                return goods;
         }
     }
 
@@ -238,7 +179,8 @@
     }
 
     getReceiptNumber() {
-        return "PT00007";
+        var receiptNumber = this.receiptNumber.slice(0,2);
+        return "XK00004";
     }
 
     randomDate(){
@@ -261,9 +203,13 @@
         return Math.floor((Math.random() * 10000000) + 1000000);
     }
 
+    randomTwoDigitNumber(){
+        return Math.floor((Math.random() * 90) + 1);
+    }
+
     randomMoney(){
-        var begin = Math.floor((Math.random() * 90) + 1);
-        return begin+'0.000';
+        
+        return this.randomTwoDigitNumber()+'0.000';
     }
 
     randomReceiptType(){
@@ -296,6 +242,45 @@
         var type = typeArr[Math.floor(Math.random()*typeArr.length)];
         var gender = genders[Math.floor(Math.random()*genders.length)];
         return type+' '+ gender;
+    }
+    
+    randomGoodCode(){
+        var goodsCodeArrr = [
+            'AKK0231001',
+            'QAK00030234',
+            'KAA023494',
+            'PAA032944',
+            'OPA0434102',
+            'THY092344',
+            ];
+        return goodsCodeArrr[Math.floor(Math.random()*goodsCodeArrr.length)];
+    }
+
+    randomPlace(){
+        var placeArr = [
+            'Chi nhánh Cầu Giấy',
+            'Chi nhánh Duy Tân',
+            'Chi nhánh Bưởi',
+            'Chi nhánh Phạm Hùng',
+            'Chi nhánh Nhổn',
+            'Chi nhánh Mỹ Đình',
+            ];
+        return placeArr[Math.floor(Math.random()*placeArr.length)];
+    }
+
+    randomUnit(){
+        var unitArr = [
+            'Chiếc',
+            'Cái',
+            'Đôi',
+            'Bộ'           
+            ];
+        return unitArr[Math.floor(Math.random()*unitArr.length)];
+    }
+
+    randomAmount(){
+        return Math.floor((Math.random() * 10) + 1);
+
     }
 
 }

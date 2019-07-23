@@ -5,6 +5,10 @@
     background-image: url('../../../Contents/Icons/common-icon.png');
 }
 
+.show-hide{
+    display: block !important;
+}
+
 .common-icon{
     background-image: url('../../../Contents/Icons/common-icon.png')
 }
@@ -54,6 +58,9 @@
 .calendar-icon-picker{
     background: url('../../../Contents/Icons/common-icon.png') no-repeat -4px -178px;
 }
+.hour-icon-picker{
+    background: url('../../../Contents/Icons/common-icon.png') no-repeat -28px -178px
+}
 
 .blue-border-btn{
     height: 35px;
@@ -88,11 +95,13 @@ tbody tr:hover{
 }
 
 tbody td{
-    padding-left: 15px;
+    padding: 9px;
+    height: 38px;
+    border: 1px solid #e1e1e1;
 }
 
 .div-wrap-master-table{
-    height: 410px;
+    height: 390px;
     background-color: white;
     overflow-y: scroll;
 }
@@ -106,12 +115,40 @@ tbody td{
     width: 17.5px;
 }
 
+.width-80{
+    width: 80px;
+}
+
+.width-90{
+    width: 90px;
+}
+
+.width-100{
+    width: 100px;
+}
+
+.width-130{
+    width: 130px;
+}
+
+.width-140{
+    width: 140px;
+}
+
+.width-150{
+    width: 150px;
+}
+
 .width-170{
     width: 170px;
 }
 
 .width-180{
     width: 180px;
+}
+
+.width-200{
+    width: 200px; 
 }
 
 .width-230{
@@ -126,8 +163,28 @@ tbody td{
     width: 368px;
 }
 
-.width-544{
-    width: 544px;
+.width-558{
+    width: 558px;
 }
 
+.garbage-icon {
+    background: url(../../../Contents/Icons/common-icon.png) no-repeat 4px 1px;
+    width: 27px;
+    height:24px;
+}
 
+.garbage-icon:hover {
+    cursor: pointer;
+}
+
+.disabled-cell{
+    opacity: 0.8;
+    pointer-events: none;
+    background-color: #e5e6eb;
+}
+
+.input-inside-cell{
+    height: 38px;
+    border: none;
+    padding: 0 7px;
+}

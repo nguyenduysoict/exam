@@ -1,0 +1,554 @@
+﻿
+/*
+     * Description: Định dạng  cho dialog
+     * Create by: NXHUNG(4/7/2019) 
+     *
+     * */
+
+/*
+    Chỉnh sửa lại jqueryui.css
+*/
+.ui-widget {
+    font-family: 'Roboto',Tahoma,sans-serif;
+    font-size: 12px;
+}
+
+.ui-dialog-title {
+    font-size: 16px;
+}
+
+.ui-dialog-content {
+    padding: 0 !important;
+}
+
+.ui-widget-overlay {
+    background: #000;
+    opacity: 0.71;
+}
+
+.ui-button, .ui-button:hover {
+    border: 1px solid #f0f0f0;
+    background: #f0f0f0;
+}
+
+.ui-widget-header {
+    background: #f0f0f0;
+}
+/*
+    --Css cho phần thanh công cụ dialog--
+*/
+.toolbar-dialog {
+    height: 32px;
+    width: 100%;
+    background: #026b97;
+    display: flex;
+    align-items: center;
+}
+
+.icon-add {
+    background-position: -1px -129px;
+}
+
+.icon-edit {
+    background-position: -77px -205px;
+}
+
+.icon-delete {
+    background-position: -1076px -129px;
+}
+
+.icon-printer {
+    background-position: -227px -129px;
+}
+
+.btn-icon.icon-help {
+    background-position: -176px -204px;
+}
+
+.icon-before {
+    background-position: -475px -129px;
+}
+
+.icon-after {
+    background-position: -425px -129px;
+}
+
+.icon-save {
+    background-position: -325px -129px;
+}
+
+.icon-return {
+    background-position: -1401px -129px;
+}
+
+.icon-close {
+    background-position: -275px -129px;
+}
+
+.toolbar-dialog-item {
+    background: #026b97;
+    height: 100%;
+    border: 1px solid #026b97;
+    color: white;
+    display: flex;
+    padding: 8px;
+}
+
+
+/*
+    định dạng cho form dialog
+*/
+.form-dialog {
+    padding: 0 8px;
+    width: 100%;
+    font: 400 13px "Roboto";
+}
+
+.panel-body-dialog {
+    height: 50px;
+    display: flex;
+    width: 100%;
+    padding: 15px 8px;
+}
+
+.icon-radio-false {
+    background-position: -77px -77px;
+}
+
+.icon-radio-true {
+    background-position: -102px -77px;
+}
+
+.choose-repayment {
+    width: 167px;
+    height: 38px;
+    border: 1px solid #026b97;
+    border-radius: 3px;
+    margin-top: -10px;
+    padding: 11px 27px;
+}
+
+    .choose-repayment a {
+        font-weight: bold;
+        text-decoration: none;
+        color: #026b97;
+    }
+
+.div-border-dialog {
+    border-right: 1px solid #1882ae;
+}
+
+.content-form-dialog {
+    display: flex;
+    width: 100%;
+}
+
+/*
+    Css cho phần thông tin chung
+*/
+.general-information {
+    width: 643px;
+    padding: 8px 8px 4px;
+}
+
+.cls-group-title {
+    font: 600 15px Roboto !important;
+    color: #757575;
+    text-transform: uppercase;
+    padding: 4px 0;
+}
+
+.Row-form-dialog {
+    display: flex;
+    user-select: none;
+    margin-bottom: 8px;
+    margin-left: 18px;
+}
+
+.lbl-item {
+    width: 105px;
+    height: 35px;
+    padding: 8px 5px 0 0;
+}
+
+.btn-icon-dialog {
+    width: 24px;
+    height: 35px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.icon-arrow-down {
+    left: 315px;
+    padding: 9px 7px;
+}
+
+.icon-quick-search {
+    padding: 9px 1px;
+    left: 338px;
+}
+
+.input1-form-dialog {
+    display: flex;
+    width: 236px;
+}
+
+.input1-form-dialog input {
+    width: 236px;
+}
+
+.input2-form-dialog {
+    margin-left: 5px;
+    width: 270px;
+}
+
+.input3-form-dialog {
+    width: 511px;
+}
+
+.input2-form-dialog input, .input3-form-dialog input {
+    width: 100%;
+}
+
+.input4-form-dialog {
+    display: flex;
+    width: 300px;
+    margin-right: 40px;
+}
+
+.input4-form-dialog input {
+    width: 300px;
+}
+
+.input5-form-dialog {
+    display: flex;
+    width: 200px;
+    margin-right: 5px;
+}
+
+.input5-form-dialog input {
+    width: 200px;
+    pointer-events: none;
+}
+
+
+
+
+/*
+    Css cho phần chứng từ
+*/
+.documents {
+    width: 240px;
+    padding: 8px 8px 4px;
+}
+
+/*
+     * Description: Định dạng  cho dialog
+     * Create by: NXHUNG(4/7/2019) 
+     *
+     * */
+.ui-widget {
+    font-family: 'Roboto',Tahoma,sans-serif;
+    font-size: 13px;
+}
+
+.ui-dialog-title {
+    font-size: 16px;
+}
+
+.ui-dialog-content {
+    padding: 0 !important;
+}
+
+.ui-widget-overlay {
+    background: #000;
+    opacity: 0.71;
+}
+
+/*
+    --Css cho phần thanh công cụ dialog--
+*/
+
+.toolbar-dialog {
+    height: 32px;
+    width: 100%;
+    background: #026b97;
+    display: flex;
+    align-items: center;
+}
+
+.icon-add {
+    background-position: -1px -129px;
+}
+
+.icon-edit {
+    background-position: -77px -205px;
+}
+
+.icon-delete {
+    background-position: -1076px -129px;
+}
+
+.icon-printer {
+    background-position: -227px -129px;
+}
+
+.btn-icon.icon-help {
+    background-position: -176px -204px;
+}
+
+.icon-before {
+    background-position: -475px -129px;
+}
+
+.icon-after {
+    background-position: -425px -129px;
+}
+
+.icon-save {
+    background-position: -325px -129px;
+}
+
+.icon-return {
+    background-position: -1401px -129px;
+}
+
+.icon-close {
+    background-position: -275px -129px;
+}
+
+.toolbar-dialog-item {
+    background: #026b97;
+    height: 100%;
+    border: 1px solid #026b97;
+    color: white;
+    display: flex;
+    padding: 8px;
+}
+
+
+/*
+    định dạng cho form dialog
+*/
+.form-dialog {
+    padding: 0 8px;
+    width: 100%;
+    font: 400 13px "Roboto";
+}
+
+.panel-body-dialog {
+    height: 50px;
+    display: flex;
+    width: 100%;
+    padding: 15px 8px;
+}
+
+.icon-radio-false {
+    background-position: -77px -77px;
+}
+
+.icon-radio-true {
+    background-position: -102px -77px;
+}
+
+.choose-repayment {
+    width: 180px;
+}
+
+.btn-custom-blue {
+    display: flex;
+    height: 35px;
+    border: 1px solid #026b97;
+    border-radius: 3px;
+    padding: 9px 22px;
+}
+
+.get-data-repayment {
+    width: 120px;
+}
+
+.btn-custom-blue:hover {
+    cursor:pointer;
+}
+
+.btn-custom-blue a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #026b97;
+}
+
+.div-border-dialog {
+    border-right: 1px solid #1882ae;
+}
+
+.content-form-dialog {
+    display: flex;
+    width: 100%;
+}
+
+/*
+    Css cho phần thông tin chung
+*/
+.general-information {
+    width: 643px;
+    padding: 8px 8px 4px;
+}
+
+.cls-group-title {
+    font: 600 15px Roboto !important;
+    color: #757575;
+    text-transform: uppercase;
+    padding: 4px 0;
+}
+
+
+.lbl-item-general {
+    width: 105px;
+    height: 35px;
+    padding: 8px 5px 0 0;
+    margin-left: 15px;
+}
+
+
+
+/*
+    Css cho phần chứng từ
+*/
+.documents {
+    width: 274px;
+    padding: 8px 0;
+    margin-left: 20px;
+}
+
+.lbl-item-documents {
+    width: 90px;
+    height: 35px;
+    padding: 8px 5px 0 0;
+    margin-left: 17px;
+}
+
+.input-form-dialog {
+    width: 130px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 3px;
+    display: flex;
+    margin:auto 5px;
+}
+
+.input-form-dialog input {
+    width: 100%;
+    height: 33px;
+    padding: 5px 10px;
+    border: none;
+    outline:none;
+}
+
+
+/*
+    Css cho phần chi tiết
+*/
+.detail-form-dialog {
+    padding: 8px;
+}
+
+.tabbar {
+    display: flex;
+    background: #f5f5f5;
+    width: 100%;
+    height: 38px;
+}
+
+.tab {
+    padding: 12px 10px;
+    height: 38px;
+}
+
+    .tab:hover {
+        background: #ddd;
+    }
+
+    .tab span {
+        color: #737373;
+        font-weight: 600;
+    }
+
+        .tab span:hover {
+            color: #026b97;
+            cursor: pointer;
+        }
+
+.tab-documents {
+    border-left: 1px solid #ddd;
+    margin-left: 4px;
+}
+
+.tabs {
+    margin-top: 5px;
+    width: 870px;
+}
+
+#tabs-1 {
+    display: none;
+}
+#tabs-2 {
+    display:none;
+}
+
+.tabs .divTable .Cell {
+    padding: 8px;
+}
+
+.Cell8 {
+    width:344px;
+}
+
+.Cell9 {
+    width: 250px;
+}
+
+.Cell10 {
+    width: 275px;
+}
+
+.Cell11 {
+    width: 149px;
+}
+
+.Cell12 {
+    width: 260px;
+}
+
+.Cell13 {
+    width: 160px;
+}
+
+.Cell14 {
+    width: 160px;
+}
+
+.Cell15 {
+    width: 141px;
+}
+
+.Cell16 {
+    width: 125px;
+}
+
+.divBody-dialog-detail {
+    background: #fff;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    height: 165px;
+}
+
+
+.repayment-detail-box {
+    width:812px;
+    height: 285px;
+}
+
+.border-bottom-texttab {
+    border-bottom: 2px solid #026b97;
+}

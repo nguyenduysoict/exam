@@ -33,3 +33,20 @@ D:\exam\Examination1\obj\Debug\Examination1.csproj.CoreCompileInputs.cache
 D:\exam\Examination1\obj\Debug\Examination1.csproj.CopyComplete
 D:\exam\Examination1\obj\Debug\Examination1.dll
 D:\exam\Examination1\obj\Debug\Examination1.pdb
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Examination1.dll.config
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Examination1.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Examination1.pdb
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Newtonsoft.Json.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Net.Http.Formatting.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Web.Http.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Web.Http.WebHost.dll
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\nmduy\examination1\New folder\exam\Examination1\bin\Newtonsoft.Json.xml
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Net.Http.Formatting.xml
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Web.Http.xml
+D:\nmduy\examination1\New folder\exam\Examination1\bin\System.Web.Http.WebHost.xml
+D:\nmduy\examination1\New folder\exam\Examination1\obj\Debug\Examination1.csprojResolveAssemblyReference.cache
+D:\nmduy\examination1\New folder\exam\Examination1\obj\Debug\Examination1.csproj.CoreCompileInputs.cache
+D:\nmduy\examination1\New folder\exam\Examination1\obj\Debug\Examination1.dll
+D:\nmduy\examination1\New folder\exam\Examination1\obj\Debug\Examination1.pdb

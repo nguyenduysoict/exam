@@ -6,17 +6,23 @@
     <link rel="stylesheet" href="../CSS/Library/bootstrap.css">
     <link rel="stylesheet" href="../CSS/Library/jquery-ui.css">
     <link rel="stylesheet" href="../CSS/Library/jquery.timepicker.css">
-    <link rel="stylesheet" href="../CSS/Library/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
-    <link rel="stylesheet" href="../CSS/Main/main.css">
-    <link rel="stylesheet" href="../CSS/Common/common.css">
-    <link rel="stylesheet" href="../CSS/Custom/custom.css">
+    <link rel="stylesheet" href="../CSS/Library/font-awesome/css/font-awesome.css">  
+
 
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <script src="../JS/Library/jquery-3.3.1.min.js"></script>
     <script src="../JS/Library/jquery-ui.min.js"></script>
     <script src="../JS/Library/popper.min.js"></script>
     <script src="../JS/Library/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
+    <link rel="stylesheet" href="../CSS/Main/main.css">
+    <link rel="stylesheet" href="../CSS/Custom/custom.css">
+    <link rel="stylesheet" href="../CSS/Common/common.css">
+    <link rel="stylesheet" href="../CSS/Common/dialog.css">
+    <link rel="stylesheet" href="../CSS/Common/share.css">
+    <link rel="stylesheet" href="../CSS/Main/newexport.css">
+    
 
 </head>
 <body>
@@ -143,24 +149,24 @@
                 <div class="filter-date">
                         <div class="dropdown">
                             <div class="cb-date dropdown-toggle" data-toggle="dropdown">
-                                    Hôm nay
+                                    <span class="time-range">Tuần này</span>
                                     <div class="add-arrow-down-icon date-filter-dropdown-icon">
                                             <i class="fa fa-caret-down icon-dropdown"></i>
                                     </div>
                             </div>
                             <ul class="dropdown-menu time-filter-selection" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm nay</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm qua</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần này</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần trước</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng này</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng trước</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý này</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý trước</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">6 tháng trước</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm nay</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm trước</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Khác</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="1" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm nay</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="2" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm qua</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="3" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="4" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="5" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="6" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="7" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="8" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="9" role="presentation"><a role="menuitem" tabindex="-1" href="#">6 tháng trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="10" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm nay</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="11" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="12" role="presentation"><a role="menuitem" tabindex="-1" href="#">Khác</a></li>
                             </ul> 
                         </div>
                             
@@ -196,7 +202,7 @@
                                                     <th class=" width-230">Số phiếu xuất</th>
                                                     <th class=" width-250">Đối tượng</th>
                                                     <th class=" width-170">Tổng tiền</th>
-                                                    <th class=" ">Diễn giải</th>
+                                                    <th class="">Diễn giải</th>
                                                     <th class=" width-368">Loại chứng từ</th>
                                                     <th class=" width-18"></th>
                                                 </tr>
@@ -229,7 +235,7 @@
                                         <div class="filter-input-master-tbl width-170">
 
                                         </div>
-                                        <div class="filter-input-master-tbl" style="min-width: 221px">
+                                        <div class="filter-input-master-tbl  width-558">
                                             <div class="filter-table-input">
                                                 <div>
                                                     <img src="../../Contents/Images/Quick-search.png" alt="">
@@ -237,12 +243,12 @@
                                                 <input type="text">
                                             </div>
                                         </div>
-                                        <div class="filter-input-master-tbl" style="flex-grow:1">
+                                        <div class="filter-input-master-tbl">
                                             <!-- <div class="filter-table-input">
                                                 <input type="text" class="" value="Tất cả"/>
                                                 <div style="margin-top: 5px;" class="arrow-down-icon"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
                                             </div> -->
-                                            <div class="dropdown filter-table-input">
+                                            <div class="dropdown filter-table-input " >
                                                     <input type="text" class="" value="Tất cả" data-toggle="dropdown"/>
 
                                                     <div style="margin-top: 5px;" class="arrow-down-icon dropdown-toggle" data-toggle="dropdown"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
@@ -266,6 +272,24 @@
                                            
                                         </tbody>
                                     </table>
+                                </div>
+
+
+                                <div class="thead-filter-row master-table-footer">
+                                    <div class="filter-input-master-tbl width-170">
+                                        <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-230">
+                                        <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-250">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-170 text-align-right" style="padding-top: 8px;padding-left: 91px;" id="sumMoneyMasterTable"></div>
+                                    <div class="filter-input-master-tbl width-558">
+                                        <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl" style="flex-grow:1"></div>
                                 </div>
                         </div>
                         
@@ -307,6 +331,229 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="dialogNewExport" style="display:none;">
+        <div class="content-dialog">
+
+            <div class="toolbar-dialog">
+                <button id="btnbefore" class="toolbar-dialog-item custom-disabled-btn">
+                    <div class="btn-icon icon-before"></div>
+                    <span class="btn-text">Trước</span>
+                    <i class="fa fa-caret-down icon-dropdown"></i>
+                </button>
+                <button id="btnafter" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+
+                    <span class="btn-text">Sau</span>
+                    <div class="btn-icon icon-after"></div>
+                    <i class="fa fa-caret-down icon-dropdown"></i>
+                </button>
+                <button id="btnAddNew" class="toolbar-dialog-item custom-disabled-btn">
+                    <div class="btn-icon icon-add"></div>
+                    <span class="btn-text">Thêm mới</span>
+                </button>
+
+                <button id="btnRepair" class="toolbar-dialog-item custom-disabled-btn">
+                    <div class="btn-icon icon-edit">
+                    </div>
+                    <span class="btn-text">Sửa</span>
+                </button>
+                <button id="btnSave" class="toolbar-dialog-item">
+                    <div class="btn-icon icon-save">
+                    </div>
+                    <span class="btn-text">Lưu</span>
+                </button>
+                <button id="btnDelete" class="toolbar-dialog-item custom-disabled-btn">
+                    <div class="btn-icon icon-delete">
+                    </div>
+                    <span class="btn-text">Xóa</span>
+                </button>
+                <button id="btnReturn" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+                    <div class="btn-icon icon-return">
+                    </div>
+                    <span class="btn-text">Hoãn</span>
+                </button>
+                <button id="btnPrinter" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+                    <div class="btn-icon icon-printer">
+                    </div>
+                    <span class="btn-text">In</span>
+                    <i class="fa fa-caret-down icon-dropdown"></i>
+                </button>
+                <button id="btnDelete" class="toolbar-dialog-item">
+                    <div class="btn-icon icon-help">
+                    </div>
+                    <span class="btn-text">Trợ giúp</span>
+                </button>
+                <button id="btnDelete" class="toolbar-dialog-item">
+                    <div class="btn-icon icon-close">
+                    </div>
+                    <span class="btn-text">Đóng</span>
+                </button>
+            </div>
+            <div class="form-dialog">
+
+                <div class="panel-body-dialog">
+                    <div style="display: flex;margin-top: 8px">
+                        <div style="width:120px;"><span>Mục đích thu</span></div>
+                        <div class="btn-icon icon-radio-true cls-other"></div>
+                        <div style="width:95px;margin-top: 2px;">Khác</div>
+                        <div class="btn-icon icon-radio-false cls-pay"></div>
+                        <div style="width:200px;margin-top: 2px;">Điều chuyển đến cửa hàng khác</div>
+                    </div>
+                    <div class="dropdown">
+                        <div class="dropdown-toggle store-dropdown-list" data-toggle="dropdown">
+                                <span class="store-place"> Chi nhánh Cầu Giấy </span>
+                                <div class="add-arrow-down-icon" style="margin-left:108px">
+                                        <i class="fa fa-caret-down icon-dropdown"></i>
+                                </div>
+                        </div>
+                        <ul class="dropdown-menu time-filter-selection" role="menu" aria-labelledby="menu1">
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Cầu Giấy</a></li>
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Duy Tân</a></li>
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Bưởi</a></li>
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Phạm Hùng</a></li>
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Nhổn</a></li>
+                                <li dropdownName="store-place" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Mỹ Đình</a></li>
+                            </ul> 
+                    </div>
+                </div>
+
+                <div class="content-form-dialog">
+                    <div class="general-information">
+                        <div class="cls-group-title"> Thông tin chung</div>
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-general"><span class="lbl-customer-object">Đối tượng</span></div>
+                            <div class="input1-form-dialog">
+                                <div class="dropdown-div">
+                                    <div>
+                                        <input class="dialog-input  input-combobox customer-code-input" inputCombobox="object" type="text" id="objDialog"  />
+                                    </div>
+                                    <div class="dropdown-content object" comboboxName="object">
+                                        <div>
+                                            <div class="thead-dropdown">
+                                                <div style="width: 127px" class="dropdown-column-name">
+                                                    Mã
+                                                </div>
+                                                <div style="width: 241px" class="dropdown-column-name center-dropdown-column">
+                                                    Tên
+                                                </div>
+                                                <div style="width: 141px" class="dropdown-column-name">
+                                                    Loại
+                                                </div>
+                                            </div>
+                                            <div class="tbody-dropdown" style="height: 200px; overflow-y:scroll">
+                                                <table>
+                                                    <tbody class="object-combobox-data">
+                                                
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="customer-input-icons">
+                                    <div class="btn-icon-dialog icon-arrow-down" style="left:330px " comboboxName="object">
+                                        <img src="../../Contents/Icons/arrow-down-line.png" />
+                                    </div>
+
+                                    <div class="btn-icon-dialog icon-quick-search" style="left:355px ">
+                                        <img src="../../Contents/Images/Quick-search.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input2-form-dialog">
+                                <input class="dialog-input  customer-name-input" type="text"  />
+                            </div>
+                        </div>
+               
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-general"><span>Lý do thu</span></div>
+                            <div class="input3-form-dialog">
+                                <input type="text" class="dialog-input  customer-address-input"  />
+                            </div>
+                        </div>
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-general"><span>Diễn giải</span></div>
+                            <div class="input3-form-dialog">
+                                <input type="text" class="dialog-input  get-reason-input"  />
+                            </div>
+                        </div>
+          
+                    </div>
+                    <div class="documents">
+                        <div class="cls-group-title">Chứng từ</div>
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-documents"><span>Số phiếu xuất</span></div>
+                            <div class="input-form-dialog">
+                                <input type="text" class="receipt-number" />
+                            </div>
+                        </div>
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-documents"><span>Ngày xuất</span></div>
+                            <div class="input-form-dialog">
+                                <input type="text" class="export-day-input" id="get-receipt-day-input" />
+                                <div class="calendar-icon-picker icon-input get-receipt-day-icon"></div>
+                            </div>
+                        </div>
+                        <div class="Row-form-dialog">
+                            <div class="lbl-item-documents"><span>Giờ xuất</span></div>
+                            <div class="input-form-dialog">
+                                <input type="text" class="export-hour-input" id="get-receipt-day-input"  value="10:30"/>
+                                <div class="hour-icon-picker icon-input get-receipt-day-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-form-dialog">
+                    <div class="cls-group-title">Chi tiết</div>
+                    <div class="detail-store-table">
+                            <div class="div-wrap-new-export-detail-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="width-150">Mã SKU</th>
+                                            <th class="width-200">Tên hàng hóa</th>
+                                            <th class="width-180">Kho</th>
+                                            <th class="width-90">Đơn vị tính</th>
+                                            <th class="width-100">Đơn giá</th>
+                                            <th class="width-80">Số lượng</th>
+                                            <th class="width-100">Thành tiền</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="new-export-detail-box">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="thead-filter-row master-table-footer">
+                                    <div class="filter-input-master-tbl width-140">
+                                        <div style="padding: 10px" class="filter-table-input "> Số dòng = 3 </div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-200">
+                                        <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-170">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-90 text-align-right"></div>
+                              
+                                    <div class="filter-input-master-tbl width-80">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-90">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl width-100">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                    <div class="filter-input-master-tbl" style="flex-grow: 1">
+                                            <div class="filter-table-input"></div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
    

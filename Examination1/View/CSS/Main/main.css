@@ -73,7 +73,11 @@
 }
 
 .date-filter-dropdown-icon{
-    margin-left: 20px;
+    margin-left: 19px;
+}
+
+.date-filter-dropdown-icon:hover{
+    cursor: pointer;
 }
 
 .pagination-table{
@@ -157,9 +161,9 @@ span.text-pagination.result-pagination{
 }
 
 .filter-table-input input{
-    width: 100%;
     border:none;
     padding: 10px;
+    width: 100%;
 }
 
 .filter-table-input img{
@@ -180,4 +184,55 @@ span.text-pagination.result-pagination{
 
 .dropdown-menu > li > a{
     padding:5px 20px;
+}
+
+.master-table-footer{
+    background-color: #FFEEDA;
+    font-weight: bold;
+}
+
+.store-dropdown-list{
+    display: flex;
+    border: 1px solid #e1e1e1;
+    padding: 9px 7px;
+    height: 35px;
+    width: 200px;
+    border-radius: 3px;
+}
+
+.new-export-detail-box tr td{
+    padding: 11px;
+}
+
+.div-wrap-new-export-detail-table{
+    height: 320px;
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+}
+
+.no-padding-data-row>td{
+    padding: 0 !important;
+}
+
+.goods-combobox-data tr td{
+    padding: 11px;
+}
+
+.goods .tbody-dropdown{
+    width: 398px;
+}
+
+.store-place-dropdown{
+    display: flex;
+    height: 38px;
+    padding: 10px;
+}
+
+.add-arrow-down-icon{
+    position: absolute;
+    right: 2px;
+}
+
+.data-cell{
+    padding: 10px;
 }
