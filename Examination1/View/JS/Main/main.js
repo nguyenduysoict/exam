@@ -54,8 +54,10 @@ class MainJS {
         $(document).on("keypress", ".positive-num-input", this.validateNumberInput);
         $(document).on("keyup", ".positive-num-input", this.displayCustomNumber.bind(this));
         $(document).on("focusout", ".positive-num-input", this.checkNegativeNumber);
-        $(document).on("click", ".amount-arrow", this.changeAmountValue);
-        $(document).on("keyup", ".unit-price", this.calculateSumMoney);
+        $(document).on("click", ".amount-arrow", this.changeAmountValue.bind(this));
+        $(document).on("keyup", ".unit-price", {mode: 1},  this.onChangeCalculateValue.bind(this));
+        $(document).on("keyup", ".amount", {mode: 1}, this.onChangeCalculateValue.bind(this));
+        $(document).on("keyup", ".sum-money",{mode: 2}, this.onChangeCalculateValue.bind(this));
     }
 
     loadData(tableId){
@@ -176,34 +178,66 @@ class MainJS {
         }
     }
 
-    changeAmountValue(){
-        var targetName = $(this).attr("amountItem");
+    changeAmountValue(sender){
+        var targetName = $(sender.currentTarget).attr("amountItem");
+        var index = targetName.replace("amount-", "");
         if(targetName){
             var targetVal = parseInt($("."+targetName).val());
-            if($(this).hasClass('arrow-up')){
+            if($(sender.currentTarget).hasClass('arrow-up')){
                 $("."+targetName).val(targetVal+1);
             } else if(targetVal>0) {
                 $("."+targetName).val(targetVal-1);
             }
         }
+        this.calculateSumMoney(index);
     }
 
-    calculateSumMoney(){
-        var classList = this.classList;
-        var target = classList.filter(function (item) {
-            return item.includes("unit-price-")
-        });
-        if(target.length == 0){
-            
+    onChangeCalculateValue(sender){
+        var index = $(sender.currentTarget).attr("index");
+        var mode = sender.data['mode'];
+        if(mode == 1){
+            this.calculateSumMoney(index);
         } else {
-            var index = target[0].replace("unit-price-", "");
+            this.calculateUnitPrice(index);
         }
-
-
     }
 
-    calculateUnitPrice(){
 
+    calculateSumMoney(index){
+        var unitPrice = $('.unit-price-'+index).val();
+        var amount = $('.amount-'+index).val();
+        if(unitPrice == "" || amount == ""){
+            $('.sumMoney-'+index).val(0);
+        } else {
+            var sumMoney = this.DatafomaterJS.formatToIntNumber(unitPrice)*parseInt(amount);
+            sumMoney = this.DatafomaterJS.formatToStringNumber(sumMoney);
+            $('.sumMoney-'+index).val(sumMoney);
+        }
+    }
+
+    calculateUnitPrice(index){
+        var sumMoney = this.DatafomaterJS.formatToIntNumber($('.sumMoney-'+index).val());
+        var amount = this.DatafomaterJS.formatToIntNumber($('.amount-'+index).val());
+        if(isNaN(sumMoney) || amount == 0){
+            $('.unit-price-'+index).val(0);
+        } else {
+            var unitPrice = sumMoney/amount;
+            unitPrice = this.DatafomaterJS.formatToStringNumber(unitPrice);
+            $('.unit-price-'+index).val(unitPrice);
+        }
+    }
+
+    calculateSumAllAmount(){
+        var tableLenght = $('.new-export-detail-box').children().length;
+        var sumAllAmount = 0;
+        if(tableLenght>1)
+        for(let i = 0;i<tableLenght-1;i++){
+            var sumAmount = this.DatafomaterJS.formatToIntNumber($('.sumMoney-'+i).val());
+            sumAllAmount+=sumAmount;
+        }
+        debugger
+        sumAllAmount = this.DatafomaterJS.formatToStringNumber(sumAllAmount);
+        $('.sum-all-amount').html(sumAllAmount);
     }
 
     bindBootstrapComboboxData(){
@@ -234,9 +268,15 @@ class MainJS {
 
         var lastRowIndex = $('.new-export-detail-box').children().length;
         $('.new-export-detail-box').children()[lastRowIndex-1].remove();
-
+        
         this.appendNewRowToNewExportDetailTable(good);
         this.appendEmptyRowToNewExportDetail();
+
+        var rowCount = lastRowIndex;
+
+        $('.row-count').html("Số dòng = "+rowCount);
+        debugger
+        this.calculateSumAllAmount();
         
     }
 
@@ -251,7 +291,7 @@ class MainJS {
         
         var sumMoney = this.DatafomaterJS.formatToIntNumber(data.unitPrice)*data.amount;
 
-        sumMoney = this.DatafomaterJS.formatToStingNumber(sumMoney.toString());
+        sumMoney = this.DatafomaterJS.formatToStringNumber(sumMoney);
 
         var row = 
                 `<tr class="no-padding-data-row">
@@ -278,18 +318,18 @@ class MainJS {
                     <td> <div class="data-cell"> ${data.countUnit}  </div></td>
                     <td>
                         <div>
-                            <input class="input-inside-cell positive-num-input text-align-right unit-price unit-price-${rowIndex}" style="width: 100px" value= "${data.unitPrice }" type="text">
+                            <input class="input-inside-cell positive-num-input text-align-right unit-price unit-price-${rowIndex}" index="${rowIndex}" style="width: 100px" value= "${data.unitPrice }" type="text">
                         </div>
                     </td>
                     <td>
                         <div style="display:flex">
-                            <input class="input-inside-cell positive-num-input text-align-center amount-${rowIndex}" style="width: 80px" value="${data.amount}" type="text">
+                            <input class="input-inside-cell positive-num-input text-align-center amount amount-${rowIndex}" index="${rowIndex}" style="width: 80px" value="${data.amount}" type="text">
                             <div class="up-down-arrow"> <div class="amount-arrow arrow-up" amountItem="amount-${rowIndex}"></div> <div class="amount-arrow arrow-down" amountItem="amount-${rowIndex}"></div> </div>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <input class="input-inside-cell positive-num-input text-align-right sum-money sumMoney-${rowIndex}" style="width: 100px" value= "${ sumMoney }" type="text">
+                            <input class="input-inside-cell positive-num-input text-align-right sum-money sumMoney-${rowIndex}" index="${rowIndex}" style="width: 100px" value= "${ sumMoney }" type="text">
                         </div>
                     </td>
                     <td>
@@ -395,7 +435,7 @@ class MainJS {
         var _this = sender.target;
         var value = $(_this).val();
         if (value) {
-            $(_this).val(this.DatafomaterJS.formatToStingNumber(value));
+            $(_this).val(this.DatafomaterJS.formatToStringNumber(value));
         }
     }
 

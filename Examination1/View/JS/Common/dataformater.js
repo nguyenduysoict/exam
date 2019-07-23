@@ -31,7 +31,8 @@
         return parseInt(stringNumber.split('.').join(''));
     }
 
-    formatToStingNumber(value) {
+    formatToStringNumber(value) {
+        value = value.toString();
         var plain = value.split('.').join('');
         var reversed = plain.split('').reverse().join('');
         var reversedWithDots = reversed.match(/.{1,3}/g).join('.');
