@@ -23,6 +23,7 @@
 
 .btn-icon-add{
     background-position: -1px -127px;
+    color: white;
 }
 
 .btn-icon-view{
@@ -90,7 +91,7 @@ tbody{
 }
 
 tbody tr:hover{
-    background: rgb(195, 236, 255);
+    background: rgba(195, 236, 255, 0.5);
     cursor: pointer;
 }
 
@@ -187,4 +188,12 @@ tbody td{
     height: 38px;
     border: none;
     padding: 0 7px;
+}
+
+.f5f5f5-background{
+    background-color: #f5f5f5;
+}
+
+.selected-row{
+    background-color: rgb(195, 236, 255);
 }

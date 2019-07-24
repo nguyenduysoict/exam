@@ -12,8 +12,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <script src="../JS/Library/jquery-3.3.1.min.js"></script>
     <script src="../JS/Library/jquery-ui.min.js"></script>
+    <script src="../JS/Library/jquery.timepicker.min.js"></script>
     <script src="../JS/Library/popper.min.js"></script>
     <script src="../JS/Library/bootstrap.min.js"></script>
+    <script src="../JS/Common/calendardisplay.js"></script>
+    <script src="../JS/Common/windowresizehandle.js"></script>
 
     <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
     <link rel="stylesheet" href="../CSS/Main/main.css">
@@ -89,7 +92,7 @@
                     <div class="help-header">
     
                         <img src="../../Contents/Images/icon_help_18.png" class="img-help-header" />
-                        <span class="text-help-header">Trợ giúp</span>
+                        <span class="text-help-header"> Trợ giúp</span>
                     </div>
                     <div class="user-login-header">
                         <div class="username-header">
@@ -111,34 +114,34 @@
             </div>
             <div class="container">
                 <div class="main-toolbar">
-                        <button id="btnAdd" class="toolbar-btn-item" title="Ctrl+Alt+N">
+                        <button id="btnAdd" class=" btn toolbar-btn-item" title="Ctrl+Alt+N">
                             <div class="btn-icon btn-icon-add"></div>
                             <span class="btn-text">Thêm mới</span>
                             
                         </button>
 
-                        <button id="btnDuplicate" class="toolbar-btn-item" title="Ctrl + C">
+                        <button id="btnDuplicate" class="btn toolbar-btn-item enable-if-selected custom-disabled-btn" title="Ctrl + C">
                             <div class="btn-icon btn-icon-duplicate"> </div>
                             <span class="btn-text">Nhân bản</span>
                         </button>
                         
-                        <button id="btnRefesh" class="toolbar-btn-item">
+                        <button id="btnRefesh" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" >
                             <div class="btn-icon btn-icon-view">
                             </div>
                             <span class="btn-text">Xem</span>
                         </button>        
         
-                        <button id="btnEdit" class="toolbar-btn-item" title="Ctrl  + E">
+                        <button id="btnEdit" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + E" >
                             <div class="btn-icon btn-icon-edit"></div>
                             <span class="btn-text">Sửa</span>
                         </button>     
         
-                        <button id="btnDelete" class="toolbar-btn-item" title="Ctrl  + D">
+                        <button id="btnDelete" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + D" >
                             <div class="btn-icon btn-icon-delete"></div>
                             <span class="btn-text">Xóa</span>
                         </button>
 
-                        <button id="btnPrint" class="toolbar-btn-item" title="Ctrl  + P">
+                        <button id="btnPrint" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + P" >
                             <div class="btn-icon btn-icon-print"></div>
                             <span class="btn-text">In</span>
                             <div class="add-arrow-down-icon">
@@ -155,18 +158,18 @@
                                     </div>
                             </div>
                             <ul class="dropdown-menu time-filter-selection" role="menu" aria-labelledby="menu1">
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="1" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm nay</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="2" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm qua</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="3" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần này</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="4" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần trước</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="5" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng này</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="6" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng trước</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="7" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý này</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="8" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý trước</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="9" role="presentation"><a role="menuitem" tabindex="-1" href="#">6 tháng trước</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="10" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm nay</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="11" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm trước</a></li>
-                                <li dropdownName="time-range" class="dropdown-bootstrap" caseCode="12" role="presentation"><a role="menuitem" tabindex="-1" href="#">Khác</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="1" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm nay</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="2" role="presentation"><a role="menuitem" tabindex="-1" href="#">Hôm qua</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="3" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="4" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuần trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="5" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="6" role="presentation"><a role="menuitem" tabindex="-1" href="#">Tháng trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="7" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý này</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="8" role="presentation"><a role="menuitem" tabindex="-1" href="#">Quý trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="9" role="presentation"><a role="menuitem" tabindex="-1" href="#">6 tháng trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="10" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm nay</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="11" role="presentation"><a role="menuitem" tabindex="-1" href="#">Năm trước</a></li>
+                                <li dropdownName="time-range" class="dropdown-bootstrap time-range-item" caseCode="12" role="presentation"><a role="menuitem" tabindex="-1" href="#">Khác</a></li>
                             </ul> 
                         </div>
                             
@@ -202,7 +205,7 @@
                                                     <th class=" width-230">Số phiếu xuất</th>
                                                     <th class=" width-250">Đối tượng</th>
                                                     <th class=" width-170">Tổng tiền</th>
-                                                    <th class="">Diễn giải</th>
+                                                    <th class="master-tbl-note">Diễn giải</th>
                                                     <th class=" width-368">Loại chứng từ</th>
                                                     <th class=" width-18"></th>
                                                 </tr>
@@ -212,8 +215,8 @@
                                     <div class="thead-filter-row">
                                         <div class="filter-input-master-tbl width-170">
                                             <div class="filter-table-input">
-                                                <input type="text" class="input-day-from" />
-                                                <div class="calendar-icon-picker icon-input filter-table-icon"></div>
+                                                <input type="text" class="input-day-from text-align-center" id="export-date-filter-input" />
+                                                <div class="calendar-icon-picker icon-input filter-table-icon export-date-filter-icon"></div>
                                             </div>
                                         </div>
                                         <div class="filter-input-master-tbl width-230">
@@ -221,7 +224,7 @@
                                                 <div>
                                                     <img src="../../Contents/Images/Quick-search.png" alt="">
                                                 </div>
-                                                <input type="text">
+                                                <input type="text" filterIndex="1" class="search-input-filter">
                                             </div>
                                         </div>
                                         <div class="filter-input-master-tbl width-250">
@@ -229,36 +232,53 @@
                                                     <div>
                                                         <img src="../../Contents/Images/Quick-search.png" alt="">
                                                     </div>
-                                                    <input type="text">
+                                                    <input type="text" filterIndex="2" class="search-input-filter">
                                                 </div>
                                         </div>
                                         <div class="filter-input-master-tbl width-170">
-
+                                            <div class="filter-table-input">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle compare-value-filter" data-toggle="dropdown">
+                                                            <span class="compare-operator"> = </span>
+                                                    </div>
+                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                            <li dropdownName="compare-operator" operator="=" class="dropdown-bootstrap compare-operator-item"><a role="menuitem" tabindex="-1" href="#"> = : Bằng</a></li>
+                                                            <li dropdownName="compare-operator" operator="<" class="dropdown-bootstrap compare-operator-item"><a role="menuitem" tabindex="-1" href="#"> < : Nhỏ hơn </a></li>
+                                                            <li dropdownName="compare-operator" operator="<=" class="dropdown-bootstrap compare-operator-item"><a role="menuitem" tabindex="-1" href="#"> <= : Nhỏ hơn hoặc bằng</a></li>
+                                                            <li dropdownName="compare-operator" operator=">" class="dropdown-bootstrap compare-operator-item"><a role="menuitem" tabindex="-1" href="#"> > : Lớn hơn </a></li>
+                                                            <li dropdownName="compare-operator" operator=">=" class="dropdown-bootstrap compare-operator-item"><a role="menuitem" tabindex="-1" href="#"> >= : Lớn hơn hoặc bằng</a></li>
+                                                        </ul> 
+                                                </div>
+                                                <input type="text" filterIndex="3" class="search-input-filter sum-amount-filter-input positive-num-input">
+                                            </div>
                                         </div>
-                                        <div class="filter-input-master-tbl  width-558">
+                                        <div class="filter-input-master-tbl width-558 master-tbl-note-item">
                                             <div class="filter-table-input">
                                                 <div>
                                                     <img src="../../Contents/Images/Quick-search.png" alt="">
                                                 </div>
-                                                <input type="text">
+                                                <input type="text" filterIndex="4" class="search-input-filter">
                                             </div>
                                         </div>
                                         <div class="filter-input-master-tbl">
-                                            <!-- <div class="filter-table-input">
-                                                <input type="text" class="" value="Tất cả"/>
-                                                <div style="margin-top: 5px;" class="arrow-down-icon"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
-                                            </div> -->
-                                            <div class="dropdown filter-table-input " >
-                                                    <input type="text" class="" value="Tất cả" data-toggle="dropdown"/>
-
-                                                    <div style="margin-top: 5px;" class="arrow-down-icon dropdown-toggle" data-toggle="dropdown"> <img src="../../Contents/Icons/arrow-down-line.png" alt=""></div>
-
-                                                    <ul class="dropdown-menu" >
-                                                        <li> 1 </li>
-                                                        <li> 1 </li>
-                                                        
-                                                    </ul> 
+                                            <div class="dropdown">
+                                                <div class="dropdown-toggle receipt-type-dropbox" data-toggle="dropdown">
+                                                        <span class="receipt-type"> Tất cả </span>
                                                 </div>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Tất cả</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu xuất kho bán hàng</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu trả lại hàng mua - Tiền mặt</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu trả lại hàng mua - Tiền gửi</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu trả lại hàng mua - Giảm trừ công nợ</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu xuất kho kiểm kê</a></li>
+                                                    <li dropdownName="receipt-type" class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu xuất kho điều chuyển sang cửa hàng khác</a></li>
+                                                    <li dropdownName="receipt-type"  class="dropdown-bootstrap receipt-type-item"><a role="menuitem" tabindex="-1" href="#">Phiếu xuất kho khác</a></li>
+                                                </ul>
+                                                <div data-toggle="dropdown" class="add-arrow-down-icon" style="top: 8px">
+                                                        <i class="fa fa-caret-down icon-dropdown"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +287,7 @@
                                 </div>
                             </div>
                                 <div class="div-wrap-master-table">
-                                    <table class="table table-striped"> 
+                                    <table class="table"> 
                                         <tbody class="tbody-table export-master-table">
                                            
                                         </tbody>
@@ -280,13 +300,12 @@
                                         <div class="filter-table-input"></div>
                                     </div>
                                     <div class="filter-input-master-tbl width-230">
-                                        <div class="filter-table-input"></div>
-                                    </div>
+                                        <div class="filter-table-input"></div>                                    </div>
                                     <div class="filter-input-master-tbl width-250">
                                             <div class="filter-table-input"></div>
                                     </div>
                                     <div class="filter-input-master-tbl width-170 text-align-right" style="padding-top: 8px;padding-left: 91px;" id="sumMoneyMasterTable"></div>
-                                    <div class="filter-input-master-tbl width-558">
+                                    <div class="filter-input-master-tbl master-tbl-note-bottom-cell ">
                                         <div class="filter-table-input"></div>
                                     </div>
                                     <div class="filter-input-master-tbl" style="flex-grow:1"></div>
@@ -295,16 +314,15 @@
                         
 
                         <div class="pagination-table">
-                            <div class="icon-pagination icon-double-arrow-left"></div>
-                            <div class="icon-pagination icon-arrow-left"></div>
+                            <div class="icon-pagination custom-disabled-btn icon-double-arrow-left"></div>
+                            <div class="icon-pagination custom-disabled-btn icon-arrow-left"></div>
                             <span class="text-pagination">Trang</span>
-                            <input type="number" min="1" class="input-pagination" />
-                            <span class="text-pagination">trên 1</span>
+                            <input type="number" min="1" max="10" value="1" class="input-pagination positive-num-input" />
+                            <span class="text-pagination">trên 10</span>
                             <div class="icon-pagination icon-arrow-right"></div>
                             <div class="icon-pagination icon-double-arrow-right"></div>
                             <div class="icon-pagination icon-refresh-pagination"></div>
-                            <span class="text-pagination">Số bản ghi</span>
-                            <span class="text-pagination result-pagination">1-15 trong 30 kết quả</span>
+                            <span class="text-pagination result-pagination"> <span class="record-range"> 1 - 30  </span> trong 300 kết quả</span>
                         </div>
 
                     </div>
@@ -380,12 +398,12 @@
                     <span class="btn-text">In</span>
                     <i class="fa fa-caret-down icon-dropdown"></i>
                 </button>
-                <button id="btnDelete" class="toolbar-dialog-item">
+                <button id="btnHelp" class="toolbar-dialog-item">
                     <div class="btn-icon icon-help">
                     </div>
                     <span class="btn-text">Trợ giúp</span>
                 </button>
-                <button id="btnDelete" class="toolbar-dialog-item">
+                <button id="btnClose" class="toolbar-dialog-item">
                     <div class="btn-icon icon-close">
                     </div>
                     <span class="btn-text">Đóng</span>
@@ -427,7 +445,7 @@
                             <div class="input1-form-dialog">
                                 <div class="dropdown-div">
                                     <div>
-                                        <input class="dialog-input  input-combobox customer-code-input" inputCombobox="object" type="text" id="objDialog"  />
+                                        <input class="dialog-input  input-combobox object-code-input" inputCombobox="object" type="text" id="objDialog"  />
                                     </div>
                                     <div class="dropdown-content object" comboboxName="object">
                                         <div>
@@ -453,30 +471,30 @@
                                     </div>
                                 </div>
                                 <div class="customer-input-icons">
-                                    <div class="btn-icon-dialog icon-arrow-down" style="left:330px " comboboxName="object">
+                                    <div class="btn-icon-dialog icon-arrow-down" style="left:300px " comboboxName="object">
                                         <img src="../../Contents/Icons/arrow-down-line.png" />
                                     </div>
 
-                                    <div class="btn-icon-dialog icon-quick-search" style="left:355px ">
+                                    <div class="btn-icon-dialog icon-quick-search" style="left:323px ">
                                         <img src="../../Contents/Images/Quick-search.png">
                                     </div>
                                 </div>
                             </div>
                             <div class="input2-form-dialog">
-                                <input class="dialog-input  customer-name-input" type="text"  />
+                                <input class="dialog-input  object-name-input" type="text"  />
                             </div>
                         </div>
                
                         <div class="Row-form-dialog">
-                            <div class="lbl-item-general"><span>Lý do thu</span></div>
+                            <div class="lbl-item-general"><span> Địa chỉ </span></div>
                             <div class="input3-form-dialog">
-                                <input type="text" class="dialog-input  customer-address-input"  />
+                                <input type="text" class="dialog-input  object-address-input"  />
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-general"><span>Diễn giải</span></div>
                             <div class="input3-form-dialog">
-                                <input type="text" class="dialog-input  get-reason-input"  />
+                                <input type="text" class="dialog-input export-explain-input"  />
                             </div>
                         </div>
           
@@ -492,14 +510,14 @@
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Ngày xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-day-input" id="get-receipt-day-input" />
-                                <div class="calendar-icon-picker icon-input get-receipt-day-icon"></div>
+                                <input type="text" class="export-day-input" id="export-date-input" />
+                                <div class="calendar-icon-picker icon-input export-day-icon"></div>
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Giờ xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-hour-input" id="get-receipt-day-input"  value="10:30"/>
+                                <input type="text" class="export-hour-input timepicker"/>
                                 <div class="hour-icon-picker icon-input get-receipt-day-icon"></div>
                             </div>
                         </div>
@@ -556,13 +574,66 @@
             </div>
         </div>
     </div>
-   
+    <div class="dialogSaveDataNotification" style="display:none">
+            <div class="popup-dialog">
+                <div class="icon-popup question-icon-popup">
+    
+                </div>
+                <div class="popup-message">
+                    Dữ liệu đã thay đổi, bạn có muốn lưu không?
+                </div>
+            </div>
+            <hr />
+            <div style="flex-grow:1">
+    
+            </div>
+    
+            <div style="display: flex; margin: 0 9px 10px 110px;">
+                <div>
+                    <div class="btn-custom btn-custom-blue-back save-export-btn">
+                        <div class="icon-save icon-in-btn" style="margin-top:3px "> </div>
+                        <span>Lưu</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn-custom btn-custom-no-border not-save-export-btn" style="border: 1px solid #026b97;" >
+                        <div class="icon-not-save icon-in-btn"> </div>
+                        <span>Không lưu</span>
+                    </div>
+                </div>
+                    <div>
+                        <div class="btn-custom btn-custom-no-border cancel-dialog-btn">
+                            <div class="icon-cancel icon-in-btn"></div>
+                            <span>Hủy bỏ</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="dialogNotification" style="display:none">
+                <div class="popup-dialog">
+                    <div class="icon-popup warning-icon-popup">
+        
+                    </div>
+                    <div class="popup-message" style="width: 234px;">
+                        Các trường dữ liệu không được để trống, phải có ít nhất một dòng chi tiết!
+                    </div>
+                </div>
+                <hr />
+                <div style="flex-grow:1">
+        
+                </div>
+        
+                <div class="btn-confirm-dialog btn-custom btn-custom-blue-back">
+                    <span>Đồng ý</span>
+                </div>
+            </div>
     <script src="../JS/Common/ajax.js"></script>
     <script src="../JS/Common/databinding.js"></script>
     <script src="../JS/Common/dataformater.js"></script>
     <script src="../JS/Common/dialog.js"></script>
     <script src="../JS/Main/main.js"></script>
-    <script src="../JS/Common/calendardisplay.js"></script>
+  
 
 </body>
 </html>

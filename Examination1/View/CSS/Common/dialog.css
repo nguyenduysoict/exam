@@ -190,16 +190,16 @@
 
 .input1-form-dialog {
     display: flex;
-    width: 236px;
+    width: 200px;
 }
 
 .input1-form-dialog input {
-    width: 236px;
+    width: 200px;
 }
 
 .input2-form-dialog {
     margin-left: 5px;
-    width: 270px;
+    width: 305px;
 }
 
 .input3-form-dialog {
@@ -237,10 +237,6 @@
 /*
     Css cho phần chứng từ
 */
-.documents {
-    width: 240px;
-    padding: 8px 8px 4px;
-}
 
 /*
      * Description: Định dạng  cho dialog
@@ -390,7 +386,7 @@
     Css cho phần thông tin chung
 */
 .general-information {
-    width: 643px;
+    width: 670px;
     padding: 8px 8px 4px;
 }
 
@@ -417,7 +413,7 @@
 .documents {
     width: 274px;
     padding: 8px 0;
-    margin-left: 20px;
+    margin-left: 48px;
 }
 
 .lbl-item-documents {

@@ -117,4 +117,21 @@
         $(dtpElementEnd).val(this.formatDate(endDate));
     }
 
+    checkEqualDate(stringDateA, stringDateB){
+        stringDateA = this.convertToISODate(stringDateA);
+        stringDateB = this.convertToISODate(stringDateB);
+        var dateA = stringDateA.getDate();
+        var dateB = stringDateB.getDate();
+        var monthA = stringDateA.getMonth();
+        var monthB = stringDateB.getMonth();
+        var yearA = stringDateA.getFullYear();
+        var yearB = stringDateB.getFullYear();
+        if(dateA == dateB && monthA == monthB && yearA == yearB){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

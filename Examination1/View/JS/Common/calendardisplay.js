@@ -34,45 +34,43 @@ $("#get-data-to-day-input").datepicker({
     }
 });
 
-// Hiển thị datepicker ngày thu chứng từ khi click icon calendar
 
-// $('.get-receipt-day-icon').click(function () {
-//     $("#get-receipt-day-input").focus();
-// });
 
-// // Gán giá trị được chọn cho ngày thu chứng từ, custom vị trí hiển thị calendar
 
-// $("#get-receipt-day-input").datepicker({
-//     onSelect: function (dateText) {
-//         var date = $(this).val();
-//         $("#get-receipt-day-input").val(mainJS.formatDate(date));
-//     },
+// Hiển thị datepicker ngày xuất click icon calendar
 
-//     beforeShow: function (input, inst) {
-//         var inputPosition = $("#get-receipt-day-input").offset();
-//         setTimeout(function () {
-//             inst.dpDiv.css({
-//                 top: inputPosition.top + 34,
-//                 left: inputPosition.left - 85
-//             });
-//         }, 0);
-//     }
-// });
+$('.export-day-icon').click(function () {
+    $("#export-date-input").focus();
+});
 
-// // Hiển thị datepicker ngày thu nợ khi click icon calendar
+// Gán giá trị được chọn cho ngày thu chứng từ, custom vị trí hiển thị calendar
 
-// $('.repayment-day-icon').click(function () {
-//     $("#repayment-day-input").focus();
-// });
+$("#export-date-input").datepicker({
+    onSelect: function (dateText) {
+        var date = $(this).val();
+        $("#export-date-input").val(formatDate(date));
+    },
 
-// // Gán giá trị được chọn cho ngày thu nợ
+    beforeShow: function (input, inst) {
+        var inputPosition = $("#export-date-input").offset();
+        setTimeout(function () {
+            inst.dpDiv.css({
+                top: inputPosition.top + 34,
+                left: inputPosition.left - 91
+            });
+        }, 0);
+    }
+});
 
-// $("#repayment-day-input").datepicker({
-//     onSelect: function (dateText) {
-//         var date = $(this).val();
-//         $("#repayment-day-input").val(mainJS.formatDate(date));
-//     }
-// });
+
+
+
+$('.timepicker').timepicker({
+    timeFormat: 'H:i',
+    show24Hours: false,
+    step: 30
+})
+
 
 function formatDate(date) {
     var date = new Date(date);

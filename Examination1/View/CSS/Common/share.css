@@ -29,19 +29,31 @@
     margin: 10px;
 }
 
+.warning-icon-popup{
+    background: url('../../../Contents/Icons/icon-popup.png') no-repeat -56px -2px;
+}
+
+.icon-save{
+    background: url('../../../Contents/Icons/save-white.png') no-repeat; 
+}
+
+.icon-not-save{
+    background: url('../../../Contents/Icons/not-save.png') no-repeat; 
+}
+
 .icon-agree {
     background: url(../../../Content/Icons/common-icon.png) no-repeat -377px -127px;
 }
 
 .icon-cancel {
     margin-top: 3px;
-    background: url(../../../Content/Icons/common-icon.png) no-repeat -255px -130px;
+    background: url('../../../Contents/Icons/common-icon.png') no-repeat -255px -130px;
 }
 
 .btn-custom {
     height: 35px;
     border-radius: 3px;
-    padding: 9px 18px 0 10px;
+    padding: 9px 11px 0 10px;
     display: flex;
 }
 
@@ -73,8 +85,8 @@
     height: 44px;
     width: 44px;
 }
-.warning-icon-popup {
-    background: url('../../../Content/Icons/icon-popup.png') no-repeat -56px -2px;
+.question-icon-popup {
+    background: url('../../../Contents/Icons/icon-popup.png') no-repeat -164px -2px;
 }
 
 .popup-message{

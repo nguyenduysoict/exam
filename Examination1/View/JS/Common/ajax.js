@@ -1,18 +1,19 @@
 ﻿class AjaxJS {
     constructor() {
         this.receiptNumber = "XK0000012";
+        this.detailExportReceipt = []
     }
 
     getExportMasterTableData(){
         var data = [];        
-        for(let i = 0;i<30;i++){
+        for(let i = 0;i<5;i++){
             var item = {
-                receiptCode: Math.floor((Math.random() * 3) + 1),
-                date: this.randomDate(),
-                receiptNumber: this.randomNumber(),
-                object: this.randomName(),
+                id: Math.floor((Math.random() * 3) + 1),
+                receiptDate: this.randomDate(),
+                receiptNumber: 'XK000'+(i+10),
+                objectName: this.randomName(),
                 sumMoney: this.randomMoney(),
-                note: this.randomNote(),
+                exportExplain: this.randomNote(),
                 receiptType: this.randomReceiptType()
             }
             data.push(item);
@@ -20,31 +21,31 @@
         return data;
     }
 
-    getDetailExportReceipt(receiptCode){
+    getDetailExportReceipt(id){
         var data = [];
-        switch (receiptCode) {
+        switch (id) {
             case "1":
                 var item = {
+                    id: 1,
                     itemCode: this.randomGoodCode(),
                     itemName: this.randomGoods(),
                     storePlace: this.randomPlace(),
                     countUnit: this.randomUnit(),
                     unitPrice: this.randomMoney(),
                     amount: this.randomAmount(),
-                    sumMoney: this.randomMoney()
                 }
                 data.push(item);
                 break;
             case "2":
                 for(let i=0;i<2;i++){
                     var item = {
+                        id: 2,
                         itemCode: this.randomGoodCode(),
                         itemName: this.randomGoods(),
                         storePlace: this.randomPlace(),
                         countUnit: this.randomUnit(),
                         unitPrice: this.randomMoney(),
                         amount: this.randomAmount(),
-                        sumMoney: this.randomMoney()
                     }
                     data.push(item);
                 }
@@ -52,55 +53,65 @@
             case "3":
                 for(let i=0;i<3;i++){
                     var item = {
+                        id: 3,
                         itemCode: this.randomGoodCode(),
                         itemName: this.randomGoods(),
                         storePlace: this.randomPlace(),
                         countUnit: this.randomUnit(),
                         unitPrice: this.randomMoney(),
                         amount: this.randomAmount(),
-                        sumMoney: this.randomMoney()
                     }
                     data.push(item);
                 }
                 break;
             default:
+                data = this.detailExportReceipt.filter(function(item){
+                    return item.id == id
+                })
                 break;
         }
         return data;
+    }
+
+    addReceiptDetailToDataTable(receiptDetails){
+        this.detailExportReceipt = [...this.detailExportReceipt, ...receiptDetails];
     }
 
     getComboboxData(comboboxName) {
         var object = [];
         switch (comboboxName) {
             case "object":
-                var comboboxData1 = {
-                    id: 'nmd2310',
-                    code: 'KH0000'+this.randomTwoDigitNumber(),
-                    name: this.randomName(),
-                    type: 'Khách hàng',
-                    address: 'Duy Tân'
-                }
 
-                var comboboxData2 = {
-                    id: '0213nmd',
-                    code: 'NV0000'+this.randomTwoDigitNumber(),
-                    name: this.randomName(),
-                    type: 'Nhân viên',
-                    address: 'Lò Đúc'
-                }
+                for (let i = 1; i <= 20; i++) {
+                    var objectCode = this.randomObjectCode();
+                    var objectType = '';
+                    var objectTypeOrder = '';
+                    if(objectCode == 'KH'){
+                        objectCode = 'KH0000';
+                        objectType = 'Khách hàng';
+                        objectTypeOrder = 1;
+                    } else if(objectCode == 'NCC') {
+                        objectCode = 'NCC0000';
+                        objectType = 'Nhà cung cấp';
+                        objectTypeOrder = 2;
 
-                var comboboxData3 = {
-                    id: 'nm0230d',
-                    code: 'NCC0000'+this.randomTwoDigitNumber(),
-                    name: this.randomName(),
-                    type: 'Nhà cung cấp',
-                    address: 'Bưởi'
-                }
+                    } else {
+                        objectCode = 'NV0000';
+                        objectType = 'Nhân viên';
+                        objectTypeOrder = 3;
 
-                for (let i = 1; i <= 5; i++) {
-                    object.push(comboboxData1);
-                    object.push(comboboxData2);
-                    object.push(comboboxData3);
+                    }
+                    
+                    var item = {
+                        id: 'nmd2310',
+                        code: objectCode+this.randomTwoDigitNumber(),
+                        name: this.randomName(),
+                        type: objectType,
+                        objectTypeOrder: objectTypeOrder,
+                        address: 'Duy Tân'
+                    }
+                    object.push(item);
+                
                 }
                 return object;
 
@@ -185,7 +196,7 @@
 
     randomDate(){
         var date = Math.floor(Math.random() * 30) + 1;
-        var month = Math.floor(Math.random() * 12) + 1;
+        var month = Math.floor(Math.random() * 6) + 1;
         return date+'/'+month+'/2019';
     }
 
@@ -214,11 +225,13 @@
 
     randomReceiptType(){
         var receiptTypeArr = [
-            'Xuất kho bán hàng',
-             'Xuất mua hàng',
-              'Nhập kho bán hàng',
-              'Nhập hàng vào kho',
-              'Xuất kho vào hàng'
+            'Phiếu xuất kho bán hàng',
+            'Phiếu trả lại hàng mua - Tiền mặt',
+            'Phiếu trả lại hàng mua - Tiền gửi',
+            'Phiếu trả lại hàng mua - Giảm trừ công nợ',
+            'Phiếu xuất kho kiểm kê',
+            'Phiếu xuất kho điều chuyển sang cửa hàng khác',
+            'Phiếu xuất kho khác',
             ];
         var receiptType = receiptTypeArr[Math.floor(Math.random()*receiptTypeArr.length)];
         return receiptType;
@@ -281,6 +294,15 @@
     randomAmount(){
         return Math.floor((Math.random() * 10) + 1);
 
+    }
+
+    randomObjectCode(){
+        var objectCodeArr = [
+            'KH',
+            'NCC',
+            'NV'
+            ];
+        return objectCodeArr[Math.floor(Math.random()*objectCodeArr.length)];
     }
 
 }
