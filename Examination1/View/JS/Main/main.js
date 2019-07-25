@@ -1,5 +1,14 @@
 $(document).ready(function(){
+    /**
+     * Khởi tạo Main object xử lý các sự kiện trên màn xuất kho
+     * createby nmduy 24/07
+     */
     mainJS = new MainJS();
+
+    /**
+     * Ẩn combobox menu khi click ra vùng ngoài
+     * Createby NMDuy 25/07/2019 
+     */
     $(document).click(function (e) {
         var container = $(".input-combobox");
         if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -10,6 +19,10 @@ $(document).ready(function(){
         }
     });
 
+    /**
+     * Toggle combobox menu khi focus vào ô input chứa combobox
+     * Createby NMDuy 25/07/2019
+     */
     $('.input-combobox').focus(function () {
         var thisInputComboboxName = $(this).attr("inputCombobox");
         var comboboxes = $('.dropdown-content');
@@ -23,17 +36,22 @@ $(document).ready(function(){
             };  
         }
     })
+
     
-
-    // Hiển thị datepicker chọn ngày chứng từ khi click icon calendar
-    $(".export-date-filter-icon").click(function () {
-        $("#export-date-filter-input").focus();
-    });
-
     
 })
 
+/**
+ * MainJS object xử lý tác vụ có trong màn xuất kho
+ * Createby NMDuy 25/07/2019
+ */
+
 class MainJS {
+
+    /**
+     * Hàm khởi tạo các đối tượng và biến dùng trong chương trình
+     * Createby NMDuy 25/07/2019
+     */
     constructor(){
         this.AjaxJS = new AjaxJS();
         this.DatabindingJS = new DataBindingJS();
@@ -41,8 +59,9 @@ class MainJS {
         this.NewExportReceiptDialog = new Dialog("Thêm phiếu xuất kho khác", 1000, 700, "dialogNewExport");
         this.DialogSaveData = new Dialog("Dữ liệu chưa được lưu", 400, 'auto', 'dialogSaveDataNotification');
         this.NotificationDialog = new Dialog("MShopKeeper", 400, 'auto', 'dialogNotification');
-        this.today = this.getInitialDate();
         this.exportTableData = [];
+        this.today = getInitialDate();
+        this.mode = '';
         this.receiptNumber = 40;
         this.receiptCodeNumber = '';
         this.selectedRowItemId = '';
@@ -53,15 +72,26 @@ class MainJS {
         this.InitEvents();
     }
 
+    /**
+     * Hàm khởi tạo các event listener, load data
+     * Createby NMDuy 25/07/2019
+     */
+
     InitEvents(){
         var _this = this;
         this.exportTableData = this.AjaxJS.getExportMasterTableData();
-        this.loadData("export-master-table");
-        this.DatafomaterJS.changeDateTimeByCase("3", "#get-data-from-day-input", "#get-data-to-day-input");
+        
+        this.loadData("export-master-table");        
+        changeDateTimeByCase("3", "#get-data-from-day-input", "#get-data-to-day-input");
+        $(document).on("focus", ".positive-num-input", this.selectAllValue);
+        $(document).on("focus", ".form-control-input", this.selectAllValue);
+        $(document).on("focus", ".input-combobox", this.selectAllValue);
 
         $(document).on("click", "#btnAdd", {type: 'add'}, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnDuplicate", {type: 'duplicate'}, this.showNewExportReceiptDialog.bind(this));
         $(document).on("click", "#btnEdit", {type: 'edit'}, this.showNewExportReceiptDialog.bind(this));
         $(document).on("click", "#btnCheck", {type: 'check'}, this.showNewExportReceiptDialog.bind(this));
+
         $(document).on("click", "#btnReturn", {type: 'return'}, this.subToolbarBtnClickHandle.bind(this));
         $(document).on("click", "#btnAddNew", {type: 'addnew'}, this.subToolbarBtnClickHandle.bind(this));
         $(document).on("click", "#btnRepair", {type: 'repair'}, this.subToolbarBtnClickHandle.bind(this));
@@ -69,16 +99,22 @@ class MainJS {
 
 
         $(document).on("click", ".export-master-table tr", this.onSelectRowOnMasterExportTable.bind(this));
-        $(document).on("click", ".goods-combobox-data tr", this.onSelectGoodsOnComboBox.bind(this));
+
+
         $(document).on("click", ".cls-other", { mode: 1 }, this.tabs.bind(this));
         $(document).on("click", ".cls-pay", { mode: 2 }, this.tabs.bind(this));
+
         $(document).on("click", ".time-range-item", this.onSelectTimeRangeFilter.bind(this));
+
         $(document).on("click", ".icon-arrow-down", this.showCombobox.bind(this));
         $(document).on("keyup", ".input-combobox", this.filterComboboxData.bind(this));
         $(document).on("click", ".dropdown-bootstrap", this.bindBootstrapComboboxData);
+
+        $(document).on("keypress", ".positive-num-input", this.validateNumberInput);
         $(document).on("keypress", ".positive-num-input", this.validateNumberInput);
         $(document).on("keyup", ".positive-num-input", this.displayCustomNumber.bind(this));
         $(document).on("focusout", ".positive-num-input", this.checkNegativeNumber);
+
         $(document).on("click", ".amount-arrow", this.changeAmountValue.bind(this));
 
         $(document).on("keyup", ".unit-price", {mode: 1},  this.onChangeCalculateValue.bind(this));
@@ -94,11 +130,15 @@ class MainJS {
         $(document).on("click", ".icon-arrow-left", {type: 2}, this.getNextPage.bind(this));
         
         $(document).on("click", ".icon-arrow-right", {type: 3}, this.getNextPage.bind(this));
-        $(document).on("click", ".icon-double-arrow-right", {type: 4}, this.getNextPage.bind(this));
-
+        $(document).on("click", ".icon-double-arrow-right", {type: 4}, this.getNextPage.bind(this));       
+        
         $(document).on("focusout", ".input-pagination", {type: 5}, this.getNextPage.bind(this));
 
+        $(document).on("click", ".icon-refresh-pagination", {type: 6}, this.getNextPage.bind(this));
+
         $(document).on("click", ".object-combobox-data>tr", this.onSelectItemOnObjectCombobox.bind(this));
+        $(document).on("click", ".goods-combobox-data tr", this.onSelectGoodsOnComboBox.bind(this));
+
 
         $(document).on("click", "#btnClose", this.closeDialog.bind(this));
 
@@ -111,11 +151,24 @@ class MainJS {
 
         $(document).on("click", ".btn-confirm-dialog", this.confirmDialog.bind(this));
 
+        $(document).on("focusout", ".date-input",{type: 1} ,this.validateTime.bind(this));
+        $(document).on("focusout", ".time-input", {type: 2}, this.validateTime.bind(this));
 
-        
+        $(document).keydown(function(e) {
+            for(let i = 0;i<$('.dropdown-content').length;i++){
+                
+                var target = $('.dropdown-content')[i];
+                if($(target).hasClass("show-hide")){
+                    
+                    _this.checkKey(e,target, _this);
+                }
+            }
+        });
 
-
-        // Gán giá trị được chọn cho ngày chứng từ
+        /**
+         * Filter dữ liệu trong bảng phiếu xuất kho theo ngày
+         * Createby NMDuy 25/07/2019
+         */
         $("#export-date-filter-input").datepicker({
             onSelect: function (dateText) {                
                 var date = $(this).val();
@@ -124,8 +177,13 @@ class MainJS {
                 _this.getStoreDataFilterByDate(date);
             }
         });
-
     }
+
+    /**
+     * Hàm load dữ liệu vào bảng
+     * @param {any} tableId id bảng cần load dữ liệu 
+     * Createby NMDuy 25/07/2019
+     */
 
     loadData(tableId){
         var _this = this;
@@ -133,7 +191,7 @@ class MainJS {
             case "export-master-table":
                 var data = this.exportTableData;
                 data.sort(function(a,b){
-                    var dateA = _this.DatafomaterJS.convertToISODate(a.receiptDate), dateB = _this.DatafomaterJS.convertToISODate(b.receiptDate);
+                    var dateA = convertToISODate(a.receiptDate), dateB = convertToISODate(b.receiptDate);
                     if(dateA > dateB){
                         return -1;
                     } else if(dateA < dateB){
@@ -150,6 +208,11 @@ class MainJS {
         }
     }
 
+    /**
+     * Hàm lọc dữ liệu trên bảng chứng từ xuất kho
+     * Createby NMDuy 25/07/2019
+     */
+
     getStoreDataByFilter(sender){
         var _this = this;
         var type = sender.data['type'];
@@ -157,13 +220,13 @@ class MainJS {
             case 1:
                 var startDate = $("#get-data-from-day-input").val();
                 var endDate = $("#get-data-to-day-input").val();
-                startDate = this.DatafomaterJS.convertToISODate(startDate);
-                endDate = this.DatafomaterJS.convertToISODate(endDate);
+                startDate = convertToISODate(startDate);
+                endDate = convertToISODate(endDate);
                 if(startDate>endDate){
                     alert("Ngày kết thúc phải lớn hơn ngày bắt đầu!");
                 } else {
                     var filterData = this.exportTableData.filter(function (item) {
-                        var isoDateItem = _this.DatafomaterJS.convertToISODate(item.date);
+                        var isoDateItem = convertToISODate(item.receiptDate);
                         if(isoDateItem >= startDate && isoDateItem <= endDate){
                             return true;
                         }
@@ -181,10 +244,10 @@ class MainJS {
                 }
                 var filterData = this.exportTableData.filter(function (item) {
                     if(item.receiptNumber.toLowerCase().includes(receiptNumberKeyword.toLowerCase())
-                     && item.object.toLowerCase().includes(objectKeyword.toLowerCase()) 
+                     && item.objectName.toLowerCase().includes(objectKeyword.toLowerCase()) 
                      && item.receiptType.toLowerCase().includes(receiptType.toLowerCase()) 
                      && _this.checkValidSumAmountValue(item.sumMoney)
-                     && item.note.toLowerCase().includes(noteKeyword.toLowerCase())
+                     && item.exportExplain.toLowerCase().includes(noteKeyword.toLowerCase())
                      ){
                         return true;
                     }        
@@ -197,15 +260,27 @@ class MainJS {
         }
     }
 
+    /**
+     * Hàm lọc dữ liệu theo ngày chứng từ
+     * @param {any} date : ngày chứng từ
+     * Createby NMDuy 25/07/2019
+     */
+
     getStoreDataFilterByDate(date){
         var _this = this;
         var filterData = this.exportTableData.filter(function (item) {
-            if(_this.DatafomaterJS.checkEqualDate(date, item.date)){
+            if(checkEqualDate(date, item.receiptDate)){
                 return true;
             }
         });
         this.DatabindingJS.bindDatatoExportMasterTable(filterData);
     }
+
+    /**
+     * Hàm chọn 1 hàng trên bảng phiếu xuất kho, bind thông tin chi tiết tương ứng vào bảng chi tiết
+     * @param {any} sender : đối tượng được click 
+     * Createby NMDuy 25/07/2019
+     */
 
     onSelectRowOnMasterExportTable(sender){
 
@@ -221,12 +296,23 @@ class MainJS {
         this.DatabindingJS.bindDetailExportReceiptData(detailExportReceipt);
     }
 
+    /**
+     * Hiển thị form thêm mới phiếu xuất kho
+     * @param {any} sender : đối tượng được click 
+     * Createby NMDuy 25/07/2019
+     */
+
     showNewExportReceiptDialog(sender){
         var type = sender.data['type'];
         $('.toolbar-dialog-item').addClass('custom-disabled-btn');
         this.resetNewExportForm();
+        this.objectComboboxData = this.AjaxJS.getComboboxData("object");
+        this.goodsComboboxData = this.AjaxJS.getComboboxData("goods");
+        this.DatabindingJS.bindingComboboxData("object", this.objectComboboxData);
+        this.DatabindingJS.bindingComboboxData("goods", this.goodsComboboxData);
         if(type == 'add'){
             this.addNewExportReceipt();
+
         } else if(type == 'edit'){
            this.editExportReceipt();
         } else if(type == 'check'){
@@ -235,9 +321,21 @@ class MainJS {
             $('.alway-enable-btn').removeClass('custom-disabled-btn');
             this.bindExportDataToForm(this.selectedRowItemId);
             $(".form-control-input").addClass("custom-disabled-btn");
+        } else if(type == 'duplicate'){
+            this.editExportReceipt();
+            this.NewExportReceiptDialog.Dialog.dialog({title: "Nhân bản phiếu xuất kho"});
+            this.mode == 'duplicate';
+            this.receiptCodeNumber = "XK000"+this.receiptNumber;
+            $(".receipt-number").val(this.receiptCodeNumber);
         }
         this.NewExportReceiptDialog.open();
+        $(".object-code-input").focus();
     }
+
+    /**
+     * Xử lý hiển thị trên form khi người dùng ấn thêm mới
+     * Createby NMDuy 25/07/2019
+     */
 
     addNewExportReceipt(){
         this.NewExportReceiptDialog.Dialog.dialog({title: "Thêm phiếu xuất kho"});
@@ -246,20 +344,23 @@ class MainJS {
         $('.toolbar-dialog-item').addClass('custom-disabled-btn');
         $(".form-control-input").removeClass("custom-disabled-btn");
         this.currentRowIndex = 0;
-        this.objectComboboxData = this.AjaxJS.getComboboxData("object");
-        this.goodsComboboxData = this.AjaxJS.getComboboxData("goods");
-        this.DatabindingJS.bindingComboboxData("object", this.objectComboboxData);
-        this.DatabindingJS.bindingComboboxData("goods", this.goodsComboboxData);
+        
         this.appendEmptyRowToNewExportDetail();
         $('.enable-when-add-btn').removeClass('custom-disabled-btn');
         $('.alway-enable-btn').removeClass('custom-disabled-btn');
         this.receiptCodeNumber = "XK000"+this.receiptNumber;
         $(".receipt-number").val(this.receiptCodeNumber);
         $(".export-day-input").val(this.today);
-        $(".export-hour-input").val(this.getCurrentTime());
-        $(".object-code-input").focus();
+        $(".export-hour-input").val(getCurrentTime());
+        this.mode = 'add';
         this.onOtherPurposeRadioSelection();
+
     }
+
+    /**
+     * Xử lý hiển thị trên form khi người dùng ấn chỉnh sửa
+     * Createby NMDuy 25/07/2019
+     */
 
     editExportReceipt(){
         this.NewExportReceiptDialog.Dialog.dialog({title: "Sửa phiếu xuất kho"});
@@ -268,11 +369,25 @@ class MainJS {
         $('.alway-enable-btn').removeClass('custom-disabled-btn');
         this.bindExportDataToForm(this.selectedRowItemId);
         this.appendEmptyRowToNewExportDetail();
+        this.mode = 'edit';
+        $(".object-code-input").focus();
+
     }
+
+    /**
+     * Hiển thị dialog xác nhận xóa phiếu xuất kho được chọn
+     * Createby NMDuy 25/07/2019
+     */
 
     deleteExportReceipt(){
         this.showNotificationDialog('delete');
     }
+
+    /**
+     * Bind dữ liệu của phiếu xuất kho được chọn vào form
+     * @param {any} id : id phiếu xuất kho được chọn
+     * Createby NMDuy 25/07/2019
+     */
 
     bindExportDataToForm(id){
         var _this = this;
@@ -298,6 +413,12 @@ class MainJS {
 
     }
 
+    /**
+     * Hàm xử lý hiển thị khi người dùng click vào button trên form thêm mới phiếu xuất kho
+     * @param {any} sender : đối tượng được click
+     * Createby NMDuy 25/07/2019
+     */
+
     subToolbarBtnClickHandle(sender){
         var type = sender.data['type'];
         if(type == 'return'){
@@ -310,24 +431,48 @@ class MainJS {
 
     }
 
+    /**
+     * Hàm bind dữ liệu vào form khi người dùng thực hiện chọn trên combobox đối tượng
+     * @param {any} sender : đối tượng được click 
+     * Createby NMDuy 25/07/2019
+     */
+
     onSelectItemOnObjectCombobox(sender){
-        var objectName = $(sender.currentTarget).children()[1].innerHTML;
-        var objectCode = $(sender.currentTarget).children()[0].innerHTML;
-        var objectAddress = $(sender.currentTarget).attr("objectAddress");
+        var objectCode = '';
+        var objectName = '';
+        var objectAddress = '';
+        if(sender.length == 1){
+        } else {
+            sender = sender.currentTarget;
+        }
+
+        objectName = $(sender).attr("objectName");
+        objectCode = $(sender).attr("objectCode");
+        objectAddress = $(sender).attr("objectAddress");
+        
         $('.object-code-input').val(objectCode);
         $('.object-name-input').val(objectName);
         $('.object-address-input').val(objectAddress);
+
+        $('.export-explain-input').focus();
     }
 
-
+    /**
+     * Hàm ẩn hiện combobox
+     * @param {any} sender : đối tượng được thực hiện thao tác 
+     * Createby NMDuy 25/07/2019
+     */
 
     showCombobox(sender){
         var comboboxName = $(sender.currentTarget).attr("comboboxName");
         $('input[inputCombobox='+comboboxName+']').focus();
         if(comboboxName == "goods"){
             this.DatabindingJS.bindingComboboxData("goods", this.goodsComboboxData);
+            var tableLenght = $('.new-export-detail-box').children().length;
+            if(tableLenght>=3){
+                $('.goods').css("top","-240px");
+            }
         }
-        console.log(comboboxName);
         if ($('.' + comboboxName).hasClass('show-hide')) {
             $('.dropdown-content').removeClass("show-hide");
         } else {
@@ -336,61 +481,69 @@ class MainJS {
         }
     }
 
+    /**
+     * Hàm xử lý hiển thị khi lựa chọn giữa 2 radio button trên form thêm mới phiếu xuất kho
+     * @param {any} sender : đối tượng được thực hiện thao tác
+     * Createby NMDuy 25/07/2019 
+     */
+
     tabs(sender) {
         var mode = sender.data["mode"];
         if (mode == 1) {
-
             this.onOtherPurposeRadioSelection();
-            
-
         }
         if (mode == 2) {
             this.onRadioSelection();
         }
     }
 
-    
+    /**
+     * Hàm lọc dữ liệu combobox
+     * @param {any} sender : đối tượng được thực hiện thao tác 
+     * Createby NMDuy 25/07/2019
+     */
     filterComboboxData(sender) {
-        var inputName = $(sender.target).attr("inputCombobox");
-
-        // if (inputName == 'repayment-customer') {
-        //     var dataTable = $('.' + inputName + '-data').find('tr').length;
-        //     if (dataTable != 0) {
-        //         $('.' + inputName + '-data').html('');
-        //     }
-        //     $('.repayment-amount').val(0);
-        // }
-
-        var keyword = $('input[inputCombobox=' + inputName + ']').val();
-
-        switch (inputName) {
-            case 'object':
-                var filterData = this.objectComboboxData.filter(function (item) {
-                    return item.name.toLowerCase().includes(keyword.toLowerCase());
-                });
-                if (filterData.length == 0) {
-                    $('.object').removeClass('show-hide');
-                } else {
-                    $('.object').addClass('show-hide');
-                    this.DatabindingJS.bindingComboboxData("object", filterData);
-                }
-                break;
-            case 'goods':
-                var filterData = this.goodsComboboxData.filter(function (item) {
-                    if(item.itemName.toLowerCase().includes(keyword.toLowerCase()) || item.itemCode.toLowerCase().includes(keyword.toLowerCase())){
-                        return true;
+        
+        var key = sender.originalEvent.keyCode;
+        if(key == 38 || key == 40){
+        } else {
+            var inputName = $(sender.target).attr("inputCombobox");
+            var keyword = $('input[inputCombobox=' + inputName + ']').val();
+    
+            switch (inputName) {
+                case 'object':
+                    var filterData = this.objectComboboxData.filter(function (item) {
+                        return item.name.toLowerCase().includes(keyword.toLowerCase());
+                    });
+                    if (filterData.length == 0) {
+                        $('.object').removeClass('show-hide');
+                    } else {
+                        $('.object').addClass('show-hide');
+                        this.DatabindingJS.bindingComboboxData("object", filterData);
                     }
-                });
-                if (filterData.length == 0) {
-                    $('.goods').removeClass('show-hide');
-                } else {
-                    $('.goods').addClass('show-hide');
-                    this.DatabindingJS.bindingComboboxData("goods", filterData);
-                }
-                break;
+                    break;
+                case 'goods':
+                    var filterData = this.goodsComboboxData.filter(function (item) {
+                        if(item.itemName.toLowerCase().includes(keyword.toLowerCase()) || item.itemCode.toLowerCase().includes(keyword.toLowerCase())){
+                            return true;
+                        }
+                    });
+                    if (filterData.length == 0) {
+                        $('.goods').removeClass('show-hide');
+                    } else {
+                        $('.goods').addClass('show-hide');
+                        this.DatabindingJS.bindingComboboxData("goods", filterData);
+                    }
+                    break;
+            }
         }
     }
 
+    /**
+     * Hàm xử lý tăng giảm giá trị khi click mũi tên lên xuống ô input
+     * @param {any} sender : đối tượng được thực hiện thao tác 
+     * Createby NMDuy 25/07/2019
+     */
     changeAmountValue(sender){
         var targetName = $(sender.currentTarget).attr("amountItem");
         var index = targetName.replace("amount-", "");
@@ -405,6 +558,11 @@ class MainJS {
         this.calculateSumMoney(index);
     }
 
+    /**
+     * Thực hiện lại việc tính toán khi có thay đổi trên đơn giá, số lượng hoặc tổng tiền
+     * @param {any} sender : đối tượng được thực hiện thao tác 
+     * Createby NMDuy 25/07/2019
+     */
     onChangeCalculateValue(sender){
         var index = $(sender.currentTarget).attr("index");
         var mode = sender.data['mode'];
@@ -414,6 +572,12 @@ class MainJS {
             this.calculateUnitPrice(index);
         }
     }
+
+    /**
+     * Hàm tính toán giá trị tổng tiền
+     * @param {any} index : chỉ số của dòng cần thực hiện việc tính toán 
+     * Createby NMDuy 25/07/2019
+     */
 
 
     calculateSumMoney(index){
@@ -426,7 +590,15 @@ class MainJS {
             sumMoney = this.DatafomaterJS.formatToStringNumber(sumMoney);
             $('.sumMoney-'+index).val(sumMoney);
         }
+        this.calculateSumAllAmount()
+
     }
+
+    /**
+     * Hàm tính toán đơn giá
+     * @param {any} index : chỉ số của dòng cần thực hiện việc tính toán 
+     * Createby NMDuy 25/07/2019
+     */
 
     calculateUnitPrice(index){
         var sumMoney = this.DatafomaterJS.formatToIntNumber($('.sumMoney-'+index).val());
@@ -438,7 +610,14 @@ class MainJS {
             unitPrice = this.DatafomaterJS.formatToStringNumber(unitPrice);
             $('.unit-price-'+index).val(unitPrice);
         }
+        this.calculateSumAllAmount()
+
     }
+
+    /**
+     * Hàm tính tổng tiền của bảng chi tiết phiếu xuất kho
+     * Createby NMDuy 25/07/2019
+     */
 
     calculateSumAllAmount(){
         var tableLenght = $('.new-export-detail-box').children().length;
@@ -454,6 +633,11 @@ class MainJS {
         $('.sum-all-amount').html(sumAllAmount);
     }
 
+    /**
+     * Binding dữ liệu từ dòng được lựa chọn vào vị trí đích,
+     * Createby NMDuy 25/07/2019
+     */
+
     bindBootstrapComboboxData(){
         var value = this.innerText;
         var dropdownName = $(this).attr("dropdownName");
@@ -464,12 +648,24 @@ class MainJS {
             $('.'+dropdownName).html(value);
         }
     }
+    
+    /**
+     * Xóa mặt hàng được đã được trong bảng chi tiết
+     * @param {any} sender : đối tượng được thực hiện thao tác 
+     * Createby NMDuy 25/07/2019
+     */
 
     deleteDetailItem(sender){
         var rowIndex = $(sender.currentTarget).attr("rowIndex");
         $('.garbage-icon[rowIndex='+rowIndex+']').closest('tr').remove()
    
     }
+
+    /**
+     * Hàm so sánh giá trị tổng tiền để thực hiện lọc theo tổng tiền trên bảng xuất kho
+     * @param {any} itemSumAmount : tổng tiền cần thực hiện so sánh
+     * Createby NMDuy 25/07/2019
+     */
 
     checkValidSumAmountValue(itemSumAmount){
         var sumMoneyKeyword = $('.search-input-filter[filterIndex=3]').val();
@@ -510,16 +706,27 @@ class MainJS {
         } else {
             return true;
         }
-
     }
+
+    /**
+     * Chọn một mặt hàng trên combobox mặt hàng
+     * @param {any} sender : đối tượng được thực hiện thao tác  
+     * Createby NMDuy 25/07/2019
+     */
 
     onSelectGoodsOnComboBox(sender){
         this.currentRowIndex += 1;
-        var ele = $(sender.currentTarget);
+        if(sender.length == 1){
+        } else {
+            sender=sender.currentTarget;
+        }
+        var ele = $(sender);
         var itemCode = ele.attr("itemCode");
         var itemName = ele.attr("itemName");
         var countUnit = ele.attr("countUnit");
         var unitPrice = ele.attr("unitPrice");
+
+
         var good = {
             itemIndex: this.currentRowIndex,
             itemCode: itemCode,
@@ -540,10 +747,16 @@ class MainJS {
         var rowCount = lastRowIndex;
 
         $('.row-count').html("Số dòng = "+rowCount);
+
         this.calculateSumAllAmount();
         
     }
 
+    /**
+     * Append dòng mới vào bảng chi tiết với dữ liệu mặt hàng được chọn từ combobox
+     * @param {any} data : mặt hàng được chọn
+     * Createby NMDuy 25/07/2019
+     */
     appendNewRowToNewExportDetailTable(data){
         var storePlace = '';
         if(!data.storePlace){
@@ -601,7 +814,14 @@ class MainJS {
                 </tr>`
 
                 $('.new-export-detail-box').append(row);
+                $('.unit-price-'+data.itemIndex).focus();
+
     }
+
+    /**
+     * Append dòng trống vào bảng chi tiết
+     * Createby NMDuy 25/07/2019
+     */
 
     appendEmptyRowToNewExportDetail(){
         var row = 
@@ -651,6 +871,12 @@ class MainJS {
         $('.new-export-detail-box').append(row);
     }
 
+    /**
+     * Hàm xử lý click vào các icon next trang trên bảng phiếu xuất kho
+     * @param {any} sender : đối tượng được thực hiện thao tác
+     * Createby NMDuy 25/07/2019
+     */
+
     getNextPage(sender){
         var type = sender.data['type'];
         var pageNumber = 1;
@@ -692,7 +918,8 @@ class MainJS {
                 break;
             case 5:
                 break;
-            
+            case 6:
+                this.loadData("export-master-table");
             default:
                 break;
         }
@@ -706,15 +933,25 @@ class MainJS {
         this.loadData("export-master-table");
     }
 
+    /**
+     * Lấy ngày cụ thể khi người dùng chọn khoảng thời gian
+     * @param {any} sender : đối tượng được thực hiện thao tác
+     * Createby NMDuy 25/07/2019
+     */
     onSelectTimeRangeFilter(sender){
         var timeRangeCode = $(sender.currentTarget).attr("caseCode");
         if(timeRangeCode == "12"){
             $("#get-data-from-day-input").val(this.today);
             $("#get-data-to-day-input").val(this.today);
         } else {
+            changeDateTimeByCase(timeRangeCode, "#get-data-from-day-input", "#get-data-to-day-input");
         }
-        this.DatafomaterJS.changeDateTimeByCase(timeRangeCode, "#get-data-from-day-input", "#get-data-to-day-input");
     }
+
+    /**
+     * Xử lý hiển thị khi lựa chọn mục đích xuất kho là Khác
+     * Createby NMDuy 25/07/2019
+     */
 
     onOtherPurposeRadioSelection(){
         $(".cls-other").removeClass("icon-radio-false");
@@ -723,9 +960,12 @@ class MainJS {
         $(".cls-pay").addClass("icon-radio-false");
         $(".store-dropdown-list").addClass("custom-disabled-btn");
         this.NewExportReceiptDialog.Dialog.dialog({title: "Thêm phiếu xuất kho khác"});
-
     }
 
+    /**
+     * Xử lý hiển thị khi lựa chọn mục đích xuất kho là Điều chuyển
+     * Createby NMDuy 25/07/2019
+     */
     onRadioSelection(){
         $(".cls-pay").removeClass("icon-radio-false");
         $(".cls-pay").addClass("icon-radio-true");
@@ -733,21 +973,30 @@ class MainJS {
         $(".cls-other").addClass("icon-radio-false");
         $(".store-dropdown-list").removeClass("custom-disabled-btn");
         this.NewExportReceiptDialog.Dialog.dialog({title: "Thêm phiếu xuất kho điều chuyển"});
-
-
     }
 
-    getInitialDate() {
-        var toDay = new Date();
-        this.today = this.DatafomaterJS.formatDate(toDay)
-        return this.today;
+   
+    /**
+     * Hiển thị lại số được format theo dạng tiền
+     * @param {any} sender : đối tượng được thực hiện thao tác
+     * Createby NMDuy 25/07/2019
+     */
+
+    displayCustomNumber(sender) {
+        var _this = sender.target;
+        var value = $(_this).val();
+        if (value) {
+            $(_this).val(this.DatafomaterJS.formatToStringNumber(value));
+        }
     }
 
-    getCurrentTime(){
-        var now = new Date();
-        var currentTime = now.getHours() + ":" + now.getMinutes();
-        return currentTime;
-    }
+    /**
+    * Kiểm tra hợp lệ khi nhập số
+    * @param {any} event : đối tượng được thực hiện thao tác
+    * Createby NMDuy 25/07/2019
+    */
+
+   
 
     validateNumberInput(event) {
         var key = window.event ? event.keyCode : event.which;
@@ -758,22 +1007,71 @@ class MainJS {
             return true;
         } else if (key === 45) {
             if (!value.includes('-')) {
-               return true;
+            return true;
             } else {
-               return false;
+            return false;
             }
         } else {
             return false;
         }
     }
 
-    displayCustomNumber(sender) {
-        var _this = sender.target;
-        var value = $(_this).val();
-        if (value) {
-            $(_this).val(this.DatafomaterJS.formatToStringNumber(value));
+    checkKey(e,target, _this) {
+        e = e || window.event;
+        var selectedRow;
+        var trElementList = $(target).find('tbody').children();
+
+        if (e.keyCode == '38') {
+            for(let i = 0;i<trElementList.length;i++){
+                var trItem = $(trElementList)[i];
+                if($(trItem).hasClass('selected-combobox-row')){
+                    if(i > 0){
+                        $(trItem).removeClass('selected-combobox-row');
+                        $((trElementList)[i-1]).addClass('selected-combobox-row');
+                        selectedRow = $((trElementList)[i-1]);
+                        $(target).find('.tbody-dropdown').scrollTop((i-1)*38);
+                        break;
+                    }
+                }
+            }
+
         }
-    }
+        else if (e.keyCode == '40') {
+            for(let i = 0;i<trElementList.length;i++){
+                var trItem = $(trElementList)[i];
+                if($(trItem).hasClass('selected-combobox-row')){
+                    if(i < trElementList.length -1 ) {
+                        $(trItem).removeClass('selected-combobox-row');
+                        $((trElementList)[i+1]).addClass('selected-combobox-row');
+                        selectedRow = $((trElementList)[i+1]);
+                        $(target).find('.tbody-dropdown').scrollTop((i+1)*38);
+                        break;
+                    }
+                }
+            }
+        }
+        else if(e.keyCode == '13'){
+            for(let i = 0;i<trElementList.length;i++){
+                var trItem = $(trElementList)[i];
+                if($(trItem).hasClass('selected-combobox-row')){
+                    selectedRow = $((trElementList)[i])
+                    if($(target).hasClass('object')){
+                        _this.onSelectItemOnObjectCombobox(selectedRow);
+                        $('.dropdown-content').removeClass('show-hide');
+                    } else if ($(target).hasClass('goods')){
+                        _this.onSelectGoodsOnComboBox(selectedRow);
+                    }
+                }
+            }
+
+            
+        }
+     }
+
+    /**
+     * Kiểm tra số âm gán lại giá trị = 0
+     * Createby NMDuy 25/07/2019
+     */
 
     checkNegativeNumber() {
         var value = $(this).val();
@@ -785,6 +1083,11 @@ class MainJS {
             }
         }
     }
+
+    /**
+     * Kiểm tra dữ liệu trên form thêm mới phiếu xuất kho khi đóng, hiển thị dialog thông báo
+     * Createby NMDuy 25/07/2019
+     */
 
     closeDialog(){
         var objectCodeInput = $(".object-code-input").val().trim();
@@ -799,14 +1102,24 @@ class MainJS {
         }
     }
 
+    /**
+     * Reset giá trị trên form
+     * Createby NMDuy 25/07/2019
+     */
+
     resetNewExportForm(){
         $(".object-code-input").val('');
         $(".object-name-input").val('');
         $(".object-address-input").val('');
         $(".export-explain-input").val('');
         $(".new-export-detail-box").html('');
-
     }
+
+    /**
+     * Xử lý hiển thị trên dialog thông báo với loại tương ứng
+     * @param {any} sender : đối tượng được thực hiện thao tác
+     * Createby NMDuy 25/07/2019
+     */
 
     notificationDialogHandle(sender){
         var option = sender.data['option'];
@@ -822,70 +1135,84 @@ class MainJS {
             var exportExplainInput = $(".export-explain-input").val().trim();
             var detailTableLenght = $('.new-export-detail-box').children().length;
             if(objectCodeInput == "" || objectNameInput == "" || objectAddressInput == "" || exportExplainInput == "" || detailTableLenght == 1){
-                this.DialogCheckEmpty.open();
+                this.showNotificationDialog('empty-form');
             } else {
-                var id = idGenerate();
-                var receiptNumber = $(".receipt-number").val();
-                var receiptDate = $(".export-day-input").val();
-                var receiptTime = $(".export-hour-input").val();
-                var sumMoney = $('.sum-all-amount').html().trim();
-                
-                var receiptType = '';
-                if($(".cls-other").hasClass("icon-radio-true")){
-                    receiptType = "Phiếu xuất kho khác";
-                } else {
-                    receiptType = "Phiếu xuất kho điều chuyển sang cửa hàng khác";
-                }
-
-                var newExportReceipt = {
-                    id: id,
-                    receiptNumber: receiptNumber,
-                    receiptDate: receiptDate,
-                    receiptTime: receiptTime,
-                    receiptType: receiptType,
-                    sumMoney: sumMoney,
-                    objectCode: objectCodeInput,
-                    objectName: objectNameInput,
-                    objectAddress: objectAddressInput,
-                    exportExplain: exportExplainInput,
-                }
-
-                this.exportTableData.push(newExportReceipt);
-                this.loadData("export-master-table");
-
-                var tableLength = $('.new-export-detail-box').children().length;
-
-                var detailTable = [];
-                for (let i = 0 ; i < tableLength-1; i++){
-                    var trElement = $('.new-export-detail-box').children()[i];
-                    var rowIndex = $(trElement).attr("rowIndex");
-                    var itemCode = $('.item-code-'+rowIndex)[0].innerText;
-                    var itemName = $('.item-name-'+rowIndex)[0].innerText;
-                    var storePlace = $('.store-place-'+rowIndex)[0].innerText;
-                    var countUnit = $('.count-unit-'+rowIndex)[0].innerText;
-                    var unitPrice = $('.unit-price-'+rowIndex).val();
-                    var amount = $('.amount-'+rowIndex).val();
-                    var sumMoney = $('.sumMoney-'+rowIndex).val();
-
-                    var good = {
-                        id: id,
-                        itemCode: itemCode,
-                        itemName: itemName,
-                        storePlace: storePlace,
-                        countUnit: countUnit,
-                        unitPrice: unitPrice,
-                        amount: amount,
-                        sumMoney: sumMoney
+                if(this.mode == 'add'){
+                    var id = idGenerate();
+                    var receiptNumber = $(".receipt-number").val();
+                    var receiptDate = $(".export-day-input").val();
+                    var receiptTime = $(".export-hour-input").val();
+                    var sumMoney = $('.sum-all-amount').html().trim();
+                    
+                    var receiptType = '';
+                    if($(".cls-other").hasClass("icon-radio-true")){
+                        receiptType = "Phiếu xuất kho khác";
+                    } else {
+                        receiptType = "Phiếu xuất kho điều chuyển sang cửa hàng khác";
                     }
-                    detailTable.push(good);
+                    var newExportReceipt = {
+                        id: id,
+                        receiptNumber: receiptNumber,
+                        receiptDate: receiptDate,
+                        receiptTime: receiptTime,
+                        receiptType: receiptType,
+                        sumMoney: sumMoney,
+                        objectCode: objectCodeInput,
+                        objectName: objectNameInput,
+                        objectAddress: objectAddressInput,
+                        exportExplain: exportExplainInput,
+                    }
+
+                    this.exportTableData.push(newExportReceipt);
+                    this.loadData("export-master-table");
+
+                    var tableLength = $('.new-export-detail-box').children().length;
+
+                    var detailTable = [];
+                    for (let i = 0 ; i < tableLength-1; i++){
+                        var trElement = $('.new-export-detail-box').children()[i];
+                        var rowIndex = $(trElement).attr("rowIndex");
+                        var itemCode = $('.item-code-'+rowIndex)[0].innerText;
+                        var itemName = $('.item-name-'+rowIndex)[0].innerText;
+                        var storePlace = $('.store-place-'+rowIndex)[0].innerText;
+                        var countUnit = $('.count-unit-'+rowIndex)[0].innerText;
+                        var unitPrice = $('.unit-price-'+rowIndex).val();
+                        var amount = $('.amount-'+rowIndex).val();
+                        var sumMoney = $('.sumMoney-'+rowIndex).val();
+
+                        var good = {
+                            id: id,
+                            itemCode: itemCode,
+                            itemName: itemName,
+                            storePlace: storePlace,
+                            countUnit: countUnit,
+                            unitPrice: unitPrice,
+                            amount: amount,
+                            sumMoney: sumMoney
+                        }
+                        detailTable.push(good);
+                    }
+                    
+                    this.AjaxJS.addReceiptDetailToDataTable(detailTable);
+                    this.NewExportReceiptDialog.close();
+                    this.receiptNumber += 1;
+                } else if(this.mode == 'edit') {
+                    this.loadData("export-master-table");
+                } else if(this.mode == 'duplicate'){
+                    this.loadData("export-master-table");
                 }
-                
-                this.AjaxJS.addReceiptDetailToDataTable(detailTable);
                 this.NewExportReceiptDialog.close();
-                this.receiptNumber += 1;
             }
         }
     }
+
+  
+
+    /**
+     * Hiển thị loại thông báo tương ứng với tham số truyền vào
+     * @param {any} type loại thông báo 
+     * Createby NMDuy 25/07/2019
+     */
 
     showNotificationDialog(type){
         if(type == 'delete'){
@@ -898,6 +1225,11 @@ class MainJS {
         }
         this.NotificationDialog.open();
     }
+
+    /**
+     * Xử lý khi người dùng ấn đồng ý trên dialog thông báo 
+     * Createby NMDuy 25/07/2019
+     */
 
     confirmDialog(){
         if(this.isDeleteItem){
@@ -914,14 +1246,36 @@ class MainJS {
         }
         this.NotificationDialog.close();
         this.DialogSaveData.close();
-        this.NewExportReceiptDialog.close();
+    }
+    
+    /**
+     * Validate ngày giờ nhập liệu, set thời gian hiện tại hôm nay
+     * @param {any} sender : đối tượng thực hiện thao tác
+     * Createby NMDuy 25/4/2019
+     */
+    
+    validateTime(sender){
+        var type = sender.data['type'];
+        if(type == 1){
+            var date = $(sender.target).val();
+            if(!checkValidDate(date)){
+                $(sender.target).val(this.today);
+            }
+        } else {
+            var hour = $(sender.target).val();
+            if(!checkValidTime(hour)){
+                $(sender.target).val(getCurrentTime());
+            }
+        }
     }
 
+    /**
+     * Select toàn bộ giá trị trong ô input khi được focus 
+     * Createby NMDuy 25/04/2019
+     */
+
+    selectAllValue() {
+        $(this).select();
+    }
 }
 
-function idGenerate(){
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}

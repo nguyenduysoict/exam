@@ -35,7 +35,11 @@ $("#get-data-to-day-input").datepicker({
 });
 
 
+$(".export-date-filter-icon").click(function () {
+    $("#export-date-filter-input").focus();
+});
 
+// Gán giá trị được chọn cho ngày chứng từ
 
 // Hiển thị datepicker ngày xuất click icon calendar
 
@@ -49,20 +53,8 @@ $("#export-date-input").datepicker({
     onSelect: function (dateText) {
         var date = $(this).val();
         $("#export-date-input").val(formatDate(date));
-    },
-
-    beforeShow: function (input, inst) {
-        var inputPosition = $("#export-date-input").offset();
-        setTimeout(function () {
-            inst.dpDiv.css({
-                top: inputPosition.top + 34,
-                left: inputPosition.left - 91
-            });
-        }, 0);
     }
 });
-
-
 
 
 $('.timepicker').timepicker({
@@ -70,96 +62,3 @@ $('.timepicker').timepicker({
     show24Hours: false,
     step: 30
 })
-
-
-function formatDate(date) {
-    var date = new Date(date);
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1;
-    var yyyy = date.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    var formatedDate = dd + '/' + mm + '/' + yyyy;
-    return formatedDate;
-}
-
-function changeDateTimeByCase(val, dtpElementStart, dtpElementEnd) {
-    var datetime = new Date();
-    var startDate;
-    var endDate;
-    switch (val) {
-        //set thời gian cho hôm nay
-        case '1':
-            startDate = datetime;
-            endDate = datetime;
-            break;
-        //hôm qua
-        case '2':
-            startDate = new Date(datetime.setDate(datetime.getDate() - 1));
-            endDate = startDate;
-            $(dtpElementStart).val(startDate.formatddMMyyyy());
-            $(dtpElementEnd).val(endDate.formatddMMyyyy());
-            break;
-        //tuần này
-        case '3':
-            startDate = new Date(datetime.setDate(datetime.getDate() - datetime.getDay()));
-            endDate = new Date();
-            break;
-        //tuần trước
-        case '4':
-            startDate = new Date(datetime.setDate(datetime.getDate() - 7 - datetime.getDay()));
-            endDate = new Date(new Date().setDate(startDate.getDate() + 6));
-            break;
-        //tháng này
-        case '5':
-            startDate = new Date(datetime.setDate(1));
-            endDate = new Date();
-            break;
-        //tháng trước
-        case '6':
-            startDate = new Date(datetime.setMonth(datetime.getMonth() - 1));
-            startDate.setDate(1);
-            endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
-            break;
-        //quý này
-        case '7':
-            startDate = new Date(datetime.setMonth(datetime.getMonth() - parseInt(datetime.getMonth() % 3)));
-            startDate.setDate(1);
-            endDate = new Date();
-            break;
-        //quý trước
-        case '8':
-            startMonth = (parseInt(datetime.getMonth() / 3) - 1) * 3;
-            startDate = new Date(datetime.setMonth(datetime.getMonth() - 3 - parseInt(datetime.getMonth() % 3)));
-            startDate.setDate(1);
-            endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 3, 0);
-            break;
-        //6 tháng trước
-        case '9':
-            startDate = new Date(datetime.setMonth(datetime.getMonth() - 6));
-            startDate.setDate(1);
-            datetime = new Date();
-            endDate = new Date(datetime.setMonth(datetime.getMonth()));
-            endDate.setDate(0);
-            break;
-        //năm nay
-        case '10':
-            startDate = new Date(datetime.getFullYear(), 0, 1);
-            endDate = new Date();
-            break;
-        //năm trước
-        case '11':
-            startDate = new Date(datetime.getFullYear() - 1, 0, 1);
-            endDate = new Date(datetime.getFullYear() - 1, 12, 0);
-            break;
-        //khác
-        case '12':
-            break;
-    }
-    $(dtpElementStart).val(startDate.formatddMMyyyy());
-    $(dtpElementEnd).val(endDate.formatddMMyyyy());
-}

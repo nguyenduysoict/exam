@@ -15,7 +15,6 @@
     <script src="../JS/Library/jquery.timepicker.min.js"></script>
     <script src="../JS/Library/popper.min.js"></script>
     <script src="../JS/Library/bootstrap.min.js"></script>
-    <script src="../JS/Common/calendardisplay.js"></script>
     <script src="../JS/Common/windowresizehandle.js"></script>
 
     <link rel="stylesheet" href="../CSS/Main/pagelayout.css">
@@ -114,34 +113,34 @@
             </div>
             <div class="container">
                 <div class="main-toolbar">
-                        <button id="btnAdd" class=" btn toolbar-btn-item" title="Ctrl+Alt+N">
+                        <button id="btnAdd" class=" toolbar-btn-item" title="Ctrl+Alt+N">
                             <div class="btn-icon btn-icon-add"></div>
                             <span class="btn-text">Thêm mới</span>
                             
                         </button>
 
-                        <button id="btnDuplicate" class="btn toolbar-btn-item enable-if-selected custom-disabled-btn" title="Ctrl + C">
+                        <button id="btnDuplicate" class="toolbar-btn-item enable-if-selected custom-disabled-btn" title="Ctrl + C">
                             <div class="btn-icon btn-icon-duplicate"> </div>
                             <span class="btn-text">Nhân bản</span>
                         </button>
                         
-                        <button id="btnCheck" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" >
+                        <button id="btnCheck" class="toolbar-btn-item enable-if-selected  custom-disabled-btn" >
                             <div class="btn-icon btn-icon-view">
                             </div>
                             <span class="btn-text">Xem</span>
                         </button>        
         
-                        <button id="btnEdit" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + E" >
+                        <button id="btnEdit" class="toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + E" >
                             <div class="btn-icon btn-icon-edit"></div>
                             <span class="btn-text">Sửa</span>
                         </button>     
         
-                        <button id="btnDelete" class="btn toolbar-btn-item enable-if-selected custom-disabled-btn delete-item-btn" title="Ctrl  + D" >
+                        <button id="btnDelete" class="toolbar-btn-item enable-if-selected custom-disabled-btn delete-item-btn" title="Ctrl  + D" >
                             <div class="btn-icon btn-icon-delete"></div>
                             <span class="btn-text">Xóa</span>
                         </button>
 
-                        <button id="btnPrint" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + P" >
+                        <button id="btnPrint" class="toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + P" >
                             <div class="btn-icon btn-icon-print"></div>
                             <span class="btn-text">In</span>
                             <div class="add-arrow-down-icon">
@@ -177,13 +176,13 @@
                         <div class="lbl-filter">Từ</div>
         
                         <div class="input-form-dialog">
-                            <input type="text" class="input-day-from" id="get-data-from-day-input" />
+                            <input type="text" class="input-day-from date-input" id="get-data-from-day-input" />
                             <div class="calendar-icon-picker icon-input get-data-from-day-icon"></div>
                         </div>
                         <div class="lbl-filter">đến</div>
         
                         <div class="input-form-dialog">
-                            <input type="text" class="input-day-to" id="get-data-to-day-input" />
+                            <input type="text" class="input-day-to date-input" id="get-data-to-day-input" />
                             <div class="calendar-icon-picker icon-input get-data-to-day-icon"></div>
                         </div>
         
@@ -215,7 +214,7 @@
                                     <div class="thead-filter-row">
                                         <div class="filter-input-master-tbl width-170">
                                             <div class="filter-table-input">
-                                                <input type="text" class="input-day-from text-align-center" id="export-date-filter-input" />
+                                                <input type="text" class="input-day-from text-align-center date-input" id="export-date-filter-input" />
                                                 <div class="calendar-icon-picker icon-input filter-table-icon export-date-filter-icon"></div>
                                             </div>
                                         </div>
@@ -300,7 +299,7 @@
                                         <div class="filter-table-input"></div>
                                     </div>
                                     <div class="filter-input-master-tbl width-230">
-                                        <div class="filter-table-input"></div>                                    </div>
+                                        <div class="filter-table-input"></div></div>
                                     <div class="filter-input-master-tbl width-250">
                                             <div class="filter-table-input"></div>
                                     </div>
@@ -413,7 +412,7 @@
 
                 <div class="panel-body-dialog">
                     <div style="display: flex;margin-top: 8px">
-                        <div style="width:120px;"><span>Mục đích thu</span></div>
+                        <div style="width:120px; margin-right: 20px"><span>Mục đích xuất kho</span></div>
                         <div class="btn-icon icon-radio-true cls-other"></div>
                         <div style="width:95px;margin-top: 2px;">Khác</div>
                         <div class="btn-icon icon-radio-false cls-pay"></div>
@@ -510,14 +509,14 @@
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Ngày xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-day-input form-control-input" id="export-date-input" />
+                                <input type="text" class="export-day-input date-input form-control-input date-input" id="export-date-input" />
                                 <div class="calendar-icon-picker icon-input export-day-icon"></div>
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Giờ xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-hour-input timepicker form-control-input"/>
+                                <input type="text" class="export-hour-input timepicker form-control-input time-input"/>
                                 <div class="hour-icon-picker icon-input get-receipt-day-icon"></div>
                             </div>
                         </div>
@@ -615,7 +614,7 @@
                     <div class="icon-popup warning-icon-popup">
         
                     </div>
-                    <div class="popup-message" style="width: 234px;">
+                    <div class="popup-message" style="width: 315px;">
                         
                     </div>
                 </div>
@@ -632,8 +631,9 @@
     <script src="../JS/Common/databinding.js"></script>
     <script src="../JS/Common/dataformater.js"></script>
     <script src="../JS/Common/dialog.js"></script>
+    <script src="../JS/Common/common.js"></script>
+    <script src="../JS/Common/calendardisplay.js"></script>
     <script src="../JS/Main/main.js"></script>
-  
 
 </body>
 </html>

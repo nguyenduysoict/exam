@@ -101,7 +101,6 @@
 .form-dialog {
     padding: 0 8px;
     width: 100%;
-    font: 400 13px "Roboto";
 }
 
 .panel-body-dialog {
@@ -243,10 +242,10 @@
      * Create by: NXHUNG(4/7/2019) 
      *
      * */
-.ui-widget {
+/* .ui-widget {
     font-family: 'Roboto',Tahoma,sans-serif;
     font-size: 13px;
-}
+} */
 
 .ui-dialog-title {
     font-size: 16px;

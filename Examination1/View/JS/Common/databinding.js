@@ -2,6 +2,11 @@
     constructor() {
     }
 
+    /**
+     * Binding dữ liệu vào bảng phiếu xuất kho
+     * @param {any} data : mảng các phiếu xuất kho
+     * Createby NMDuy 25/07/2019
+     */
     bindDatatoExportMasterTable(data){
         $(".export-master-table").html("");
         for(let i = 0;i<data.length;i++){
@@ -30,6 +35,12 @@
         $("#sumMoneyMasterTable").html("53.000.000");
     }
 
+    /**
+     * Bindind dữ liệu vào bảng chi tiết các mặt hàng
+     * @param {any} data : mảng chi tiết các mặt hàng
+     * Createby NMDuy 25/07/2019
+     */
+
     bindDetailExportReceiptData(data){
         $.each(data, function (index, item) {
             var row = `<tr>
@@ -45,24 +56,13 @@
         })
     }
 
-    bindNewExportDetailData(){
-        var row = `<tr>
-                        <td>AKK12312321</td>
-                        <td>Áo khoác kaki nam</td>
-                        <td> Chi nhánh Cầu Giấy </td>
-                        <td>Chiếc</td>
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            350.000
-                        </td>
-                        <td>
-                            700.000
-                        </td>
-                        <td><div class="garbage-icon"></div></td>
-                    </tr>`
-    }
+    /**
+     * binding dữ liệu combobox và sắp xếp
+     * @param {any} comboboxName tên combobox
+     * @param {any} comboboxData dữ liệu combobox
+     * Createby NMDuy 25/07/2019
+     * 
+     */
 
     bindingComboboxData(comboboxName, comboboxData) {
         switch (comboboxName) {
@@ -91,10 +91,11 @@
                 })
                 $(".object-combobox-data").html('');
                 $.each(comboboxData, function (index, item) {
-                    var row = `<tr customerRepaymentId="${item.id}" objectAddress="${item.address}" customerCode="${item.code}"> <td width="130px">${item.code}</td> <td width="250px" class="center-td">${item.name}</td> <td width="150px">${item.type}</td></tr >`;
+                    var row = `<tr customerRepaymentId="${item.id}" objectAddress="${item.address}" objectCode="${item.code}" objectName="${item.name}"> <td width="130px">${item.code}</td> <td width="250px" class="center-td">${item.name}</td> <td width="150px">${item.type}</td></tr >`;
                     $(".object-combobox-data").append(row);
                 })
-                $(".object-combobox-data").children().first().addClass('first-row-dropdown');
+                $(".object-combobox-data").children().first().addClass('selected-combobox-row');
+                
                 break;
 
             case "goods":
@@ -105,48 +106,8 @@
                      </tr >`;
                     $(".goods-combobox-data").append(row);
                 })
-                $(".goods-combobox-data").children().first().addClass('first-row-dropdown');
+                $(".goods-combobox-data").children().first().addClass('selected-combobox-row');
                 break;
-        }
-    }
-
-    // bindRepaymentDocument(repaymentDocument) {
-    //     let _this = this;
-    //     $(".repayment-customer-data").html('');
-    //     $.each(repaymentDocument, function (index, item) {
-    //         var row = `'<tr><td class="first-cell-in-row" width= "41px" ><div style="padding-left: 4px"> <div class="custom-checkbox repayment-checkbox-item uncheck-status" checkboxIndex="${index}"></div> </div> </td>
-    //             <td class="disabled-cell-backcolor text-align-center recorded-date" width="129px"> ${_this.formatDate(item.RecordedDate)} </td>
-    //             <td class="disabled-cell-backcolor record-number" width="159px"> ${item.RecordNumber} </td>
-    //             <td class="disabled-cell-backcolor text-align-right must-get-amount must-get-amount-${index}" width="202px"> ${_this.formatNumber(item.GetAmount)} </td>
-    //             <td class="disabled-cell-backcolor text-align-right not-get-amount not-get-amount-${index}" width="140px"> ${_this.formatNumber(item.NotGetAmount)} </td>
-    //             <td class="last-cell-in-row text-align-right amount" width="139px"> <input type="text" class="text-align-right number-input positive-num-input amount-${index}" value="0"/> <div class="up-down-arrow"> <div class="amount-arrow arrow-up"></div> <div class="amount-arrow arrow-down"></div> </div> </td></tr > '`;
-    //         $(".repayment-customer-data").append(row);
-    //     })
-    // }
-
-    formatDate(date) {
-        var date = new Date(date);
-        var dd = date.getDate();
-        var mm = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var formatedDate = dd + '/' + mm + '/' + yyyy;
-        return formatedDate;
-    }
-
-    formatNumber(number) {
-        var value = number.toString();
-        if (value) {
-            var plain = value.split('.').join('');
-            var reversed = plain.split('').reverse().join('');
-            var reversedWithDots = reversed.match(/.{1,3}/g).join('.');
-            var normal = reversedWithDots.split('').reverse().join('');
-            return normal;
         }
     }
 }

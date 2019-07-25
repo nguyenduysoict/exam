@@ -82,6 +82,7 @@
 }
 
 .icon-popup {
+    margin-top: 10px;
     height: 44px;
     width: 44px;
 }
@@ -90,7 +91,7 @@
 }
 
 .popup-message{
-    font-size: 13px;
+    font-size: 14px;
     margin:10px;
 }
 
@@ -123,6 +124,7 @@
     border-radius: 3px;
     height: 35px;
     padding: 5px 10px;
+    line-height: 41px;
 }
 
 .Cell-1 {

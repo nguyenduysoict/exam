@@ -4,9 +4,15 @@
         this.detailExportReceipt = []
     }
 
+    /**
+     * Sinh dữ liệu giả và trả về cho bảng phiếu xuất kho
+     * Createby NMDuy 25/07/2019
+     */
+
     getExportMasterTableData(){
         var data = [];        
-        for(let i = 0;i<5;i++){
+        for(let i = 0;i<30;i++){
+            var objectCode = this.randomObjectCode();
             var item = {
                 id: Math.floor((Math.random() * 3) + 1),
                 receiptDate: this.randomDate(),
@@ -14,12 +20,21 @@
                 objectName: this.randomName(),
                 sumMoney: this.randomMoney(),
                 exportExplain: this.randomNote(),
-                receiptType: this.randomReceiptType()
+                receiptType: this.randomReceiptType(),
+                objectCode: objectCode+this.randomTwoDigitNumber(),
+                objectAddress: 'Cầu Giấy',
+                receiptTime: '10:34',
             }
             data.push(item);
         }
         return data;
     }
+
+    /**
+     * Lấy dữ liệu thông tin chi tiết phiếu xuất kho 
+     * @param {any} id : id phiếu xuất kho 
+     * Createby NMDuy 25/07/2019
+     */
 
     getDetailExportReceipt(id){
         var data = [];
@@ -76,9 +91,21 @@
         return data;
     }
 
+    /**
+     * Thêm mới các mặt hàng vào bảng chi tiết phiếu xuất kho
+     * @param {any} receiptDetails : mảng các mặt hàng
+     * Createby NMDuy 25/07/2019
+     */
+
     addReceiptDetailToDataTable(receiptDetails){
         this.detailExportReceipt = [...this.detailExportReceipt, ...receiptDetails];
     }
+    
+    /**
+     * Lấy dữ liệu combobox tương ứng với tên truyền vào
+     * @param {any} comboboxName : tên combobox
+     * Createby NMDuy 25/07/2019
+     */
 
     getComboboxData(comboboxName) {
         var object = [];
@@ -135,65 +162,7 @@
         }
     }
 
-    getRepaymentDocumentFromCustomerById(id) {
-        var repaymentDocument = [];
-        switch (id) {
-            case 'nmd2310':
-                repaymentDocument = [
-                    {
-                        RecordedDate: new Date("2019-5-15"),
-                        RecordNumber: "17154500005",
-                        GetAmount: 200000,
-                        NotGetAmount: 200000,
-                    },
-                    {
-                        RecordedDate: new Date("2019-6-20"),
-                        RecordNumber: "5321265405",
-                        GetAmount: 300000,
-                        NotGetAmount: 100000,
-                    }
-                ];
-                break;
-            case 'nm0230d':
-                repaymentDocument = [
-                    {
-                        RecordedDate: new Date("2019-6-1"),
-                        RecordNumber: "064300541",
-                        GetAmount: 120000,
-                        NotGetAmount: 230000,
-                    }
-                ];
-                break;
-            case '0213nmd':
-                repaymentDocument = [
-                    {
-                        RecordedDate: new Date("2019-07-03"),
-                        RecordNumber: "036205004",
-                        GetAmount: 500000,
-                        NotGetAmount: 100000,
-                    },
-                    {
-                        RecordedDate: new Date("2019-10-03"),
-                        RecordNumber: "0127206943",
-                        GetAmount: 600000,
-                        NotGetAmount: 200000,
-                    },
-                    {
-                        RecordedDate: new Date("2019-06-18"),
-                        RecordNumber: "97300153047",
-                        GetAmount: 150000,
-                        NotGetAmount: 300000,
-                    }
-                ];
-                break;
-        }
-            return repaymentDocument;
-    }
-
-    getReceiptNumber() {
-        var receiptNumber = this.receiptNumber.slice(0,2);
-        return "XK00004";
-    }
+    //#region hàm sinh dữ liệu giả
 
     randomDate(){
         var date = Math.floor(Math.random() * 30) + 1;
@@ -305,4 +274,5 @@
         return objectCodeArr[Math.floor(Math.random()*objectCodeArr.length)];
     }
 
+    //#endregion
 }
