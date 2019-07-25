@@ -172,6 +172,7 @@ tbody td{
     background: url(../../../Contents/Icons/common-icon.png) no-repeat 4px 1px;
     width: 27px;
     height:24px;
+    margin: 6px;
 }
 
 .garbage-icon:hover {

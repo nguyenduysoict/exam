@@ -33,6 +33,7 @@
                     countUnit: this.randomUnit(),
                     unitPrice: this.randomMoney(),
                     amount: this.randomAmount(),
+                    sumMoney: this.randomMoney()
                 }
                 data.push(item);
                 break;
@@ -46,6 +47,7 @@
                         countUnit: this.randomUnit(),
                         unitPrice: this.randomMoney(),
                         amount: this.randomAmount(),
+                        sumMoney: this.randomMoney()
                     }
                     data.push(item);
                 }
@@ -60,6 +62,7 @@
                         countUnit: this.randomUnit(),
                         unitPrice: this.randomMoney(),
                         amount: this.randomAmount(),
+                        sumMoney: this.randomMoney()
                     }
                     data.push(item);
                 }
@@ -124,8 +127,6 @@
                         storePlace: this.randomPlace(),
                         countUnit: this.randomUnit(),
                         unitPrice: this.randomMoney(),
-                        amount: this.randomAmount(),
-                        sumMoney: this.randomMoney()
                     }
     
                     goods.push(item);
@@ -215,11 +216,10 @@
     }
 
     randomTwoDigitNumber(){
-        return Math.floor((Math.random() * 90) + 1);
+        return Math.floor((Math.random() * 90) + 10);
     }
 
     randomMoney(){
-        
         return this.randomTwoDigitNumber()+'0.000';
     }
 

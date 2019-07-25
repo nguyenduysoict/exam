@@ -125,7 +125,7 @@
                             <span class="btn-text">Nhân bản</span>
                         </button>
                         
-                        <button id="btnRefesh" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" >
+                        <button id="btnCheck" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" >
                             <div class="btn-icon btn-icon-view">
                             </div>
                             <span class="btn-text">Xem</span>
@@ -136,7 +136,7 @@
                             <span class="btn-text">Sửa</span>
                         </button>     
         
-                        <button id="btnDelete" class="btn toolbar-btn-item enable-if-selected  custom-disabled-btn" title="Ctrl  + D" >
+                        <button id="btnDelete" class="btn toolbar-btn-item enable-if-selected custom-disabled-btn delete-item-btn" title="Ctrl  + D" >
                             <div class="btn-icon btn-icon-delete"></div>
                             <span class="btn-text">Xóa</span>
                         </button>
@@ -356,54 +356,54 @@
         <div class="content-dialog">
 
             <div class="toolbar-dialog">
-                <button id="btnbefore" class="toolbar-dialog-item custom-disabled-btn">
+                <button id="btnbefore" class="toolbar-dialog-item">
                     <div class="btn-icon icon-before"></div>
                     <span class="btn-text">Trước</span>
                     <i class="fa fa-caret-down icon-dropdown"></i>
                 </button>
-                <button id="btnafter" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+                <button id="btnafter" class="toolbar-dialog-item div-border-dialog">
 
                     <span class="btn-text">Sau</span>
                     <div class="btn-icon icon-after"></div>
                     <i class="fa fa-caret-down icon-dropdown"></i>
                 </button>
-                <button id="btnAddNew" class="toolbar-dialog-item custom-disabled-btn">
+                <button id="btnAddNew" class="toolbar-dialog-item enable-when-check-btn enable-when-edit-btn">
                     <div class="btn-icon icon-add"></div>
                     <span class="btn-text">Thêm mới</span>
                 </button>
 
-                <button id="btnRepair" class="toolbar-dialog-item custom-disabled-btn">
+                <button id="btnRepair" class="toolbar-dialog-item enable-when-check-btn">
                     <div class="btn-icon icon-edit">
                     </div>
                     <span class="btn-text">Sửa</span>
                 </button>
-                <button id="btnSave" class="toolbar-dialog-item">
+                <button id="btnSave" class="toolbar-dialog-item enable-when-add-btn enable-when-edit-btn">
                     <div class="btn-icon icon-save">
                     </div>
                     <span class="btn-text">Lưu</span>
                 </button>
-                <button id="btnDelete" class="toolbar-dialog-item custom-disabled-btn">
+                <button id="btnDelete" class="toolbar-dialog-item enable-when-check-btn enable-when-edit-btn delete-item-btn">
                     <div class="btn-icon icon-delete">
                     </div>
                     <span class="btn-text">Xóa</span>
                 </button>
-                <button id="btnReturn" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+                <button id="btnReturn" class="toolbar-dialog-item div-border-dialog enable-when-edit-btn">
                     <div class="btn-icon icon-return">
                     </div>
                     <span class="btn-text">Hoãn</span>
                 </button>
-                <button id="btnPrinter" class="toolbar-dialog-item div-border-dialog custom-disabled-btn">
+                <button id="btnPrinter" class="toolbar-dialog-item div-border-dialog">
                     <div class="btn-icon icon-printer">
                     </div>
                     <span class="btn-text">In</span>
                     <i class="fa fa-caret-down icon-dropdown"></i>
                 </button>
-                <button id="btnHelp" class="toolbar-dialog-item">
+                <button id="btnHelp" class="toolbar-dialog-item alway-enable-btn">
                     <div class="btn-icon icon-help">
                     </div>
                     <span class="btn-text">Trợ giúp</span>
                 </button>
-                <button id="btnClose" class="toolbar-dialog-item">
+                <button id="btnClose" class="toolbar-dialog-item alway-enable-btn">
                     <div class="btn-icon icon-close">
                     </div>
                     <span class="btn-text">Đóng</span>
@@ -445,7 +445,7 @@
                             <div class="input1-form-dialog">
                                 <div class="dropdown-div">
                                     <div>
-                                        <input class="dialog-input  input-combobox object-code-input" inputCombobox="object" type="text" id="objDialog"  />
+                                        <input class="dialog-input  input-combobox object-code-input form-control-input" inputCombobox="object" type="text" id="objDialog"  />
                                     </div>
                                     <div class="dropdown-content object" comboboxName="object">
                                         <div>
@@ -481,20 +481,20 @@
                                 </div>
                             </div>
                             <div class="input2-form-dialog">
-                                <input class="dialog-input  object-name-input" type="text"  />
+                                <input class="dialog-input  object-name-input form-control-input" type="text"  />
                             </div>
                         </div>
                
                         <div class="Row-form-dialog">
                             <div class="lbl-item-general"><span> Địa chỉ </span></div>
                             <div class="input3-form-dialog">
-                                <input type="text" class="dialog-input  object-address-input"  />
+                                <input type="text" class="dialog-input  object-address-input form-control-input"  />
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-general"><span>Diễn giải</span></div>
                             <div class="input3-form-dialog">
-                                <input type="text" class="dialog-input export-explain-input"  />
+                                <input type="text" class="dialog-input export-explain-input form-control-input"  />
                             </div>
                         </div>
           
@@ -504,20 +504,20 @@
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Số phiếu xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="receipt-number" />
+                                <input type="text" class="receipt-number form-control-input" />
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Ngày xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-day-input" id="export-date-input" />
+                                <input type="text" class="export-day-input form-control-input" id="export-date-input" />
                                 <div class="calendar-icon-picker icon-input export-day-icon"></div>
                             </div>
                         </div>
                         <div class="Row-form-dialog">
                             <div class="lbl-item-documents"><span>Giờ xuất</span></div>
                             <div class="input-form-dialog">
-                                <input type="text" class="export-hour-input timepicker"/>
+                                <input type="text" class="export-hour-input timepicker form-control-input"/>
                                 <div class="hour-icon-picker icon-input get-receipt-day-icon"></div>
                             </div>
                         </div>
@@ -531,16 +531,16 @@
                                     <thead>
                                         <tr>
                                             <th class="width-150">Mã SKU</th>
-                                            <th class="width-200">Tên hàng hóa</th>
+                                            <th class="item-name-header">Tên hàng hóa</th>
                                             <th class="width-180">Kho</th>
                                             <th class="width-90">Đơn vị tính</th>
                                             <th class="width-100">Đơn giá</th>
-                                            <th class="width-80">Số lượng</th>
+                                            <th class="width-90">Số lượng</th>
                                             <th class="width-100">Thành tiền</th>
-                                            <th class=""></th>
+                                            <th style="width: 40px"></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="new-export-detail-box">
+                                    <tbody class="new-export-detail-box form-control-input">
                                     </tbody>
                                 </table>
                             </div>
@@ -548,7 +548,7 @@
                                     <div class="filter-input-master-tbl width-150">
                                         <div style="padding: 10px" class="filter-table-input row-count"> Số dòng = 0 </div>
                                     </div>
-                                    <div class="filter-input-master-tbl width-200">
+                                    <div class="filter-input-master-tbl width-200 item-name-footer">
                                         <div class="filter-table-input"></div>
                                     </div>
                                     <div class="filter-input-master-tbl width-180">
@@ -559,13 +559,13 @@
                                     <div class="filter-input-master-tbl width-100">
                                             <div class="filter-table-input"></div>
                                     </div>
-                                    <div class="filter-input-master-tbl width-80">
+                                    <div class="filter-input-master-tbl width-90">
                                             <div class="filter-table-input"></div>
                                     </div>
-                                    <div class="filter-input-master-tbl width-100">
+                                    <div class="filter-input-master-tbl width-100" style="padding: 10px 40px">
                                             <div class="filter-table-input text-align-right sum-all-amount">  </div>
                                     </div>
-                                    <div class="filter-input-master-tbl">
+                                    <div style="width: 40px">
                                             <div class="filter-table-input"></div>
                                     </div>
                                 </div>
@@ -616,7 +616,7 @@
         
                     </div>
                     <div class="popup-message" style="width: 234px;">
-                        Các trường dữ liệu không được để trống, phải có ít nhất một dòng chi tiết!
+                        
                     </div>
                 </div>
                 <hr />

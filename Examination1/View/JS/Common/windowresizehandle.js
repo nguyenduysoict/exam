@@ -6,6 +6,12 @@ $(document).ready(function(){
     $(".master-tbl-note-bottom-cell").css({
         'width': ($(".master-tbl-note").width()+10 + 'px')
     });
+
+    // $(".item-name-footer").css({
+    //     'width': ($(".item-name-header").width()+10 + 'px')
+    // });
+
+
     
     window.onresize = function(event) {
     
@@ -15,6 +21,10 @@ $(document).ready(function(){
         
         $(".master-tbl-note-bottom-cell").css({
             'width': ($(".master-tbl-note").width()+10 + 'px')
+        });
+
+        $(".item-name-footer").css({
+            'width': ($(".item-name-header").width()+10 + 'px')
         });
     };
 })

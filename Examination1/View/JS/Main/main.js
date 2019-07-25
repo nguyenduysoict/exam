@@ -40,13 +40,14 @@ class MainJS {
         this.DatafomaterJS = new DataFormaterJS();
         this.NewExportReceiptDialog = new Dialog("Thêm phiếu xuất kho khác", 1000, 700, "dialogNewExport");
         this.DialogSaveData = new Dialog("Dữ liệu chưa được lưu", 400, 'auto', 'dialogSaveDataNotification');
-        this.DialogCheckEmpty = new Dialog("MShopKeeper", 400, 'auto', 'dialogNotification');
+        this.NotificationDialog = new Dialog("MShopKeeper", 400, 'auto', 'dialogNotification');
         this.today = this.getInitialDate();
         this.exportTableData = [];
-        this.recentGoodsList = [];
         this.receiptNumber = 40;
         this.receiptCodeNumber = '';
+        this.selectedRowItemId = '';
         this.currentRowIndex = 0;
+        this.isDeleteItem = false;
         this.objectComboboxData = [];
         this.goodsComboboxData = [];
         this.InitEvents();
@@ -57,8 +58,16 @@ class MainJS {
         this.exportTableData = this.AjaxJS.getExportMasterTableData();
         this.loadData("export-master-table");
         this.DatafomaterJS.changeDateTimeByCase("3", "#get-data-from-day-input", "#get-data-to-day-input");
-        $("#btnAdd").click(this.showNewExportReceiptDialog.bind(this))
-        this.showNewExportReceiptDialog();
+
+        $(document).on("click", "#btnAdd", {type: 'add'}, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnEdit", {type: 'edit'}, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnCheck", {type: 'check'}, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnReturn", {type: 'return'}, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", "#btnAddNew", {type: 'addnew'}, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", "#btnRepair", {type: 'repair'}, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", ".delete-item-btn", this.deleteExportReceipt.bind(this));
+
+
         $(document).on("click", ".export-master-table tr", this.onSelectRowOnMasterExportTable.bind(this));
         $(document).on("click", ".goods-combobox-data tr", this.onSelectGoodsOnComboBox.bind(this));
         $(document).on("click", ".cls-other", { mode: 1 }, this.tabs.bind(this));
@@ -99,6 +108,9 @@ class MainJS {
         $(document).on("click", "#btnSave", {option: 3}, this.notificationDialogHandle.bind(this));
         
         $(document).on("click", ".delete-detail-item-btn", this.deleteDetailItem.bind(this));
+
+        $(document).on("click", ".btn-confirm-dialog", this.confirmDialog.bind(this));
+
 
         
 
@@ -196,34 +208,106 @@ class MainJS {
     }
 
     onSelectRowOnMasterExportTable(sender){
+
         $('.export-master-table tr').removeClass('selected-row');
         var target = $(sender.currentTarget);
         target.addClass('selected-row');
         $('.enable-if-selected').removeClass('custom-disabled-btn');
         $('.export-detail-table').html('');
-        var exportReceiptCode = $(sender.currentTarget).attr("id");
-        var detailExportReceipt = this.AjaxJS.getDetailExportReceipt(exportReceiptCode);
+        var itemId = $(sender.currentTarget).attr("id");
+        this.selectedRowItemId = itemId;
+        var detailExportReceipt = this.AjaxJS.getDetailExportReceipt(itemId);
+      
         this.DatabindingJS.bindDetailExportReceiptData(detailExportReceipt);
     }
 
-    showNewExportReceiptDialog(){
-        this.currentRowIndex = 0;
-        this.recentGoodsList = [];
+    showNewExportReceiptDialog(sender){
+        var type = sender.data['type'];
+        $('.toolbar-dialog-item').addClass('custom-disabled-btn');
+        this.resetNewExportForm();
+        if(type == 'add'){
+            this.addNewExportReceipt();
+        } else if(type == 'edit'){
+           this.editExportReceipt();
+        } else if(type == 'check'){
+            this.NewExportReceiptDialog.Dialog.dialog({title: "Xem phiếu xuất kho"});
+            $('.enable-when-check-btn').removeClass('custom-disabled-btn');
+            $('.alway-enable-btn').removeClass('custom-disabled-btn');
+            this.bindExportDataToForm(this.selectedRowItemId);
+            $(".form-control-input").addClass("custom-disabled-btn");
+        }
+        this.NewExportReceiptDialog.open();
+    }
+
+    addNewExportReceipt(){
+        this.NewExportReceiptDialog.Dialog.dialog({title: "Thêm phiếu xuất kho"});
+        this.resetNewExportForm();
+        $('.new-export-detail-box').html('');
+        $('.toolbar-dialog-item').addClass('custom-disabled-btn');
+        $(".form-control-input").removeClass("custom-disabled-btn");
         this.currentRowIndex = 0;
         this.objectComboboxData = this.AjaxJS.getComboboxData("object");
         this.goodsComboboxData = this.AjaxJS.getComboboxData("goods");
         this.DatabindingJS.bindingComboboxData("object", this.objectComboboxData);
         this.DatabindingJS.bindingComboboxData("goods", this.goodsComboboxData);
-        $('.new-export-detail-box').html('');
         this.appendEmptyRowToNewExportDetail();
+        $('.enable-when-add-btn').removeClass('custom-disabled-btn');
+        $('.alway-enable-btn').removeClass('custom-disabled-btn');
         this.receiptCodeNumber = "XK000"+this.receiptNumber;
         $(".receipt-number").val(this.receiptCodeNumber);
         $(".export-day-input").val(this.today);
         $(".export-hour-input").val(this.getCurrentTime());
-
-        this.NewExportReceiptDialog.open();
         $(".object-code-input").focus();
         this.onOtherPurposeRadioSelection();
+    }
+
+    editExportReceipt(){
+        this.NewExportReceiptDialog.Dialog.dialog({title: "Sửa phiếu xuất kho"});
+        $('.enable-when-edit-btn').removeClass('custom-disabled-btn');
+        $(".form-control-input").removeClass("custom-disabled-btn");
+        $('.alway-enable-btn').removeClass('custom-disabled-btn');
+        this.bindExportDataToForm(this.selectedRowItemId);
+        this.appendEmptyRowToNewExportDetail();
+    }
+
+    deleteExportReceipt(){
+        this.showNotificationDialog('delete');
+    }
+
+    bindExportDataToForm(id){
+        var _this = this;
+        var exportReceipt = this.exportTableData.filter(function(item){
+            return item.id == _this.selectedRowItemId
+        });
+
+        $(".object-code-input").val(exportReceipt[0].objectCode);
+        $(".object-name-input").val(exportReceipt[0].objectName);
+        $(".object-address-input").val(exportReceipt[0].objectAddress);
+        $(".export-explain-input").val(exportReceipt[0].exportExplain);
+        $(".receipt-number").val(exportReceipt[0].receiptNumber);
+        $(".export-day-input").val(exportReceipt[0].receiptDate);
+        $(".export-hour-input").val(exportReceipt[0].receiptTime);
+
+        var detailExportItemData = this.AjaxJS.detailExportReceipt.filter(function(item){
+            return item.id == _this.selectedRowItemId
+        });
+
+        for(let i = 0;i<detailExportItemData.length;i++){
+            this.appendNewRowToNewExportDetailTable(detailExportItemData[i]);
+        }
+
+    }
+
+    subToolbarBtnClickHandle(sender){
+        var type = sender.data['type'];
+        if(type == 'return'){
+            this.bindExportDataToForm(this.selectedRowItemId);
+        } else if (type == 'addnew'){
+            this.addNewExportReceipt();
+        } else if (type == 'repair'){
+            this.editExportReceipt();
+        }
+
     }
 
     onSelectItemOnObjectCombobox(sender){
@@ -255,14 +339,13 @@ class MainJS {
     tabs(sender) {
         var mode = sender.data["mode"];
         if (mode == 1) {
-            this.resetNewExportForm();
+
             this.onOtherPurposeRadioSelection();
             
 
         }
         if (mode == 2) {
             this.onRadioSelection();
-            // this.resetNewReceiptForm();
         }
     }
 
@@ -357,18 +440,19 @@ class MainJS {
         }
     }
 
-    // calculateSumAllAmount(){
-    //     var tableLenght = $('.new-export-detail-box').children().length;
-    //     var sumAllAmount = 0;
-    //     if(tableLenght>1)
-    //     for(let i = 0;i<tableLenght-1;i++){
-    //         debugger
-    //         var sumAmount = this.DatafomaterJS.formatToIntNumber($('.sumMoney-'+i).val());
-    //         sumAllAmount+=sumAmount;
-    //     }
-    //     sumAllAmount = this.DatafomaterJS.formatToStringNumber(sumAllAmount);
-    //     $('.sum-all-amount').html(sumAllAmount);
-    // }
+    calculateSumAllAmount(){
+        var tableLenght = $('.new-export-detail-box').children().length;
+        var sumAllAmount = 0;
+        if(tableLenght>1)
+        for(let i = 0;i<tableLenght-1;i++){
+            var trElement = $('.new-export-detail-box').children()[i];
+            var rowIndex = $(trElement).attr("rowIndex");
+            var sumAmount = this.DatafomaterJS.formatToIntNumber($('.sumMoney-'+rowIndex).val());
+            sumAllAmount+=sumAmount;
+        }
+        sumAllAmount = this.DatafomaterJS.formatToStringNumber(sumAllAmount);
+        $('.sum-all-amount').html(sumAllAmount);
+    }
 
     bindBootstrapComboboxData(){
         var value = this.innerText;
@@ -384,10 +468,7 @@ class MainJS {
     deleteDetailItem(sender){
         var rowIndex = $(sender.currentTarget).attr("rowIndex");
         $('.garbage-icon[rowIndex='+rowIndex+']').closest('tr').remove()
-        this.recentGoodsList = this.recentGoodsList.filter(function(item){
-            return item.itemIndex != rowIndex
-        });
-        debugger
+   
     }
 
     checkValidSumAmountValue(itemSumAmount){
@@ -432,34 +513,23 @@ class MainJS {
 
     }
 
-
-
     onSelectGoodsOnComboBox(sender){
         this.currentRowIndex += 1;
         var ele = $(sender.currentTarget);
         var itemCode = ele.attr("itemCode");
         var itemName = ele.attr("itemName");
-        var storePlace = ele.attr("storePlace");
         var countUnit = ele.attr("countUnit");
         var unitPrice = ele.attr("unitPrice");
-        var amount = ele.attr("amount");
-
-        var sumMoney = this.DatafomaterJS.formatToIntNumber(data.unitPrice)*data.amount;
-
-        sumMoney = this.DatafomaterJS.formatToStringNumber(sumMoney);
-
         var good = {
             itemIndex: this.currentRowIndex,
             itemCode: itemCode,
             itemName: itemName,
-            storePlace: storePlace,
             countUnit: countUnit,
             unitPrice: unitPrice,
-            amount: amount,
-            sumMoney: sumMoney
+            amount: 1,
+            sumMoney: unitPrice
         }
 
-        this.recentGoodsList.push(good);
 
         var lastRowIndex = $('.new-export-detail-box').children().length;
         $('.new-export-detail-box').children()[lastRowIndex-1].remove();
@@ -470,17 +540,20 @@ class MainJS {
         var rowCount = lastRowIndex;
 
         $('.row-count').html("Số dòng = "+rowCount);
-        // this.calculateSumAllAmount();
+        this.calculateSumAllAmount();
         
     }
 
     appendNewRowToNewExportDetailTable(data){
         var storePlace = '';
-
-        if($(".cls-other").hasClass("icon-radio-true")){
-            storePlace = "Chi nhánh Cầu Giấy"
+        if(!data.storePlace){
+            if($(".cls-other").hasClass("icon-radio-true")){
+                storePlace = "Chi nhánh Cầu Giấy"
+            } else {
+                storePlace = $('.store-place').html();
+            }
         } else {
-            storePlace = $('.store-place').html();
+            storePlace = data.storePlace;
         }
 
         var row = 
@@ -490,18 +563,18 @@ class MainJS {
                     <td>
                         <div class="dropdown">
                             <div class="dropdown-toggle store-place-dropdown" data-toggle="dropdown">
-                                    <span class="store-place-in-table-${data.itemIndex}"> ${storePlace} </span>
+                                    <span class="store-place-${data.itemIndex}"> ${storePlace} </span>
                                     <div class="add-arrow-down-icon">
                                             <i class="fa fa-caret-down icon-dropdown"></i>
                                     </div>
                             </div>
                             <ul class="dropdown-menu time-filter-selection" role="menu" aria-labelledby="menu1">
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Cầu Giấy</a></li>
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Duy Tân</a></li>
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Bưởi</a></li>
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Phạm Hùng</a></li>
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Nhổn</a></li>
-                                <li dropdownName="store-place-in-table-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Mỹ Đình</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Cầu Giấy</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Duy Tân</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Bưởi</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Phạm Hùng</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Nhổn</a></li>
+                                <li dropdownName="store-place-${data.itemIndex}" class="dropdown-bootstrap"><a role="menuitem" tabindex="-1" href="#">Chi nhánh Mỹ Đình</a></li>
                             </ul> 
                         </div>
                     </td>
@@ -519,7 +592,7 @@ class MainJS {
                     </td>
                     <td>
                         <div>
-                            <input class="input-inside-cell positive-num-input text-align-right sum-money sumMoney-${data.itemIndex}" index="${data.itemIndex}" style="width: 100px" value= "${ sumMoney }" type="text">
+                            <input class="input-inside-cell positive-num-input text-align-right sum-money sumMoney-${data.itemIndex}" index="${data.itemIndex}" style="width: 100px" value= "${ data.sumMoney }" type="text">
                         </div>
                     </td>
                     <td>
@@ -727,6 +800,11 @@ class MainJS {
     }
 
     resetNewExportForm(){
+        $(".object-code-input").val('');
+        $(".object-name-input").val('');
+        $(".object-address-input").val('');
+        $(".export-explain-input").val('');
+        $(".new-export-detail-box").html('');
 
     }
 
@@ -773,17 +851,70 @@ class MainJS {
                 }
 
                 this.exportTableData.push(newExportReceipt);
-
-                for(let i = 0;i<this.recentGoodsList.length;i++){
-                    this.recentGoodsList[i].id = id;
-                }
-                debugger
-                this.AjaxJS.addReceiptDetailToDataTable(this.recentGoodsList);
                 this.loadData("export-master-table");
+
+                var tableLength = $('.new-export-detail-box').children().length;
+
+                var detailTable = [];
+                for (let i = 0 ; i < tableLength-1; i++){
+                    var trElement = $('.new-export-detail-box').children()[i];
+                    var rowIndex = $(trElement).attr("rowIndex");
+                    var itemCode = $('.item-code-'+rowIndex)[0].innerText;
+                    var itemName = $('.item-name-'+rowIndex)[0].innerText;
+                    var storePlace = $('.store-place-'+rowIndex)[0].innerText;
+                    var countUnit = $('.count-unit-'+rowIndex)[0].innerText;
+                    var unitPrice = $('.unit-price-'+rowIndex).val();
+                    var amount = $('.amount-'+rowIndex).val();
+                    var sumMoney = $('.sumMoney-'+rowIndex).val();
+
+                    var good = {
+                        id: id,
+                        itemCode: itemCode,
+                        itemName: itemName,
+                        storePlace: storePlace,
+                        countUnit: countUnit,
+                        unitPrice: unitPrice,
+                        amount: amount,
+                        sumMoney: sumMoney
+                    }
+                    detailTable.push(good);
+                }
+                
+                this.AjaxJS.addReceiptDetailToDataTable(detailTable);
                 this.NewExportReceiptDialog.close();
                 this.receiptNumber += 1;
             }
         }
+    }
+
+    showNotificationDialog(type){
+        if(type == 'delete'){
+            this.isDeleteItem = true;
+            $('.popup-message').html('Bạn có muốn xóa phiếu xuất kho này?');
+            
+        } else {
+            this.isDeleteItem = false
+            $('.popup-message').html('Các trường dữ liệu không được để trống, phải có ít nhất một dòng chi tiết!');
+        }
+        this.NotificationDialog.open();
+    }
+
+    confirmDialog(){
+        if(this.isDeleteItem){
+            var _this = this;
+            this.exportTableData = this.exportTableData.filter(function(item){
+                return item.id != _this.selectedRowItemId
+            })
+            this.AjaxJS.detailExportReceipt = this.AjaxJS.detailExportReceipt.filter(function(item){
+                return item.id != _this.selectedRowItemId
+            })
+            this.loadData("export-master-table");
+            $('.export-detail-table').html('');
+            $('.enable-if-selected').addClass('custom-disabled-btn');
+        }
+        this.NotificationDialog.close();
+        this.DialogSaveData.close();
+        this.NewExportReceiptDialog.close();
     }
 
 }
