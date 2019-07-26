@@ -32,13 +32,12 @@ $(document).ready(function(){
                 if (thisInputComboboxName != inputComboboxName) {
                     $(comboboxes[i]).removeClass("show-hide");
                 }
-
             };  
         }
     })
 
-    
-    
+    $('.date-input').mask("99/99/9999");
+    $('.time-input').mask("99:99");
 })
 
 /**
@@ -59,6 +58,7 @@ class MainJS {
         this.NewExportReceiptDialog = new Dialog("Thêm phiếu xuất kho khác", 1000, 700, "dialogNewExport");
         this.DialogSaveData = new Dialog("Dữ liệu chưa được lưu", 400, 'auto', 'dialogSaveDataNotification');
         this.NotificationDialog = new Dialog("MShopKeeper", 400, 'auto', 'dialogNotification');
+        this.SearchObjectDialog = new Dialog("Chọn đối tượng", 800, 'auto', 'dialogSearchObject');
         this.exportTableData = [];
         this.today = getInitialDate();
         this.mode = '';
@@ -77,24 +77,22 @@ class MainJS {
      * Createby NMDuy 25/07/2019
      */
 
-    InitEvents(){
+    InitEvents() {
         var _this = this;
         this.exportTableData = this.AjaxJS.getExportMasterTableData();
-        
-        this.loadData("export-master-table");        
+
+        this.loadData("export-master-table");
         changeDateTimeByCase("3", "#get-data-from-day-input", "#get-data-to-day-input");
-        $(document).on("focus", ".positive-num-input", this.selectAllValue);
         $(document).on("focus", ".form-control-input", this.selectAllValue);
-        $(document).on("focus", ".input-combobox", this.selectAllValue);
 
-        $(document).on("click", "#btnAdd", {type: 'add'}, this.showNewExportReceiptDialog.bind(this));
-        $(document).on("click", "#btnDuplicate", {type: 'duplicate'}, this.showNewExportReceiptDialog.bind(this));
-        $(document).on("click", "#btnEdit", {type: 'edit'}, this.showNewExportReceiptDialog.bind(this));
-        $(document).on("click", "#btnCheck", {type: 'check'}, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnAdd", { type: 'add' }, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnDuplicate", { type: 'duplicate' }, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnEdit", { type: 'edit' }, this.showNewExportReceiptDialog.bind(this));
+        $(document).on("click", "#btnCheck", { type: 'check' }, this.showNewExportReceiptDialog.bind(this));
 
-        $(document).on("click", "#btnReturn", {type: 'return'}, this.subToolbarBtnClickHandle.bind(this));
-        $(document).on("click", "#btnAddNew", {type: 'addnew'}, this.subToolbarBtnClickHandle.bind(this));
-        $(document).on("click", "#btnRepair", {type: 'repair'}, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", "#btnReturn", { type: 'return' }, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", "#btnAddNew", { type: 'addnew' }, this.subToolbarBtnClickHandle.bind(this));
+        $(document).on("click", "#btnRepair", { type: 'repair' }, this.subToolbarBtnClickHandle.bind(this));
         $(document).on("click", ".delete-item-btn", this.deleteExportReceipt.bind(this));
 
 
@@ -108,12 +106,15 @@ class MainJS {
 
         $(document).on("click", ".icon-arrow-down", this.showCombobox.bind(this));
         $(document).on("keyup", ".input-combobox", this.filterComboboxData.bind(this));
+        //$(document).on("keydown", ".input-combobox", this.hideComboboxDataByTabPress);
+        $(document).on("focus", ".input-combobox", this.selectAllValue);
+
         $(document).on("click", ".dropdown-bootstrap", this.bindBootstrapComboboxData);
 
         $(document).on("keypress", ".positive-num-input", this.validateNumberInput);
-        $(document).on("keypress", ".positive-num-input", this.validateNumberInput);
         $(document).on("keyup", ".positive-num-input", this.displayCustomNumber.bind(this));
         $(document).on("focusout", ".positive-num-input", this.checkNegativeNumber);
+        $(document).on("focus", ".positive-num-input", this.selectAllValue);
 
         $(document).on("click", ".amount-arrow", this.changeAmountValue.bind(this));
 
@@ -151,16 +152,21 @@ class MainJS {
 
         $(document).on("click", ".btn-confirm-dialog", this.confirmDialog.bind(this));
 
+        $(document).on("click", ".btn-confirm-dialog", this.confirmDialog.bind(this));
+
+        $(document).on("click", ".icon-object-quick-search", this.showObjectSearchDialog.bind(this));
+
         $(document).on("focusout", ".date-input",{type: 1} ,this.validateTime.bind(this));
         $(document).on("focusout", ".time-input", {type: 2}, this.validateTime.bind(this));
 
+        
+
+
         $(document).keydown(function(e) {
             for(let i = 0;i<$('.dropdown-content').length;i++){
-                
                 var target = $('.dropdown-content')[i];
                 if($(target).hasClass("show-hide")){
-                    
-                    _this.checkKey(e,target, _this);
+                    _this.checkKeyOnComboboxInput(e,target, _this);
                 }
             }
         });
@@ -312,24 +318,40 @@ class MainJS {
         this.DatabindingJS.bindingComboboxData("goods", this.goodsComboboxData);
         if(type == 'add'){
             this.addNewExportReceipt();
+            this.NewExportReceiptDialog.open();
+            $(".object-code-input").focus();
+            $(".move-to-other-store").removelass("custom-disabled-btn");
 
         } else if(type == 'edit'){
            this.editExportReceipt();
+           this.NewExportReceiptDialog.open();
+           $(".object-code-input").focus();
+           $(".move-to-other-store").removeClass("custom-disabled-btn");
+
         } else if(type == 'check'){
             this.NewExportReceiptDialog.Dialog.dialog({title: "Xem phiếu xuất kho"});
             $('.enable-when-check-btn').removeClass('custom-disabled-btn');
             $('.alway-enable-btn').removeClass('custom-disabled-btn');
             this.bindExportDataToForm(this.selectedRowItemId);
             $(".form-control-input").addClass("custom-disabled-btn");
-        } else if(type == 'duplicate'){
+            $(".move-to-other-store").addClass("custom-disabled-btn");
+            this.NewExportReceiptDialog.open();
+        } else if (type == 'duplicate') {
+
             this.editExportReceipt();
             this.NewExportReceiptDialog.Dialog.dialog({title: "Nhân bản phiếu xuất kho"});
             this.mode == 'duplicate';
             this.receiptCodeNumber = "XK000"+this.receiptNumber;
             $(".receipt-number").val(this.receiptCodeNumber);
+            this.NewExportReceiptDialog.open();
+            $(".object-code-input").focus();
+            $(".move-to-other-store").removeClass("custom-disabled-btn");
         }
-        this.NewExportReceiptDialog.open();
-        $(".object-code-input").focus();
+    }
+
+
+    showObjectSearchDialog(){
+        this.SearchObjectDialog.open();
     }
 
     /**
@@ -353,7 +375,9 @@ class MainJS {
         $(".export-day-input").val(this.today);
         $(".export-hour-input").val(getCurrentTime());
         this.mode = 'add';
-        this.onOtherPurposeRadioSelection();
+        this.onOtherPurposeRadioSelection();   
+
+        
 
     }
 
@@ -471,6 +495,9 @@ class MainJS {
             var tableLenght = $('.new-export-detail-box').children().length;
             if(tableLenght>=3){
                 $('.goods').css("top","-240px");
+            } else {
+                $('.goods').css("top","unset");
+
             }
         }
         if ($('.' + comboboxName).hasClass('show-hide')) {
@@ -503,38 +530,47 @@ class MainJS {
      * Createby NMDuy 25/07/2019
      */
     filterComboboxData(sender) {
-        
         var key = sender.originalEvent.keyCode;
-        if(key == 38 || key == 40){
+        if (key == 38 || key == 40 || key == 9) {
         } else {
             var inputName = $(sender.target).attr("inputCombobox");
             var keyword = $('input[inputCombobox=' + inputName + ']').val();
-    
-            switch (inputName) {
-                case 'object':
-                    var filterData = this.objectComboboxData.filter(function (item) {
-                        return item.name.toLowerCase().includes(keyword.toLowerCase());
-                    });
-                    if (filterData.length == 0) {
-                        $('.object').removeClass('show-hide');
-                    } else {
-                        $('.object').addClass('show-hide');
-                        this.DatabindingJS.bindingComboboxData("object", filterData);
-                    }
-                    break;
-                case 'goods':
-                    var filterData = this.goodsComboboxData.filter(function (item) {
-                        if(item.itemName.toLowerCase().includes(keyword.toLowerCase()) || item.itemCode.toLowerCase().includes(keyword.toLowerCase())){
-                            return true;
+            if (keyword == '') {
+                $('.dropdown-content').removeClass('show-hide');
+            } else {
+                switch (inputName) {
+                    case 'object':
+                        var filterData = this.objectComboboxData.filter(function (item) {
+                            return item.name.toLowerCase().includes(keyword.toLowerCase());
+                        });
+                        if (filterData.length == 0) {
+                            $('.object').removeClass('show-hide');
+                        } else {
+                            $('.object').addClass('show-hide');
+                            this.DatabindingJS.bindingComboboxData("object", filterData);
                         }
-                    });
-                    if (filterData.length == 0) {
-                        $('.goods').removeClass('show-hide');
-                    } else {
-                        $('.goods').addClass('show-hide');
-                        this.DatabindingJS.bindingComboboxData("goods", filterData);
-                    }
-                    break;
+                        break;
+                    case 'goods':
+                        var filterData = this.goodsComboboxData.filter(function (item) {
+                            if(item.itemName.toLowerCase().includes(keyword.toLowerCase()) || item.itemCode.toLowerCase().includes(keyword.toLowerCase())){
+                                return true;
+                            }
+                        });
+                        if (filterData.length == 0) {
+                            $('.goods').removeClass('show-hide');
+                        } else {
+                            debugger
+                            var tableLenght = $('.new-export-detail-box').children().length;
+                            if(tableLenght>=3){
+                                $('.goods').css("top","240px");
+                            } else {
+                                $('.goods').css("top","unset");
+                            }
+                            $('.goods').addClass('show-hide');
+                            this.DatabindingJS.bindingComboboxData("goods", filterData);
+                        }
+                        break;
+                }
             }
         }
     }
@@ -714,7 +750,7 @@ class MainJS {
      * Createby NMDuy 25/07/2019
      */
 
-    onSelectGoodsOnComboBox(sender){
+    onSelectGoodsOnComboBox(sender) {
         this.currentRowIndex += 1;
         if(sender.length == 1){
         } else {
@@ -1016,20 +1052,20 @@ class MainJS {
         }
     }
 
-    checkKey(e,target, _this) {
+    checkKeyOnComboboxInput(e, target, _this) {
         e = e || window.event;
         var selectedRow;
         var trElementList = $(target).find('tbody').children();
 
         if (e.keyCode == '38') {
-            for(let i = 0;i<trElementList.length;i++){
+            for (let i = 0; i < trElementList.length; i++) {
                 var trItem = $(trElementList)[i];
-                if($(trItem).hasClass('selected-combobox-row')){
-                    if(i > 0){
+                if ($(trItem).hasClass('selected-combobox-row')) {
+                    if (i > 0) {
                         $(trItem).removeClass('selected-combobox-row');
-                        $((trElementList)[i-1]).addClass('selected-combobox-row');
-                        selectedRow = $((trElementList)[i-1]);
-                        $(target).find('.tbody-dropdown').scrollTop((i-1)*38);
+                        $((trElementList)[i - 1]).addClass('selected-combobox-row');
+                        selectedRow = $((trElementList)[i - 1]);
+                        $(target).find('.tbody-dropdown').scrollTop((i - 1) * 38);
                         break;
                     }
                 }
@@ -1037,34 +1073,34 @@ class MainJS {
 
         }
         else if (e.keyCode == '40') {
-            for(let i = 0;i<trElementList.length;i++){
+            for (let i = 0; i < trElementList.length; i++) {
                 var trItem = $(trElementList)[i];
-                if($(trItem).hasClass('selected-combobox-row')){
-                    if(i < trElementList.length -1 ) {
+                if ($(trItem).hasClass('selected-combobox-row')) {
+                    if (i < trElementList.length - 1) {
                         $(trItem).removeClass('selected-combobox-row');
-                        $((trElementList)[i+1]).addClass('selected-combobox-row');
-                        selectedRow = $((trElementList)[i+1]);
-                        $(target).find('.tbody-dropdown').scrollTop((i+1)*38);
+                        $((trElementList)[i + 1]).addClass('selected-combobox-row');
+                        selectedRow = $((trElementList)[i + 1]);
+                        $(target).find('.tbody-dropdown').scrollTop((i + 1) * 38);
                         break;
                     }
                 }
             }
         }
-        else if(e.keyCode == '13'){
-            for(let i = 0;i<trElementList.length;i++){
+        else if (e.keyCode == '13') {
+            for (let i = 0; i < trElementList.length; i++) {
                 var trItem = $(trElementList)[i];
-                if($(trItem).hasClass('selected-combobox-row')){
+                if ($(trItem).hasClass('selected-combobox-row')) {
                     selectedRow = $((trElementList)[i])
-                    if($(target).hasClass('object')){
+                    if ($(target).hasClass('object')) {
                         _this.onSelectItemOnObjectCombobox(selectedRow);
                         $('.dropdown-content').removeClass('show-hide');
-                    } else if ($(target).hasClass('goods')){
+                    } else if ($(target).hasClass('goods')) {
                         _this.onSelectGoodsOnComboBox(selectedRow);
                     }
                 }
             }
-
-            
+        } else if (e.keyCode == '9') {
+            $('.dropdown-content').removeClass('show-hide');
         }
      }
 
@@ -1206,8 +1242,6 @@ class MainJS {
         }
     }
 
-  
-
     /**
      * Hiển thị loại thông báo tương ứng với tham số truyền vào
      * @param {any} type loại thông báo 
@@ -1256,11 +1290,19 @@ class MainJS {
     
     validateTime(sender){
         var type = sender.data['type'];
-        if(type == 1){
+
+        if (type == 1) {
             var date = $(sender.target).val();
-            if(!checkValidDate(date)){
-                $(sender.target).val(this.today);
+            if (!checkValidDate(date)) {
+                debugger
+                 console.log($(this))
+                 if ($(sender.target).hasClass('date-filter-input')) {
+                    $(sender.target).val('');
+                } else {
+                    $(sender.target).val(this.today);
+                }
             }
+            
         } else {
             var hour = $(sender.target).val();
             if(!checkValidTime(hour)){

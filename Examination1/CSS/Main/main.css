@@ -95,7 +95,7 @@
     border: 1px solid #026b97;
     border-radius: 3px;
     margin-right: 8px;
-    background-image: url('../../../Contents/Icons/common-icon.png');
+    background-image: url('/Contents/Icons/common-icon.png');
 }
 
 .icon-double-arrow-left{
@@ -207,6 +207,7 @@ span.text-pagination.result-pagination{
 
 .div-wrap-new-export-detail-table{
     height: 320px;
+    overflow: auto;
     border-left: 1px solid #e1e1e1;
     border-right: 1px solid #e1e1e1;
 }
@@ -261,4 +262,8 @@ span.text-pagination.result-pagination{
 
 .icon-pagination:hover{
     cursor: pointer;
+}
+
+.receipt-number-cell{
+    color:#006189;
 }

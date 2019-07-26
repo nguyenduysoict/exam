@@ -81,8 +81,71 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\Icons\ajax-loader.gif" />
+    <Content Include="Contents\Icons\arrow-down-line.png" />
+    <Content Include="Contents\Icons\arrow-down.png" />
+    <Content Include="Contents\Icons\arrow-up.png" />
+    <Content Include="Contents\Icons\calendar.png" />
+    <Content Include="Contents\Icons\cancel-blue.png" />
+    <Content Include="Contents\Icons\check.png" />
+    <Content Include="Contents\Icons\checkbox-parrent.png" />
+    <Content Include="Contents\Icons\common-icon.png" />
+    <Content Include="Contents\Icons\exclamation.png" />
+    <Content Include="Contents\Icons\icon-popup.png" />
+    <Content Include="Contents\Icons\loading.gif" />
+    <Content Include="Contents\Icons\minus.png" />
+    <Content Include="Contents\Icons\not-save.png" />
+    <Content Include="Contents\Icons\plus.png" />
+    <Content Include="Contents\Icons\quick-add.png" />
+    <Content Include="Contents\Icons\quick-search.png" />
+    <Content Include="Contents\Icons\radio-check.png" />
+    <Content Include="Contents\Icons\radio-uncheck.png" />
+    <Content Include="Contents\Icons\save-white.png" />
+    <Content Include="Contents\Icons\Search-blue.png" />
+    <Content Include="Contents\Icons\ui-icons_444444_256x240.png" />
+    <Content Include="Contents\Icons\ui-icons_555555_256x240.png" />
+    <Content Include="Contents\Icons\ui-icons_777620_256x240.png" />
+    <Content Include="Contents\Icons\ui-icons_777777_256x240.png" />
+    <Content Include="Contents\Icons\ui-icons_cc0000_256x240.png" />
+    <Content Include="Contents\Icons\ui-icons_ffffff_256x240.png" />
+    <Content Include="Contents\Icons\uncheck.png" />
+    <Content Include="Contents\Images\icon_help_18.png" />
+    <Content Include="Contents\Images\Image.jpg" />
+    <Content Include="Contents\Images\logo-mshopkeeper.png" />
+    <Content Include="Contents\Images\misasupport_1.png" />
+    <Content Include="Contents\Images\quick-add.png" />
+    <Content Include="Contents\Images\Quick-search.png" />
+    <Content Include="Contents\Images\slibarmenu.png" />
     <Content Include="Global.asax" />
-    <Content Include="View\HTML\index.html" />
+    <Content Include="CSS\Common\common.css" />
+    <Content Include="CSS\Common\dialog.css" />
+    <Content Include="CSS\Common\share.css" />
+    <Content Include="CSS\Custom\custom.css" />
+    <Content Include="CSS\Library\bootstrap.css" />
+    <Content Include="CSS\Library\font-awesome\.gitignore" />
+    <Content Include="CSS\Library\font-awesome\css\font-awesome.css" />
+    <Content Include="CSS\Library\font-awesome\css\font-awesome.min.css" />
+    <Content Include="CSS\Library\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="CSS\Library\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="CSS\Library\jquery-ui.css" />
+    <Content Include="CSS\Library\jquery.timepicker.css" />
+    <Content Include="CSS\Main\main.css" />
+    <Content Include="CSS\Main\pagelayout.css" />
+    <Content Include="HTML\index.html" />
+    <Content Include="JS\Common\ajax.js" />
+    <Content Include="JS\Common\calendardisplay.js" />
+    <Content Include="JS\Common\common.js" />
+    <Content Include="JS\Common\databinding.js" />
+    <Content Include="JS\Common\dataformater.js" />
+    <Content Include="JS\Common\dialog.js" />
+    <Content Include="JS\Common\windowresizehandle.js" />
+    <Content Include="JS\Library\bootstrap.min.js" />
+    <Content Include="JS\Library\jquery-3.3.1.min.js" />
+    <Content Include="JS\Library\jquery-ui.min.js" />
+    <Content Include="JS\Library\jquery.maskedinput.js" />
+    <Content Include="JS\Library\jquery.timepicker.min.js" />
+    <Content Include="JS\Library\popper.min.js" />
+    <Content Include="JS\Main\main.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +157,43 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="CSS\Library\font-awesome\.bower.json" />
+    <Content Include="CSS\Library\font-awesome\.npmignore" />
+    <Content Include="CSS\Library\font-awesome\bower.json" />
+    <Content Include="CSS\Library\font-awesome\css\font-awesome.css.map" />
+    <Content Include="CSS\Library\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="CSS\Library\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="CSS\Library\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="CSS\Library\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="CSS\Library\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="CSS\Library\font-awesome\less\animated.less" />
+    <Content Include="CSS\Library\font-awesome\less\bordered-pulled.less" />
+    <Content Include="CSS\Library\font-awesome\less\core.less" />
+    <Content Include="CSS\Library\font-awesome\less\fixed-width.less" />
+    <Content Include="CSS\Library\font-awesome\less\font-awesome.less" />
+    <Content Include="CSS\Library\font-awesome\less\icons.less" />
+    <Content Include="CSS\Library\font-awesome\less\larger.less" />
+    <Content Include="CSS\Library\font-awesome\less\list.less" />
+    <Content Include="CSS\Library\font-awesome\less\mixins.less" />
+    <Content Include="CSS\Library\font-awesome\less\path.less" />
+    <Content Include="CSS\Library\font-awesome\less\rotated-flipped.less" />
+    <Content Include="CSS\Library\font-awesome\less\screen-reader.less" />
+    <Content Include="CSS\Library\font-awesome\less\stacked.less" />
+    <Content Include="CSS\Library\font-awesome\less\variables.less" />
+    <Content Include="CSS\Library\font-awesome\scss\font-awesome.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_animated.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_core.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_icons.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_larger.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_list.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_mixins.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_path.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_stacked.scss" />
+    <Content Include="CSS\Library\font-awesome\scss\_variables.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -105,12 +205,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="View\CSS\Common\" />
-    <Folder Include="View\CSS\Library\" />
-    <Folder Include="View\CSS\Main\" />
-    <Folder Include="View\JS\Common\" />
-    <Folder Include="View\JS\Library\" />
-    <Folder Include="View\JS\Main\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

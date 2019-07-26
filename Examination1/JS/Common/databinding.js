@@ -13,7 +13,7 @@
             if(i%2 == 0){
                 var row = `<tr class="f5f5f5-background" id="${data[i].id}">
                             <td class="text-align-center width-170">${data[i].receiptDate}</td>
-                            <td class=" width-230">${data[i].receiptNumber}</td>
+                            <td class=" width-230 receipt-number-cell">${data[i].receiptNumber}</td>
                             <td class=" width-250">${data[i].objectName}</td>
                             <td class=" width-170 text-align-right">${data[i].sumMoney}</td>
                             <td class="">${data[i].exportExplain}</td>
@@ -22,7 +22,7 @@
             } else{
                 var row = `<tr id="${data[i].id}">
                             <td class="text-align-center width-170">${data[i].receiptDate}</td>
-                            <td class=" width-230">${data[i].receiptNumber}</td>
+                            <td class=" width-230 receipt-number-cell">${data[i].receiptNumber}</td>
                             <td class=" width-250">${data[i].objectName}</td>
                             <td class=" width-170 text-align-right">${data[i].sumMoney}</td>
                             <td class="">${data[i].exportExplain}</td>

@@ -15,12 +15,12 @@ body{
 
 
 .main-left-sidebar{
-    width: 140px;
+    width: 100px;
     background-color: #026b97;
 }
 
 .content{
-    width: calc(100% - 140px);
+    width: calc(100% - 100px);
     background-color: #e5e6eb;
 
 }
@@ -30,13 +30,20 @@ body{
     background-color: #006189;
     height: 52px;
     padding: 12px 8px;
+    position:relative;
+}
+
+.logo-img {
+    position: absolute;
+    top: 14px;
+    left: -25px;
 }
 
 .menu-icon{
     margin: auto;
     height: 26px;
     width: 26px;
-    background: url('../../../Contents/Images/slibarmenu.png')  no-repeat;
+    background: url('/Contents/Images/slibarmenu.png')  no-repeat;
 }
 
 .item-menu{

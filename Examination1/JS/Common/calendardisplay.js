@@ -47,6 +47,11 @@ $('.export-day-icon').click(function () {
     $("#export-date-input").focus();
 });
 
+
+$(".get-receipt-day-icon").click(function () {
+    $(".export-hour-input").focus();
+})
+
 // Gán giá trị được chọn cho ngày thu chứng từ, custom vị trí hiển thị calendar
 
 $("#export-date-input").datepicker({

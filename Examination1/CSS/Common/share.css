@@ -14,7 +14,7 @@
 }
 
 .checked-status{
-    content: url('../../../Content/Icons/check.png');
+    content: url('/Content/Icons/check.png');
 }
 
 .uncheck-status {
@@ -30,24 +30,24 @@
 }
 
 .warning-icon-popup{
-    background: url('../../../Contents/Icons/icon-popup.png') no-repeat -56px -2px;
+    background: url('/Contents/Icons/icon-popup.png') no-repeat -56px -2px;
 }
 
 .icon-save{
-    background: url('../../../Contents/Icons/save-white.png') no-repeat; 
+    background: url('/Contents/Icons/save-white.png') no-repeat; 
 }
 
 .icon-not-save{
-    background: url('../../../Contents/Icons/not-save.png') no-repeat; 
+    background: url('/Contents/Icons/not-save.png') no-repeat; 
 }
 
 .icon-agree {
-    background: url(../../../Content/Icons/common-icon.png) no-repeat -377px -127px;
+    background: url(/Content/Icons/common-icon.png) no-repeat -377px -127px;
 }
 
 .icon-cancel {
     margin-top: 3px;
-    background: url('../../../Contents/Icons/common-icon.png') no-repeat -255px -130px;
+    background: url('/Contents/Icons/common-icon.png') no-repeat -255px -130px;
 }
 
 .btn-custom {
@@ -87,7 +87,7 @@
     width: 44px;
 }
 .question-icon-popup {
-    background: url('../../../Contents/Icons/icon-popup.png') no-repeat -164px -2px;
+    background: url('/Contents/Icons/icon-popup.png') no-repeat -164px -2px;
 }
 
 .popup-message{
@@ -247,11 +247,11 @@ input::-webkit-inner-spin-button {
 }
 
 .arrow-down {
-    background: url('../../../Contents/Icons/arrow-down.png') no-repeat 4px 3px;
+    background: url('/Contents/Icons/arrow-down.png') no-repeat 4px 3px;
 }
 
 .arrow-up {
-    background: url('../../../Contents/Icons/arrow-up.png') no-repeat 4px 3px;
+    background: url('/Contents/Icons/arrow-up.png') no-repeat 4px 3px;
     margin: 5px 0;
 }
 
@@ -290,7 +290,7 @@ input::-webkit-inner-spin-button {
 }
 
 .search-blue-icon{
-    background: url('../../../Content/Icons/Search-blue.png') no-repeat;
+    background: url('/Content/Icons/Search-blue.png') no-repeat;
     margin-top: 2px;
 }
 

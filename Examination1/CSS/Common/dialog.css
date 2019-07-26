@@ -300,7 +300,7 @@
     background-position: -425px -129px;
 }
 
-.icon-save {
+.icon-save-dialog {
     background-position: -325px -129px;
 }
 
@@ -546,4 +546,8 @@
 
 .border-bottom-texttab {
     border-bottom: 2px solid #026b97;
+}
+
+.move-to-other-store{
+    display: flex;
 }
